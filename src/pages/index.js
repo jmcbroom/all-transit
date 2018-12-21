@@ -1,15 +1,13 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from "react";
+import { Link, graphql } from "gatsby";
 
-import Layout from '../components/layout'
-import Image from '../components/image'
-import SEO from '../components/seo'
+import Layout from "../components/layout";
 
 const agencies = {
-  "ddot": {
+  ddot: {
     color: "rgba(0, 68, 69, 1)"
   },
-  "smart": {
+  smart: {
     color: "rgba(240, 32, 0, 1)"
   },
   "the-ride": {
@@ -17,14 +15,26 @@ const agencies = {
   },
   "transit-windsor": {
     color: "rgba(0, 157, 211, 1)"
-  },
-}
+  }
+};
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <div style={{display: 'grid', gridTemplate: `200px 200px / 1fr 1fr`, gridGap: 10}}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplate: `200px 200px / 1fr 1fr`,
+        gridGap: 10
+      }}
+    >
       {data.postgres.agencies.map(a => (
-        <section style={{background: agencies[a.agencyId].color, opacity: 0.85, padding: 10}}>
+        <section
+          style={{
+            background: agencies[a.agencyId].color,
+            opacity: 0.85,
+            padding: 10
+          }}
+        >
           <Link to={`/${a.agencyId}`}>
             <h3>{a.agencyName}</h3>
           </Link>
@@ -44,11 +54,11 @@ export const query = graphql`
         agencyName
         agencyUrl
         subheader
-        routesByFeedIndexAndAgencyId{
+        routesByFeedIndexAndAgencyId {
           totalCount
         }
       }
     }
   }
 `;
-export default IndexPage
+export default IndexPage;

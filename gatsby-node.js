@@ -4,75 +4,59 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const path = require('path');
+const path = require("path");
 
-exports.createPages = async ({ graphql, actions: { createPage }}) => {
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
+  const agencies = ["ddot", "smart", "the-ride", "transit-windsor"];
   const result = await graphql(`
-  {
-    postgres {
-      agencies: allAgenciesList {
-        agencyId
-        agencyName
-        agencyUrl
-      }
-      routes: allRoutesList {
-        agencyId
-        routeShortName
-        routeLongName
-      }
-      stops: allStopsList {
-        stopId
+    {
+      postgres {
+        agencies: allAgenciesList {
+          agencyId
+          agencyName
+          agencyUrl
+        }
+        routes: allRoutesList {
+          agencyId
+          routeShortName
+          routeLongName
+        }
+        stops: allStopsList {
+          feedIndex
+          stopId
+        }
       }
     }
-  }
-  `)
+  `);
 
   result.data.postgres.agencies.forEach(a => {
-      createPage({
-          path: `/${a.agencyId}`,
-          component: path.resolve('./src/templates/agency-page.js'),
-          context: {
-              id: a.agencyId
-          }
-      })
-  })
-  result.data.postgres.routes.forEach(r => {
     createPage({
-      path: `/${r.agencyId}/route/${Number(r.routeShortName)}`,
-      component: path.resolve('./src/templates/route-page.js'),
+      path: `/${a.agencyId}`,
+      component: path.resolve("./src/templates/agency-page.js"),
       context: {
-        routeNo: r.routeShortName,
-      },
+        id: a.agencyId
+      }
     });
   });
 
-//   result.data.postgres.routes.forEach(route => {
-//     createPage({
-//       path: `/route/${Number(route.routeShortName)}/stops`,
-//       component: path.resolve('./src/templates/route-stop-page.js'),
-//       context: {
-//         routeNo: route.routeShortName,
-//       },
-//     });
-//   });
+  result.data.postgres.routes.forEach(r => {
+    createPage({
+      path: `/${r.agencyId}/route/${Number(r.routeShortName)}`,
+      component: path.resolve("./src/templates/route-page.js"),
+      context: {
+        routeNo: r.routeShortName
+      }
+    });
+  });
 
-//   result.data.postgres.routes.forEach(route => {
-//     createPage({
-//       path: `/route/${Number(route.routeShortName)}/schedule`,
-//       component: path.resolve('./src/templates/route-schedule-page.js'),
-//       context: {
-//         routeNo: route.routeShortName,
-//       },
-//     });
-//   });
-
-//   result.data.postgres.stops.forEach(stop => {
-//     createPage({
-//       path: `/stop/${stop.stopId}`,
-//       component: path.resolve('./src/templates/stop-page.js'),
-//       context: {
-//         stopId: stop.stopId,
-//       }
-//     })
-//   })
-}
+  result.data.postgres.stops.forEach(stop => {
+    createPage({
+      path: `/${agencies[stop.feedIndex - 1]}/stop/${stop.stopId}`,
+      component: path.resolve("./src/templates/stop-page.js"),
+      context: {
+        stopId: stop.stopId,
+        feedIndex: stop.feedIndex
+      }
+    });
+  });
+};
