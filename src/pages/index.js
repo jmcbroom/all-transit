@@ -29,6 +29,7 @@ const IndexPage = ({ data }) => (
     >
       {data.postgres.agencies.map(a => (
         <section
+          key={a.agencyId}
           style={{
             background: agencies[a.agencyId].color,
             opacity: 0.85,

@@ -1,7 +1,5 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import _ from "lodash";
-
 import Layout from "../components/layout";
 
 export default ({ data }) => {
@@ -13,7 +11,10 @@ export default ({ data }) => {
         <h1>{a.agencyName}</h1>
         <ul>
         {a.routesByFeedIndexAndAgencyIdList.map(r => (
-            <li>{r.routeLongName} <Link to={`${r.agencyId}/route/${Number(r.routeShortName)}`}>page</Link></li>
+            <li key={r.agencyId}>
+              {r.routeLongName} 
+              <Link to={`${r.agencyId}/route/${Number(r.routeShortName)}`}>page</Link>
+            </li>
         ))}
         </ul>
       </div>

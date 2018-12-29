@@ -44,7 +44,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: `/${r.agencyId}/route/${Number(r.routeShortName)}`,
       component: path.resolve("./src/templates/route-page.js"),
       context: {
-        routeNo: r.routeShortName
+        routeNo: r.routeShortName,
+        feedIndex: agencies.indexOf(r.agencyId) + 1
       }
     });
   });
