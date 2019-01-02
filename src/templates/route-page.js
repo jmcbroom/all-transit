@@ -1,10 +1,19 @@
 import React from "react";
 import { graphql } from "gatsby";
-import _ from 'lodash';
 import Layout from "../components/layout";
 import RouteStops from '../components/RouteStops';
+import { Tab } from 'semantic-ui-react';
+import feeds from '../feeds'
 
-export default ({ data }) => {
+const RouteTrips = ({ trips, feedIndex }) => (
+  <ul>
+    {trips.map(t => (
+      <li>{t.id} {feeds[feedIndex - 1].services[t.service]} {t.direction}</li>
+    ))}
+  </ul>
+)
+
+export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
 
   // derive some information from the trips
@@ -21,18 +30,18 @@ export default ({ data }) => {
     })[0]
     return mostStopsTrip
   })
+
+  const panes = [
+    { menuItem: 'Info', render: () => (<Tab.Pane>information</Tab.Pane>) },
+    { menuItem: 'Schedule', render: () => <Tab.Pane><RouteTrips trips={r.trips} feedIndex={pageContext.feedIndex} /></Tab.Pane> },
+    { menuItem: 'Stops', render: () => <Tab.Pane><RouteStops stops={stopsList} agency={r.agencyId} /></Tab.Pane> }
+  ];
   
   return (
     <Layout>
       <div>
         <h1>{r.routeShortName} {r.routeLongName}</h1>
-        <section>
-          <h3>Schedule of trips</h3>
-          <p>{r.trips.length} trips</p>
-          <h4>services: {services.join(", ")}</h4>
-          <h4>directions: {directions.join(", ")}</h4>
-        </section>
-        <RouteStops stops={stopsList} agency={r.agencyId} />
+        <Tab menu={{attached: false}} panes={panes} />
       </div>
     </Layout>
   );
