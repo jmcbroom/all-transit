@@ -15,3 +15,7 @@ This will work with the `.env.development` default, which is to connect to local
 run `yarn` to install.
 
 to develop, `gatsby develop` will start at `localhost:8080`
+
+## trip planner
+
+is currently running at `http://159.89.225.251:8080/`

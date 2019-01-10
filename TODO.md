@@ -38,7 +38,11 @@ Here's what we should do before we launch.
 
 ### Agency page & components
 
-- Fare information
+- Agency information
+  - fares
+  - calendar
+  - upcoming holidays
+  - social media embed? or at least links
 - Route links
 - Route map
 
@@ -76,3 +80,4 @@ Here's what we should do before we launch.
 - each agencies paratransit, other policies
 - live predictions for stops
 - PDF generation
+- service alerts
