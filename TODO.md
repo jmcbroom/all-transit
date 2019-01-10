@@ -70,11 +70,13 @@ Here's what we should do before we launch.
 - Amtrak
 - Greyhound
 - Tunnel Bus/Crossing the border
+- UofM Connector
+- Travel to X city
+- Bikeshare, scooters
 
 # Phase 2/Nice-to-have
 
 - cross-agency stop pages (create db table to crosswalk many stops into single?)
-- most custom pages (eg options for travelling to X city, other transit options available per city like scooters, mogo, etc)
 - trip planning
 - nearby page
 - each agencies paratransit, other policies
