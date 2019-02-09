@@ -22,6 +22,12 @@ const feeds = [
             "3_merged_287885": "weekday",
             "1_merged_287879": "saturday",
             "1_merged_287883": "saturday",
+            "1_merged_301738": "saturday",
+            "1_merged_301742": "saturday",
+            "2_merged_301741": "sunday",
+            "2_merged_301745": "sunday",
+            "3_merged_301740": "weekday",
+            "3_merged_301744": "weekday",
             "2_merged_287882": "sunday",
             "2_merged_287886": "sunday"
         }
