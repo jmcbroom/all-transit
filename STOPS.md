@@ -11,30 +11,33 @@ Ideal formatting:
 - No punctuation
 - First letter of each word capitalized only
 
-Pseudo code for postgres' `regexp_replace` function:
+Pseudo code for postgres' `replace` and/or `regexp_replace` functions:
 - find [` @ `, ` + `, ` at `] and replace with ` & `
 - find `.` and replace with `''`
 
 ```sql
--- handle `at`
-SELECT regexp_replace('Ouellette at Montrose', ' at ', ' & ');
--->                    Ouellette & Montrose
-
 -- handle `@` and `+`
 SELECT regexp_replace('Ouellette @ Montrose', '[@+|<>]', '&');
 -->                    Ouellette & Montrose
 
+-- handle `at`
+SELECT replace('Ouellette at Montrose', ' at ', ' & ');
+-->             Ouellette & Montrose
+
 -- handle `.`
+SELECT replace('Ouellette St. & Montrose Ave.', '.', '');
+-->             Ouellette St & Montrose Ave
 
 -- handle caseing
+SELECT initcap('OUELLETTE ST & MONTROSE')
+-->             Ouellette St & Montrose
 
--- update the whole table
+-- syntax for updating the whole table
 UPDATE table SET field = regexp_replace(field, from, to, optional_flags);
 ```
 
 How we might implement?
-- Combine these select statments into postgres function
-- Trigger that function if `gtfs.stops` table is updated?
+- Combine these select statments into postgres function, trigger that function if `gtfs.stops` table is updated?
 
 Where we might store values?
 - Overwrite `stop_name` values directly in `gtfs.stops` table
