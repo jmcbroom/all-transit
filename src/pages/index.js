@@ -39,7 +39,6 @@ const IndexPage = ({ data }) => (
           <Link to={`/${a.agencyId}`}>
             <h3>{a.agencyName}</h3>
           </Link>
-          <h6>{a.subheader}</h6>
           <p>{a.routesByFeedIndexAndAgencyId.totalCount} routes</p>
         </section>
       ))}
@@ -54,7 +53,6 @@ export const query = graphql`
         agencyId
         agencyName
         agencyUrl
-        subheader
         routesByFeedIndexAndAgencyId {
           totalCount
         }
