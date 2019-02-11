@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import RouteStops from '../components/RouteStops';
+import RouteMap from '../components/RouteMap';
 import { Tab } from 'semantic-ui-react';
 import feeds from '../feeds'
 import _ from 'lodash';
@@ -68,7 +69,7 @@ export default ({ data, pageContext }) => {
   })
 
   const panes = [
-    { menuItem: 'Info', render: () => (<Tab.Pane>information</Tab.Pane>) },
+    { menuItem: 'Map', render: () => (<Tab.Pane><RouteMap shapes={r.shapes} /></Tab.Pane>) },
     { menuItem: 'Schedule', render: () => <Tab.Pane><RouteTrips trips={r.trips} feedIndex={pageContext.feedIndex} /></Tab.Pane> },
     { menuItem: 'Stops', render: () => <Tab.Pane><RouteStops stops={stopsList} agency={r.agencyId} /></Tab.Pane> }
   ];
@@ -96,6 +97,11 @@ export const query = graphql`
         routeColor
         routeTextColor
         routeSortOrder
+        shapes: routeShapesByFeedIndexAndRouteIdList {
+          dir
+          direction
+          geom
+        }
         trips: tripsByFeedIndexAndRouteIdList {
           id: tripId
           headsign: tripHeadsign
