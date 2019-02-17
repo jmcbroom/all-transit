@@ -7,7 +7,6 @@ import RouteDisplay from '../components/RouteDisplay';
 import AgencyMap from '../components/AgencyMap';
 import { Tab, Grid, Label, Header } from "semantic-ui-react";
 
-
 const RouteGrid = ({ routes }) => (
   <Grid columns={3} divided>
     {routes.map((r, i) => {
@@ -21,11 +20,10 @@ const RouteGrid = ({ routes }) => (
 
 export default ({ data }) => {
   const a = data.postgres.agency[0];
-  console.log(a.routes)
 
   const routes = _.uniqBy(a.routes, 'routeLongName')
-  console.log(routes)
 
+  // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes.map(r => {
     let m = r.shapes.map(rs => {
       let wkbBuffer = new Buffer(rs.geom, 'hex')
@@ -38,10 +36,11 @@ export default ({ data }) => {
         },
         geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
       }
-    })
+    });
     return m;
   }).reduce((a, c) => a.concat(c), [])
 
+  // put those features in a single FeatureCollection
   const routeFeatures = {
     "type": "FeatureCollection",
     "features": routeShapes

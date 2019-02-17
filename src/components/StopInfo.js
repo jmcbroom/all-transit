@@ -21,7 +21,7 @@ const StopInfo = ({ stop }) => {
       <Header as='h4'>Routes that stop here: </Header>
       <div style={routeGridStyle}>
         {uniqRoutes.map(ur => (
-          <RouteDisplay route={ur} />
+          <RouteDisplay key={ur.routeShortName} route={ur} />
         ))}
       </div>
     </div>

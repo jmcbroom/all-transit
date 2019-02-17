@@ -37,18 +37,18 @@ export default class Stop extends React.Component {
     let uniq = _.uniqBy(sorted, x => {
       return (x.arrivalTime.hours * 3600) + (x.arrivalTime.minutes * 60) + x.arrivalTime.seconds
     })
-    
+
     const panes = [
-      { menuItem: 'Home', render: () => (<Tab.Pane><StopInfo stop={s}/></Tab.Pane>) },
+      { menuItem: 'Home', render: () => (<Tab.Pane><StopInfo stop={s} /></Tab.Pane>) },
       { menuItem: 'Stop Times', render: () => <Tab.Pane><StopTimeList list={uniq} /></Tab.Pane> },
-      { menuItem: 'Nearby', render: () => <Tab.Pane><StopMap lat={s.stopLat} lon={s.stopLon} /></Tab.Pane> }
+      { menuItem: 'Nearby', render: () => <Tab.Pane><StopMap lat={s.stopLat} lon={s.stopLon} routes={s.routeShapes} /></Tab.Pane> }
     ]
 
     return (
       <Layout>
         <div>
           <h1>{s.stopName} / {s.stopDesc}</h1>
-          <Tab menu={{attached: false}} panes={panes} />
+          <Tab menu={{ attached: false }} panes={panes} />
         </div>
       </Layout>
     )
@@ -64,6 +64,19 @@ export const query = graphql`
         stopDesc
         stopLat
         stopLon
+    		routeShapes: routeShapesList {
+          routeByFeedIndexAndRouteId{
+            agencyId
+            routeShortName
+            routeLongName
+            routeType
+            routeColor
+            routeTextColor
+          }
+          direction
+          dir
+          geom
+        }
         times: stopTimesByFeedIndexAndStopIdList {
           trip: tripByFeedIndexAndTripId {
             tripId
