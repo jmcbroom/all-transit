@@ -15,17 +15,20 @@ class StopMap extends React.Component {
     let routeFeatures = routes
       .map(r => {
         let wkbBuffer = new Buffer(r.geom, "hex");
-
+        let route = r.routeByFeedIndexAndRouteId;
         return {
           type: "Feature",
           properties: {
             direction: r.direction,
-            ...r.routeByFeedIndexAndRouteId
+            color: `#${route.routeColor}`,
+            textColor: `#${route.routeTextColor}`
           },
           geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
         };
       })
       .sort((a, b) => a.properties.order < b.properties.order);
+
+    console.log(routeFeatures);
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -52,9 +55,12 @@ class StopMap extends React.Component {
             "line-cap": "round"
           },
           paint: {
-            "line-color": "green",
-            "line-opacity": 0.5,
-            "line-width": 3
+            "line-color": ["get", "color"],
+            "line-opacity": 0.9,
+            "line-width": {
+              base: 1.5,
+              stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
+            }
           }
         },
         "road-label-small"

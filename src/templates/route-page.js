@@ -98,8 +98,8 @@ export default ({ data, pageContext }) => {
     return {
       type: "Feature",
       properties: {
-        color: r.routeColor,
-        textColor: r.routeTextColor,
+        color: `#${r.routeColor}`,
+        textColor: `#${r.routeTextColor}`,
         order: r.routeSortOrder,
         short: r.routeShortName,
         long: r.routeLongName,

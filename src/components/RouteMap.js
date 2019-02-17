@@ -42,9 +42,12 @@ class RouteMap extends React.Component {
             "line-cap": "round"
           },
           paint: {
-            "line-color": `#${shapes[0].properties.color}`,
+            "line-color": ["get", "color"],
             "line-opacity": 1,
-            "line-width": ["/", ["get", "order"], 10]
+            "line-width": {
+              base: 1.5,
+              stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
+            }
           }
         },
         "road-label-small"

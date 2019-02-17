@@ -3631,11 +3631,11 @@
         "visibility": "visible",
         "text-rotation-alignment": "map",
         "text-field": "{name_en}",
-        "text-letter-spacing": 0.01
+        "text-letter-spacing": -0.02
       },
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
-        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "hsl(0, 0%, 90%)",
         "text-halo-width": 1.25,
         "text-halo-blur": 1,
         "text-opacity": 0.5
@@ -3656,7 +3656,6 @@
       "layout": {
         "text-size": { "base": 1, "stops": [[11, 9], [20, 17]] },
         "text-max-angle": 30,
-        "text-transform": "lowercase",
         "symbol-spacing": 250,
         "text-font": [
           "Super Grotesk Offc Pro Medium",
@@ -3667,11 +3666,11 @@
         "visibility": "visible",
         "text-rotation-alignment": "map",
         "text-field": "{name_en}",
-        "text-letter-spacing": 0.06
+        "text-letter-spacing": -0.02
       },
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
-        "text-halo-color": "hsla(0, 0%, 100%, 1)",
+        "text-halo-color": "hsla(0, 0%, 100%, 0.9)",
         "text-opacity": 1,
         "text-halo-width": 6,
         "text-halo-blur": 2
@@ -3695,10 +3694,9 @@
       "layout": {
         "text-size": { "base": 1, "stops": [[9, 11], [20, 18]] },
         "text-max-angle": 30,
-        "text-transform": "lowercase",
         "symbol-spacing": 250,
         "text-font": [
-          "Super Grotesk Offc Pro Bold",
+          "Super Grotesk Offc Pro Semibold",
           "Arial Unicode MS Regular"
         ],
         "symbol-placement": "line",
@@ -3710,9 +3708,8 @@
       },
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
-        "text-halo-color": "hsla(0, 0%, 100%, 1)",
-        "text-halo-width": 6,
-        "text-halo-blur": 2
+        "text-halo-color": "hsla(0, 0%, 100%, 0.9)",
+        "text-halo-width": 4
       }
     },
     {
@@ -3834,7 +3831,8 @@
         "text-anchor": "top",
         "text-field": "{name_en}",
         "text-letter-spacing": 0.01,
-        "text-max-width": 8
+        "text-max-width": 8,
+        "visibility": "none"
       },
       "paint": {
         "text-color": "hsl(26, 25%, 32%)",

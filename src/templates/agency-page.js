@@ -19,6 +19,8 @@ const RouteGrid = ({ routes }) => (
   </Grid>
 );
 
+const RouteInfo = ({ fares, url }) => <div>information</div>;
+
 export default ({ data }) => {
   const a = data.postgres.agency[0];
 
@@ -63,7 +65,14 @@ export default ({ data }) => {
         </Tab.Pane>
       )
     },
-    { menuItem: "Fares", render: () => <Tab.Pane>information</Tab.Pane> },
+    {
+      menuItem: "Fares",
+      render: () => (
+        <Tab.Pane>
+          <RouteInfo fares={a.fares} url={a.agencyUrl} />
+        </Tab.Pane>
+      )
+    },
     {
       menuItem: "Routes",
       render: () => (
@@ -89,6 +98,15 @@ export const query = graphql`
     postgres {
       agency: allAgenciesList(condition: { agencyId: $id }) {
         agencyName
+        agencyUrl
+        agencyPhone
+        agencyFareUrl
+        fares: fareAttributesByFeedIndexAndAgencyIdList {
+          paymentMethod
+          transfers
+          transferDuration
+          agencyId
+        }
         routes: routesByFeedIndexAndAgencyIdList {
           routeLongName
           routeShortName
