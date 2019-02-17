@@ -2,6 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import wkx from "wkx";
 import bbox from "@turf/bbox";
+import style from "./style.json";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -15,7 +16,7 @@ class RouteMap extends React.Component {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/jmcbroom/cj7vfzaa231c02spklbu7bn1z",
+      style: style,
       bounds: bbox(shapes[0]),
       minZoom: 10
     });
@@ -46,7 +47,7 @@ class RouteMap extends React.Component {
             "line-width": ["/", ["get", "order"], 10]
           }
         },
-        "road-label-large"
+        "road-label-small"
       );
 
       console.log(m);

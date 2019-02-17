@@ -2,6 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import wkx from "wkx";
 import bbox from "@turf/bbox";
+import style from "./style.json";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -11,7 +12,7 @@ class AgencyMap extends React.Component {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/jmcbroom/cj7vfzaa231c02spklbu7bn1z",
+      style: style,
       bounds: bbox(routes),
       minZoom: 10
     });
@@ -34,12 +35,15 @@ class AgencyMap extends React.Component {
           },
           paint: {
             "line-color": ["get", "color"],
-            "line-opacity": 1,
-            "line-width": 2
+            "line-opacity": 0.85,
+            "line-width": {
+              base: 1.5,
+              stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
+            }
             // "line-width": ["*", ["/", 3, ["get", "order"]], 3]
           }
         },
-        "road-label-large"
+        "road-label-small"
       );
 
       console.log(m);

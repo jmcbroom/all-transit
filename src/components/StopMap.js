@@ -1,6 +1,7 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
 import wkx from "wkx";
+import style from "./style.json";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -11,22 +12,24 @@ class StopMap extends React.Component {
     const lon = this.props.lon;
     const routes = this.props.routes;
 
-    let routeFeatures = routes.map(r => {
-      let wkbBuffer = new Buffer(r.geom, "hex");
+    let routeFeatures = routes
+      .map(r => {
+        let wkbBuffer = new Buffer(r.geom, "hex");
 
-      return {
-        type: "Feature",
-        properties: {
-          direction: r.direction,
-          ...r.routeByFeedIndexAndRouteId
-        },
-        geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
-      };
-    });
+        return {
+          type: "Feature",
+          properties: {
+            direction: r.direction,
+            ...r.routeByFeedIndexAndRouteId
+          },
+          geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
+        };
+      })
+      .sort((a, b) => a.properties.order < b.properties.order);
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/jmcbroom/cj7vfzaa231c02spklbu7bn1z",
+      style: style,
       center: [lon, lat],
       zoom: 17.5,
       minZoom: 10
@@ -54,7 +57,7 @@ class StopMap extends React.Component {
             "line-width": 3
           }
         },
-        "road-label-large"
+        "road-label-small"
       );
     });
   }

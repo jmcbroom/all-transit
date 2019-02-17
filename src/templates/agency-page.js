@@ -45,7 +45,8 @@ export default ({ data }) => {
       });
       return m;
     })
-    .reduce((a, c) => a.concat(c), []);
+    .reduce((a, c) => a.concat(c), [])
+    .sort((a, b) => a.properties.order < b.properties.order);
 
   // put those features in a single FeatureCollection
   const routeFeatures = {

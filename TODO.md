@@ -12,13 +12,13 @@ Here's what we should do before we launch.
 ### Timepoints
 
 - [*] DDOT
-- [ ] SMART
-- [ ] The Ride
-- [ ] Transit Windsor
+- [*] SMART
+- [*] The Ride
+- [-] Transit Windsor
 
 ### Route shapes
 
-- [ ] DDOT
+- [*] DDOT
 - [ ] SMART
 - [ ] The Ride
 - [ ] Transit Windsor
