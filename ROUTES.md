@@ -35,29 +35,52 @@ $$ LANGUAGE plpython3u;
 update ddot set geom = ST_SetSRID(ST_GeomFromGeoJSON(osrm_parse(osrm_url)), 4326) where osrm_url != '' and geom is null;
 ```
 
+### DDOT route clean up
+
+```sql
+-- trim leading zero
+update gtfs.routes set route_short_name = TRIM(leading '0' from route_short_name) where feed_index = 1;
+
+-- set colors & sort order
+-- normal green
+update gtfs.routes set route_color = '44AA42', route_sort_order = 2 where feed_index = 1;
+-- connect ten
+update gtfs.routes set route_color = '004445', route_sort_order = 1 where feed_index = 1 and route_short_name::integer < 11;
+-- crosstown
+update gtfs.routes set route_color = '0079C2' where feed_index = 1 and route_short_name in ('11', '15', '17', '32','38', '39', '43', '45', '47');
+-- north-south
+update gtfs.routes set route_color = '9B5BA5' where feed_index = 1 and route_short_name in ('12', '13', '30', '41', '46', '54', '60', '68');
+-- special
+update gtfs.routes set route_color = 'D07C32', route_sort_order = 3 where feed_index = 1 and route_short_name in ('42', '80', '89', '92', '95', '96');
+
+-- initcap names & fix special case
+update gtfs.routes set route_long_name = initcap(route_long_name) where feed_index = 1;
+update gtfs.routes set route_long_name = 'McNichols' where feed_index = 1 and route_long_name = 'Mcnichols';
+```
+
 ### Associate route shapes to stops
 
 This will give a direct link from a `stop` to the `routeShapes` (route/direction combinations) that you can catch there.
 
 ```sql
-CREATE OR REPLACE FUNCTION gtfs.stops_route_shapes ( stp gtfs.stops ) 
-  RETURNS SETOF gtfs.route_shapes AS $$ 
+CREATE OR REPLACE FUNCTION gtfs.stops_route_shapes ( stp gtfs.stops )
+  RETURNS SETOF gtfs.route_shapes AS $$
 SELECT DISTINCT
-	( rs.* ) 
+	( rs.* )
 FROM
 	gtfs.stops s
-	INNER JOIN gtfs.stop_times st ON st.stop_id = s.stop_id 
+	INNER JOIN gtfs.stop_times st ON st.stop_id = s.stop_id
 	AND st.feed_index = s.feed_index
-	INNER JOIN gtfs.trips t ON t.trip_id = st.trip_id 
+	INNER JOIN gtfs.trips t ON t.trip_id = st.trip_id
 	AND T.feed_index = st.feed_index
-	INNER JOIN gtfs.routes r ON t.route_id = r.route_id 
+	INNER JOIN gtfs.routes r ON t.route_id = r.route_id
 	AND T.feed_index = r.feed_index
-	INNER JOIN gtfs.route_shapes rs ON rs.route_id = r.route_id 
-	AND rs.dir::INTEGER = t.direction_id 
-	AND rs.feed_index = r.feed_index 
-	AND rs.feed_index = t.feed_index 
+	INNER JOIN gtfs.route_shapes rs ON rs.route_id = r.route_id
+	AND rs.dir::INTEGER = t.direction_id
+	AND rs.feed_index = r.feed_index
+	AND rs.feed_index = t.feed_index
 WHERE
-	s.stop_id = stp.stop_id 
+	s.stop_id = stp.stop_id
 	AND s.feed_index = stp.feed_index;
 $$ LANGUAGE SQL STABLE;
 ```
