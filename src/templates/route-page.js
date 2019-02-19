@@ -77,7 +77,7 @@ export default ({ data, pageContext }) => {
 
   // derive some information from the trips
   let directions = Array.from(new Set(r.trips.map(t => t.direction)));
-  let services = Array.from(new Set(r.trips.map(t => t.service)));
+  // let services = Array.from(new Set(r.trips.map(t => t.service)));
 
   // generate list of stops
   let stopsList = directions.map(d => {

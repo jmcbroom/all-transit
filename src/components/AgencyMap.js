@@ -1,6 +1,5 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import wkx from "wkx";
 import bbox from "@turf/bbox";
 import style from "./style.json";
 
@@ -14,7 +13,7 @@ class AgencyMap extends React.Component {
       container: this.mapContainer,
       style: style,
       bounds: bbox(routes),
-      minZoom: 10
+      minZoom: 7
     });
 
     this.map.on("load", m => {
@@ -35,24 +34,21 @@ class AgencyMap extends React.Component {
           },
           paint: {
             "line-color": ["get", "color"],
-            "line-opacity": 0.85,
+            "line-opacity": 1,
             "line-width": {
               base: 1.5,
               stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
             }
-            // "line-width": ["*", ["/", 3, ["get", "order"]], 3]
           }
         },
         "road-label-small"
       );
-
-      console.log(m);
     });
   }
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "50vh" }} />
+      <div ref={el => (this.mapContainer = el)} style={{ height: "60vh" }} />
     );
   }
 }

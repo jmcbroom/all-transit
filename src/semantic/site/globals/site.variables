@@ -6,7 +6,7 @@
        Fonts
 --------------------*/
 
-@fontName          : "Barlow Semi Condensed";
+@fontName          : "Bitter";
 @fontSmoothing     : antialiased;
 
 @headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -18,7 +18,7 @@
 @googleSubset      : 'latin';
 
 @googleProtocol    : 'https://';
-@googleFontRequest : 'Barlow+Semi+Condensed:400,400i,700,700i';
+@googleFontRequest : 'Bitter:400,400i,700';
 
 
 @bold              : bold;

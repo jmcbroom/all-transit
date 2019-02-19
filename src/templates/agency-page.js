@@ -1,25 +1,12 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import _ from "lodash";
 import wkx from "wkx";
 import Layout from "../components/layout";
-import RouteDisplay from "../components/RouteDisplay";
 import AgencyMap from "../components/AgencyMap";
-import { Tab, Grid, Label, Header } from "semantic-ui-react";
-
-const RouteGrid = ({ routes }) => (
-  <Grid columns={3} divided>
-    {routes.map((r, i) => {
-      return (
-        <Grid.Column>
-          <RouteDisplay route={r} />
-        </Grid.Column>
-      );
-    })}
-  </Grid>
-);
-
-const RouteInfo = ({ fares, url }) => <div>information</div>;
+import { Tab } from "semantic-ui-react";
+import { RouteInfo } from "../components/RouteInfo";
+import { RouteGrid } from "../components/RouteGrid";
 
 export default ({ data }) => {
   const a = data.postgres.agency[0];
@@ -39,8 +26,7 @@ export default ({ data }) => {
             textColor: `#${r.routeTextColor}`,
             order: r.routeSortOrder,
             short: r.routeShortName,
-            long: r.routeLongName,
-            short: r.routeShortName
+            long: r.routeLongName
           },
           geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
         };
@@ -48,7 +34,7 @@ export default ({ data }) => {
       return m;
     })
     .reduce((a, c) => a.concat(c), [])
-    .sort((a, b) => a.properties.order < b.properties.order);
+    .sort((a, b) => b.properties.order - a.properties.order);
 
   // put those features in a single FeatureCollection
   const routeFeatures = {

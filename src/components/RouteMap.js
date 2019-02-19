@@ -1,6 +1,5 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import wkx from "wkx";
 import bbox from "@turf/bbox";
 import style from "./style.json";
 
@@ -10,9 +9,6 @@ mapboxgl.accessToken =
 class RouteMap extends React.Component {
   componentDidMount() {
     const shapes = this.props.shapes;
-
-    console.log(shapes);
-    console.log(bbox(shapes[0]));
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -52,8 +48,6 @@ class RouteMap extends React.Component {
         },
         "road-label-small"
       );
-
-      console.log(m);
     });
   }
 

@@ -8,10 +8,9 @@ import StopInfo from '../components/StopInfo';
 import RouteDisplay from '../components/RouteDisplay'
 
 import feeds from '../feeds';
-import { Segment, Tab, Grid } from "semantic-ui-react";
+import { Segment, Tab } from "semantic-ui-react";
 
 const StopTimeList = ({ list }) => {
-  console.log(list)
   return (
     <Segment.Group>
       {list.map(t => (

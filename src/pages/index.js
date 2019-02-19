@@ -2,6 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
+import AllAgencyMap from '../components/AllAgencyMap';
 
 const agencies = {
   ddot: {
@@ -23,7 +24,7 @@ const IndexPage = ({ data }) => (
     <div
       style={{
         display: "grid",
-        gridTemplate: `200px 200px / 1fr 1fr`,
+        gridTemplate: `100px 100px / 1fr 1fr`,
         gridGap: 10
       }}
     >
@@ -39,10 +40,11 @@ const IndexPage = ({ data }) => (
           <Link to={`/${a.agencyId}`}>
             <h3>{a.agencyName}</h3>
           </Link>
-          <p>{a.routesByFeedIndexAndAgencyId.totalCount} routes</p>
+          <p>{a.routes.length} routes</p>
         </section>
       ))}
     </div>
+    <AllAgencyMap agencies={data.postgres.agencies} />
   </Layout>
 );
 
@@ -53,8 +55,21 @@ export const query = graphql`
         agencyId
         agencyName
         agencyUrl
-        routesByFeedIndexAndAgencyId {
-          totalCount
+        routes: routesByFeedIndexAndAgencyIdList {
+          agencyId
+          routeShortName
+          routeLongName
+          routeDesc
+          routeType
+          routeUrl
+          routeColor
+          routeTextColor
+          routeSortOrder
+          shapes: routeShapesByFeedIndexAndRouteIdList {
+            dir
+            direction
+            geom
+          }
         }
       }
     }

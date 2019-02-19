@@ -14,7 +14,7 @@ const RouteDisplay = ({ route, inline }) => (
     </React.Fragment> :
     <div style={{display: 'inline-block'}}>
       <Header as="h4">
-      <Label size="large" color="grey">{route.routeShortName}</Label>
+      <Label size="large" color={`#${route.routeColor}`} style={{background: `#${route.routeColor}`, opacity: 0.75}}>{route.routeShortName}</Label>
         <Link to={`${route.agencyId}/route/${Number(route.routeShortName)}`} style={{marginLeft: '.5rem'}}>
           {route.routeLongName}
         </Link>

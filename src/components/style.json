@@ -378,7 +378,7 @@
       "source": "composite",
       "source-layer": "water",
       "layout": {},
-      "paint": { "fill-color": "hsl(196, 80%, 70%)" }
+      "paint": { "fill-color": "hsl(196, 20%, 90%)" }
     },
     {
       "id": "barrier_line-land-polygon",
@@ -3671,7 +3671,7 @@
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
         "text-halo-color": "hsla(0, 0%, 100%, 0.9)",
-        "text-opacity": 1,
+        "text-opacity": 0.85,
         "text-halo-width": 6,
         "text-halo-blur": 2
       }
@@ -3696,7 +3696,7 @@
         "text-max-angle": 30,
         "symbol-spacing": 250,
         "text-font": [
-          "Super Grotesk Offc Pro Semibold",
+          "Super Grotesk Offc Pro Medium",
           "Arial Unicode MS Regular"
         ],
         "symbol-placement": "line",
