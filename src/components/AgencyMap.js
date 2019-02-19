@@ -9,12 +9,6 @@ class AgencyMap extends React.Component {
   componentDidMount() {
     const routes = this.props.routeFeatures;
 
-    console.log(
-      routes.sort(
-        (a, b) => b.properties.routeSortOrder - a.properties.routeSortOrder
-      )
-    );
-
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: style,
