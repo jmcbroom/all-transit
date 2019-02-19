@@ -2,42 +2,51 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
-import wkx from 'wkx';
+import wkx from "wkx";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 
 class AllAgencyMap extends React.Component {
   componentDidMount() {
-    const agencies = this.props.agencies
+    const agencies = this.props.agencies;
 
     // map through agencies => routes => shapes to generate a long list of features
-    let routeShapes = agencies.map(a => {
-      let routes = a.routes.map(r => {
-        let m = r.shapes.map(rs => {
-          let wkb = new Buffer(rs.geom, 'hex')
-          return {
-            type: "Feature",
-            properties: {
-              dir: rs.direction,
-              color: `#${r.routeColor}`,
-              textColor: `#${r.routeTextColor}`,
-              order: r.routeSortOrder,
-              short: r.routeShortName,
-              long: r.routeLongName
-            },
-            geometry: wkx.Geometry.parse(wkb).toGeoJSON()
-          };
-        })
-        return m;
-      }).reduce((a, c) => a.concat(c), []);
-      return routes;
-    }).reduce((a, c) => a.concat(c), [])
+    let routeShapes = agencies
+      .map((a, i) => {
+        let routes = a.routes
+          .map(r => {
+            let m = r.shapes.map(rs => {
+              let wkb = new Buffer(rs.geom, "hex");
+              return {
+                type: "Feature",
+                properties: {
+                  feedIndex: i + 1,
+                  dir: rs.direction,
+                  color: `#${r.routeColor}`,
+                  textColor: `#${r.routeTextColor}`,
+                  order: r.routeSortOrder,
+                  short: r.routeShortName,
+                  long: r.routeLongName
+                },
+                geometry: wkx.Geometry.parse(wkb).toGeoJSON()
+              };
+            });
+            return m;
+          })
+          .reduce((a, c) => a.concat(c), []);
+        return routes;
+      })
+      .reduce((a, c) => a.concat(c), []);
 
     let routes = {
-      "type": "FeatureCollection",
-      "features": routeShapes
-    }
+      type: "FeatureCollection",
+      features: routeShapes
+        .sort((a, b) => b.properties.feedIndex - a.properties.feedIndex)
+        .sort((a, b) => b.properties.order - a.properties.order)
+    };
+
+    console.log(routes);
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -79,7 +88,10 @@ class AllAgencyMap extends React.Component {
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "60vh", margin: "10px 0px" }} />
+      <div
+        ref={el => (this.mapContainer = el)}
+        style={{ height: "60vh", margin: "10px 0px" }}
+      />
     );
   }
 }
