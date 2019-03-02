@@ -58,7 +58,11 @@ export default ({ data, pageContext }) => {
       menuItem: "Schedule",
       render: () => (
         <Tab.Pane>
-          <RouteSchedule trips={r.trips} feedIndex={pageContext.feedIndex} />
+          <RouteSchedule
+            trips={r.trips}
+            shapes={r.shapes}
+            feedIndex={pageContext.feedIndex}
+          />
         </Tab.Pane>
       )
     },
@@ -66,7 +70,7 @@ export default ({ data, pageContext }) => {
       menuItem: "Stops",
       render: () => (
         <Tab.Pane>
-          <RouteStops stops={stopsList} agency={r.agencyId} />
+          <RouteStops stops={stopsList} shapes={r.shapes} agency={r.agencyId} />
         </Tab.Pane>
       )
     }

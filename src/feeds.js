@@ -35,13 +35,13 @@ const feeds = [
   {
     name: "transit-windsor",
     services: {
-      "7": "weekday",
-      // "8": "weekday",
+      // "7": "weekday",
+      "8": "saturday",
       // "9": "weekday",
       // "2": "weekday",
       // "3": "weekday",
-      "4": "saturday",
-      "6": "sunday"
+      "4": "sunday",
+      "6": "weekday"
     }
   }
 ];

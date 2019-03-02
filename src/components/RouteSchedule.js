@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import feeds from "../feeds";
 import _ from "lodash";
 
-export const RouteSchedule = ({ trips, feedIndex }) => {
-  const [service, setService] = useState("saturday");
+import { Dropdown } from "semantic-ui-react";
 
-  console.log(service, setService);
+export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
+  const [service, setService] = useState("weekday");
+  const [direction, setDirection] = useState(0);
 
+  let services = _.uniq(
+    trips.map(t => feeds[feedIndex - 1].services[t.service])
+  );
+
+  // filter trips by service/direction
   let filteredTrips = _.filter(trips, t => {
     return (
-      t.direction === 0 && feeds[feedIndex - 1].services[t.service] === service
+      t.direction === direction &&
+      feeds[feedIndex - 1].services[t.service] === service
     );
+    // then sort by the lowest/earliest arrivalTime
   }).sort((a, b) => {
     return (
       a.stopTimes[0].arrivalTime.hours * 60 +
@@ -19,6 +27,7 @@ export const RouteSchedule = ({ trips, feedIndex }) => {
         b.stopTimes[0].arrivalTime.minutes)
     );
   });
+
   let timepointList = filteredTrips
     .sort((a, b) => {
       return (
@@ -29,37 +38,85 @@ export const RouteSchedule = ({ trips, feedIndex }) => {
     .stopTimes.filter(st => {
       return st.timepoint === 1;
     });
-  console.log(filteredTrips);
+
+  let serviceOptions = services.map((s, i) => {
+    return {
+      key: i + 1,
+      text: _.capitalize(s),
+      value: s
+    };
+  });
+
+  const directionOptions = shapes.map((s, i) => {
+    return {
+      key: i + 1,
+      text: _.capitalize(s.direction),
+      value: parseInt(s.dir)
+    };
+  });
+
   return (
-    <table>
-      <thead>
-        <tr>
-          {timepointList.map(t => (
-            <th key={t.stop.stopId}>{t.stop.stopName}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {filteredTrips.map(tr => (
-          <tr key={tr.id}>
-            {timepointList.map((t, i) => {
-              let filtered = tr.stopTimes.filter(
-                st => st.stop.stopId === t.stop.stopId && st.timepoint === 1
-              );
-              if (filtered.length === 0) {
-                return <td>-</td>;
-              } else {
-                let st = filtered[0];
-                return (
-                  <td key={st.stop.stopId}>
-                    {st.arrivalTime.hours} {st.arrivalTime.minutes}
-                  </td>
-                );
-              }
-            })}
+    <div>
+      <Dropdown
+        onChange={(e, { value }) => {
+          console.log(value);
+          setService(value);
+        }}
+        options={serviceOptions}
+        placeholder="Choose an option"
+        selection
+        floating
+        labeled
+        button
+        value={service}
+        icon="filter"
+        className="icon"
+      />
+      <Dropdown
+        onChange={(e, { value }) => {
+          console.log(value);
+          setDirection(value);
+        }}
+        options={directionOptions}
+        placeholder="Choose an option"
+        selection
+        floating
+        labeled
+        button
+        value={direction}
+        icon="filter"
+        className="icon"
+      />
+      <table>
+        <thead>
+          <tr>
+            {timepointList.map(t => (
+              <th key={t.stop.stopId}>{t.stop.stopName}</th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {filteredTrips.map(tr => (
+            <tr key={tr.id}>
+              {timepointList.map((t, i) => {
+                let filtered = tr.stopTimes.filter(
+                  st => st.stop.stopId === t.stop.stopId && st.timepoint === 1
+                );
+                if (filtered.length === 0) {
+                  return <td>-</td>;
+                } else {
+                  let st = filtered[0];
+                  return (
+                    <td key={st.stop.stopId}>
+                      {st.arrivalTime.hours} {st.arrivalTime.minutes}
+                    </td>
+                  );
+                }
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
