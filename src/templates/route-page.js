@@ -14,19 +14,6 @@ export default ({ data, pageContext }) => {
   let directions = Array.from(new Set(r.trips.map(t => t.direction)));
   // let services = Array.from(new Set(r.trips.map(t => t.service)));
 
-  // generate list of stops
-  let stopsList = directions.map(d => {
-    // filter trips by the current direction
-    let tripsThisWay = r.trips.filter(t => {
-      return t.direction === d;
-    });
-    // sort by # of stopTimes desc and get top result
-    let mostStopsTrip = tripsThisWay.sort((a, b) => {
-      return b.stopTimes.length - a.stopTimes.length;
-    })[0];
-    return mostStopsTrip;
-  });
-
   // generate GeoJSON features
   const features = r.shapes.map(s => {
     let wkbBuffer = new Buffer(s.geom, "hex");
@@ -70,7 +57,7 @@ export default ({ data, pageContext }) => {
       menuItem: "Stops",
       render: () => (
         <Tab.Pane>
-          <RouteStops stops={stopsList} shapes={r.shapes} agency={r.agencyId} />
+          <RouteStops trips={r.trips} shapes={r.shapes} agency={r.agencyId} />
         </Tab.Pane>
       )
     }

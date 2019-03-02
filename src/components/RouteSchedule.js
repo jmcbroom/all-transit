@@ -8,8 +8,8 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
   const [service, setService] = useState("weekday");
   const [direction, setDirection] = useState(0);
 
-  let services = _.uniq(
-    trips.map(t => feeds[feedIndex - 1].services[t.service])
+  let services = _.compact(
+    _.uniq(trips.map(t => feeds[feedIndex - 1].services[t.service]))
   );
 
   // filter trips by service/direction
@@ -59,7 +59,6 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
     <div>
       <Dropdown
         onChange={(e, { value }) => {
-          console.log(value);
           setService(value);
         }}
         options={serviceOptions}
@@ -69,12 +68,11 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
         labeled
         button
         value={service}
-        icon="filter"
+        icon="calendar alternate outline"
         className="icon"
       />
       <Dropdown
         onChange={(e, { value }) => {
-          console.log(value);
           setDirection(value);
         }}
         options={directionOptions}
@@ -84,7 +82,7 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
         labeled
         button
         value={direction}
-        icon="filter"
+        icon="exchange"
         className="icon"
       />
       <table>

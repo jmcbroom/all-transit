@@ -3,8 +3,7 @@ import { Link } from "gatsby";
 import { Dropdown } from "semantic-ui-react";
 import _ from "lodash";
 
-const RouteStops = ({ stops, shapes, agency }) => {
-  let stopList = stops[0].stopTimes.map(st => st.stop);
+const RouteStops = ({ trips, shapes, agency }) => {
   const [direction, setDirection] = useState(0);
 
   const directionOptions = shapes.map((s, i) => {
@@ -14,6 +13,20 @@ const RouteStops = ({ stops, shapes, agency }) => {
       value: parseInt(s.dir)
     };
   });
+
+  let mostStopTrips = directionOptions
+    .map(d => d.value)
+    .map(v => {
+      let tripsThisWay = trips.filter(t => {
+        return t.direction === v;
+      });
+      let mostStopsTrip = tripsThisWay.sort((a, b) => {
+        return b.stopTimes.length - a.stopTimes.length;
+      })[0];
+      return mostStopsTrip;
+    });
+
+  let stopList = mostStopTrips[direction].stopTimes.map(st => st.stop);
 
   return (
     <div>
