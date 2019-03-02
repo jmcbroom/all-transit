@@ -9,7 +9,7 @@ import { RouteSchedule } from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
-
+  console.log(pageContext);
   // derive some information from the trips
   let directions = Array.from(new Set(r.trips.map(t => t.direction)));
   // let services = Array.from(new Set(r.trips.map(t => t.service)));
@@ -69,7 +69,7 @@ export default ({ data, pageContext }) => {
         <h1>
           {r.routeShortName} {r.routeLongName}
         </h1>
-        <Tab menu={{ attached: false }} panes={panes} />
+        <Tab menu={{ attached: true }} panes={panes} />
       </div>
     </Layout>
   );

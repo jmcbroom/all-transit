@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import feeds from "../feeds";
 import _ from "lodash";
+import formatTime from "./Helpers";
 
 import { Dropdown } from "semantic-ui-react";
 
@@ -105,9 +106,7 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
                 } else {
                   let st = filtered[0];
                   return (
-                    <td key={st.stop.stopId}>
-                      {st.arrivalTime.hours} {st.arrivalTime.minutes}
-                    </td>
+                    <td key={st.stop.stopId}>{formatTime(st.arrivalTime)}</td>
                   );
                 }
               })}

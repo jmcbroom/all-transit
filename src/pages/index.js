@@ -2,7 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
-import AllAgencyMap from '../components/AllAgencyMap';
+import AllAgencyMap from "../components/AllAgencyMap";
 
 const agencies = {
   ddot: {
@@ -32,7 +32,8 @@ const IndexPage = ({ data }) => (
         <section
           key={a.agencyId}
           style={{
-            background: agencies[a.agencyId].color,
+            border: `.5em solid ${agencies[a.agencyId].color}`,
+            background: "#eee",
             opacity: 0.85,
             padding: 10
           }}
