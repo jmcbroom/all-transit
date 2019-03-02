@@ -1,4 +1,82 @@
-# Route shape cleanup
+# Routes
+
+## timepoint cleanup
+
+How to get the timepoints:
+
+```sql
+---- this function will retrieve a list of stop times for the trip with the most stops.
+-- adjust the `vars` below, similar to the above function.
+WITH vars AS ( SELECT 4::integer AS feed, '9'::text AS route_id, '1'::text AS direction_id ),
+-- `trips` is a CTE to grab the longest/most stops trip
+trips AS (
+	SELECT
+		tr.trip_id
+	FROM
+		gtfs.trips tr
+		INNER JOIN gtfs.stop_times st ON st.trip_id = tr.trip_id
+	WHERE
+		route_id::text = ( SELECT route_id FROM vars )
+		AND direction_id::text = ( SELECT direction_id FROM vars )
+		AND st.feed_index::integer = ( SELECT feed FROM vars )
+		AND tr.feed_index::integer = ( SELECT feed FROM vars )
+	GROUP BY
+		tr.trip_id
+	ORDER BY
+		random()
+		LIMIT 1
+	)
+SELECT
+	st.arrival_time,
+	s.stop_id,
+	s.stop_name,
+	st.stop_sequence
+FROM
+	gtfs.stop_times st
+	INNER JOIN gtfs.stops s ON s.stop_id = st.stop_id
+WHERE
+	st.trip_id = ( SELECT trip_id FROM trips )
+	AND s.feed_index = ( SELECT feed FROM vars )
+	AND st.feed_index = ( SELECT feed FROM vars )
+ORDER BY
+st.stop_sequence;
+```
+
+How to set the timepoints:
+
+```sql
+with timepoints as (
+  select
+    feed :: integer as feed_index,
+    route_id,
+    dir :: integer as direction_id,
+    unnest(regexp_split_to_array(timepoints, ',\s?')) as stop_id
+  from
+    ann_arbor
+)
+UPDATE
+  gtfs.stop_times
+SET
+  timepoint = 1
+from
+  timepoints
+where
+  stop_times.trip_id in (
+    select
+      trip_id
+    from
+      gtfs.trips
+    where
+      trips.route_id = timepoints.route_id
+      and trips.feed_index = timepoints.feed_index
+      and trips.direction_id = timepoints.direction_id
+  )
+  and stop_times.stop_id = timepoints.stop_id
+  and stop_times.feed_index = timepoints.feed_index;
+
+```
+
+## shape cleanup
 
 Wrote a PL/Python function that will return GeoJSON given an OSRM URL like we have in our sheet. We can use this to populate a geometry column.
 
@@ -35,6 +113,16 @@ $$ LANGUAGE plpython3u;
 update ddot set geom = ST_SetSRID(ST_GeomFromGeoJSON(osrm_parse(osrm_url)), 4326) where osrm_url != '' and geom is null;
 ```
 
+#### For SMART
+
+```sql
+select AddGeometryColumn('public', 'smart', 'geom', 4326, 'LINESTRING', 2);
+update smart set geom = ST_SetSRID(ST_GeomFromGeoJSON(osrm_parse(osrm_url)), 4326) where osrm_url != '' and geom is null;
+alter table smart alter column feed type integer using feed::integer;
+alter table smart rename column feed to feed_index;
+insert into gtfs.route_shapes (select * from public.smart);
+```
+
 ### DDOT route clean up
 
 ```sql
@@ -57,6 +145,8 @@ update gtfs.routes set route_color = 'D07C32', route_sort_order = 3 where feed_i
 update gtfs.routes set route_long_name = initcap(route_long_name) where feed_index = 1;
 update gtfs.routes set route_long_name = 'McNichols' where feed_index = 1 and route_long_name = 'Mcnichols';
 ```
+
+### SMART route clean up
 
 ### Associate route shapes to stops
 
