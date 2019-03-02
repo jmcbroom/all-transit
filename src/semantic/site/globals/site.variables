@@ -2,11 +2,13 @@
          Site Settings
 *******************************/
 
+@import url('https://rsms.me/inter/inter-ui.css');
+
 /*-------------------
        Fonts
 --------------------*/
 
-@fontName          : "Bitter";
+@fontName          : "Inter UI";
 @fontSmoothing     : antialiased;
 
 @headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;

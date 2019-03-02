@@ -42,7 +42,7 @@ const RouteStops = ({ trips, shapes, agency }) => {
         labeled
         button
         value={direction}
-        icon="filter"
+        icon="exchange"
         className="icon"
       />
       <ul>
