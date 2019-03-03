@@ -1,4 +1,4 @@
-const formatTime = arrivalTime => {
+export const formatTime = arrivalTime => {
   let minutes =
     arrivalTime.minutes !== null
       ? arrivalTime.minutes.toString().padStart(2, "0")

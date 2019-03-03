@@ -5,7 +5,7 @@ import formatTime from "./Helpers";
 
 import { Dropdown, Table, Menu } from "semantic-ui-react";
 
-export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
+const RouteSchedule = ({ trips, shapes, feedIndex }) => {
   const [service, setService] = useState("weekday");
   const [direction, setDirection] = useState(0);
 
@@ -156,3 +156,5 @@ export const RouteSchedule = ({ trips, shapes, feedIndex }) => {
     </div>
   );
 };
+
+export default RouteSchedule;

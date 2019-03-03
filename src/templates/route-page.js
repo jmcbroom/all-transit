@@ -5,7 +5,7 @@ import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
 import { Tab } from "semantic-ui-react";
 import wkx from "wkx";
-import { RouteSchedule } from "../components/RouteSchedule";
+import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
