@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, List, Icon } from "semantic-ui-react";
 import _ from "lodash";
 
 const RouteStops = ({ trips, shapes, agency }) => {
@@ -26,7 +26,10 @@ const RouteStops = ({ trips, shapes, agency }) => {
       return mostStopsTrip;
     });
 
-  let stopList = mostStopTrips[direction].stopTimes.map(st => st.stop);
+  let stopList = mostStopTrips[direction].stopTimes.map(st => ({
+    ...st.stop,
+    timepoint: st.timepoint
+  }));
 
   return (
     <div>
@@ -45,15 +48,26 @@ const RouteStops = ({ trips, shapes, agency }) => {
         icon="exchange"
         className="icon"
       />
-      <ul>
+      <List
+        divided
+        link
+        size="huge"
+        verticalAlign="middle"
+        style={{ maxHeight: "60vh", overflowY: "scroll" }}
+      >
         {stopList.map(s => (
-          <Link to={`${agency}/stop/${s.stopId}`}>
-            <li>
-              {s.stopName} / {s.stopDesc}
-            </li>
-          </Link>
+          <List.Item as="a" href={`../stop/${s.stopId}`}>
+            <List.Icon
+              name={s.timepoint ? "circle" : "circle outline"}
+              verticalAlign="middle"
+            />
+            <List.Content>
+              <List.Header>{s.stopName}</List.Header>
+              <List.Description>stop ID: #{s.stopId}</List.Description>
+            </List.Content>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
