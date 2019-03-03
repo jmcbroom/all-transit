@@ -10,9 +10,6 @@ import { RouteSchedule } from "../components/RouteSchedule";
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
   console.log(pageContext);
-  // derive some information from the trips
-  let directions = Array.from(new Set(r.trips.map(t => t.direction)));
-  // let services = Array.from(new Set(r.trips.map(t => t.service)));
 
   // generate GeoJSON features
   const features = r.shapes.map(s => {

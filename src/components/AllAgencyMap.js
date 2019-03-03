@@ -46,14 +46,14 @@ class AllAgencyMap extends React.Component {
         .sort((a, b) => b.properties.order - a.properties.order)
     };
 
-    console.log(routes);
-
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: style,
       bounds: bbox(routes),
       minZoom: 7
     });
+
+    this.map.addControl(new mapboxgl.FullscreenControl());
 
     this.map.on("load", m => {
       this.map.fitBounds(bbox(routes), {

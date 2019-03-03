@@ -51,7 +51,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   result.data.postgres.routes.forEach(r => {
     createPage({
-      path: `/${r.agencyId}/route/${Number(r.routeShortName)}`,
+      path: `/${r.agencyId}/route/${r.routeShortName}`,
       component: path.resolve("./src/templates/route-page.js"),
       context: {
         routeNo: r.routeShortName,

@@ -5,23 +5,10 @@ import _ from "lodash";
 import Layout from "../components/layout";
 import StopMap from "../components/StopMap";
 import StopInfo from "../components/StopInfo";
-import RouteDisplay from "../components/RouteDisplay";
 
 import feeds from "../feeds";
-import { Segment, Tab } from "semantic-ui-react";
-
-const StopTimeList = ({ list }) => {
-  return (
-    <Segment.Group>
-      {list.map(t => (
-        <Segment>
-          {t.arrivalTime.hours}:{t.arrivalTime.minutes}{" "}
-          <RouteDisplay route={t.trip.route} inline />
-        </Segment>
-      ))}
-    </Segment.Group>
-  );
-};
+import { Tab } from "semantic-ui-react";
+import { StopTimeList } from "../components/StopTimeList";
 
 export default class Stop extends React.Component {
   render() {

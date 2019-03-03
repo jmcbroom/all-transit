@@ -2,7 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
-
+import "mapbox-gl/dist/mapbox-gl.css";
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 class AgencyMap extends React.Component {
@@ -16,9 +16,11 @@ class AgencyMap extends React.Component {
       minZoom: 7
     });
 
+    this.map.addControl(new mapboxgl.FullscreenControl());
+
     this.map.on("load", m => {
       this.map.fitBounds(bbox(routes), {
-        padding: 40
+        padding: 20
       });
       this.map.addLayer(
         {
