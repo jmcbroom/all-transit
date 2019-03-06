@@ -44,7 +44,7 @@ const RouteStops = ({ trips, shapes, agency }) => {
         style={{ maxHeight: "60vh", overflowY: "scroll" }}
       >
         {stopList.map(s => (
-          <List.Item as="a" href={`../../stop/${s.stopId}`}>
+          <List.Item as="a" href={`/${agency}/stop/${s.stopId}`}>
             <List.Icon
               name={s.timepoint ? "circle" : "circle outline"}
               verticalAlign="middle"

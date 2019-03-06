@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
-import { Tab } from "semantic-ui-react";
+import RouteDisplay from "../components/RouteDisplay";
+import { Tab, Menu } from "semantic-ui-react";
 import wkx from "wkx";
 import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
-  console.log(pageContext);
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const longTrips = r.longTrips.sort((a, b) => a.directionId - b.directionId);
 
   // generate GeoJSON features
   const features = r.shapes.map(s => {
@@ -54,11 +57,7 @@ export default ({ data, pageContext }) => {
       menuItem: "Stops",
       render: () => (
         <Tab.Pane>
-          <RouteStops
-            trips={r.longTrips}
-            shapes={r.shapes}
-            agency={r.agencyId}
-          />
+          <RouteStops trips={longTrips} shapes={r.shapes} agency={r.agencyId} />
         </Tab.Pane>
       )
     }
@@ -67,10 +66,17 @@ export default ({ data, pageContext }) => {
   return (
     <Layout>
       <div>
-        <h1>
-          {r.routeShortName} {r.routeLongName}
-        </h1>
-        <Tab menu={{ attached: true }} panes={panes} />
+        <Menu>
+          <Menu.Item>
+            <RouteDisplay route={r} />
+          </Menu.Item>
+          <Menu.Menu position="right" inline>
+            <Menu.Item onClick={() => setTabIndex(0)}>Map</Menu.Item>
+            <Menu.Item onClick={() => setTabIndex(1)}>Schedule</Menu.Item>
+            <Menu.Item onClick={() => setTabIndex(2)}>Stops</Menu.Item>
+          </Menu.Menu>
+        </Menu>
+        <Tab activeIndex={tabIndex} panes={panes} />
       </div>
     </Layout>
   );

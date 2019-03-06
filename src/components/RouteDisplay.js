@@ -23,7 +23,11 @@ const RouteDisplay = ({ route, inline }) =>
         <Label
           size="large"
           color={`#${route.routeColor}`}
-          style={{ background: `#${route.routeColor}`, opacity: 0.75 }}
+          style={{
+            background: `#${route.routeColor}`,
+            text: `white`,
+            opacity: 0.75
+          }}
         >
           {route.routeShortName}
         </Label>

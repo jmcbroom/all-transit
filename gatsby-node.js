@@ -38,7 +38,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           agencyName
           agencyUrl
         }
-        routes: allRoutesList(first: 20) {
+        routes: allRoutesList {
           agencyId
           routeShortName
           routeLongName
@@ -72,14 +72,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     });
   });
 
-  // result.data.postgres.stops.forEach(stop => {
-  //   createPage({
-  //     path: `/${agencies[stop.feedIndex - 1]}/stop/${stop.stopId}`,
-  //     component: path.resolve("./src/templates/stop-page.js"),
-  //     context: {
-  //       stopId: stop.stopId,
-  //       feedIndex: stop.feedIndex
-  //     }
-  //   });
-  // });
+  result.data.postgres.stops.forEach(stop => {
+    createPage({
+      path: `/${agencies[stop.feedIndex - 1]}/stop/${stop.stopId}`,
+      component: path.resolve("./src/templates/stop-page.js"),
+      context: {
+        stopId: stop.stopId,
+        feedIndex: stop.feedIndex
+      }
+    });
+  });
 };
