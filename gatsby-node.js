@@ -13,11 +13,11 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
         rules: [
           {
             test: /mapbox-gl/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
+            use: loaders.null()
+          }
+        ]
+      }
+    });
   }
   actions.setWebpackConfig({
     resolve: {
@@ -38,7 +38,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           agencyName
           agencyUrl
         }
-        routes: allRoutesList {
+        routes: allRoutesList(first: 20) {
           agencyId
           routeShortName
           routeLongName
@@ -72,14 +72,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     });
   });
 
-  result.data.postgres.stops.forEach(stop => {
-    createPage({
-      path: `/${agencies[stop.feedIndex - 1]}/stop/${stop.stopId}`,
-      component: path.resolve("./src/templates/stop-page.js"),
-      context: {
-        stopId: stop.stopId,
-        feedIndex: stop.feedIndex
-      }
-    });
-  });
+  // result.data.postgres.stops.forEach(stop => {
+  //   createPage({
+  //     path: `/${agencies[stop.feedIndex - 1]}/stop/${stop.stopId}`,
+  //     component: path.resolve("./src/templates/stop-page.js"),
+  //     context: {
+  //       stopId: stop.stopId,
+  //       feedIndex: stop.feedIndex
+  //     }
+  //   });
+  // });
 };

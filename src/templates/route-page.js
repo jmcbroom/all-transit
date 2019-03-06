@@ -97,7 +97,9 @@ export const query = graphql`
           headsign: tripHeadsign
           direction: directionId
           service: serviceId
-          stopTimes: stopTimesByFeedIndexAndTripIdList {
+          stopTimes: stopTimesByFeedIndexAndTripIdList(
+            condition: { timepoint: 1 }
+          ) {
             timepoint
             arrivalTime {
               hours

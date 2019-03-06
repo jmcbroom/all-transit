@@ -174,3 +174,21 @@ WHERE
 	AND s.feed_index = stp.feed_index;
 $$ LANGUAGE SQL STABLE;
 ```
+
+### Route queries consuming too much data
+
+Here's a function to optimize the route-page.js query.
+
+```sql
+create or replace function gtfs.routes_longest_trips (r gtfs.routes) returns setof gtfs.trips as $$
+
+with longest_trips as (select distinct on (t.direction_id) t.feed_index, t.trip_id from gtfs.trips t
+inner join gtfs.stop_times st on t.trip_id = st.trip_id
+where t.route_id = r.route_id and t.feed_index = r.feed_index
+group by t.feed_index, t.trip_id
+order by t.direction_id, count(st.*) desc)
+
+select * from gtfs.trips where trip_id in (select trip_id from longest_trips) and feed_index = r.feed_index
+
+$$ language sql stable;
+```

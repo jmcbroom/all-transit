@@ -4,7 +4,7 @@ import _ from "lodash";
 import wkx from "wkx";
 import Layout from "../components/layout";
 import AgencyMap from "../components/AgencyMap";
-import { Tab } from "semantic-ui-react";
+import { Tab, Menu } from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
 
@@ -71,10 +71,10 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <div>
-        <h1>{a.agencyName}</h1>
-        <Tab menu={{ attached: false }} panes={panes} />
-      </div>
+      <Menu>
+        <Menu.Item header>{a.agencyName}</Menu.Item>
+      </Menu>
+      <Tab menu={{ attached: false }} panes={panes} />
     </Layout>
   );
 };

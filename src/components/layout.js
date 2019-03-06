@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
+import Footer from './footer';
 // import 'semantic-ui-css/semantic.min.css'
 import "semantic-ui-less/semantic.less";
 const Layout = ({ children }) => (
@@ -22,13 +23,14 @@ const Layout = ({ children }) => (
         <div
           style={{
             margin: "0 auto",
-            maxWidth: 1080,
+            maxWidth: 960,
             padding: "0px 1.0875rem 1.45rem",
             paddingTop: 0
           }}
         >
           {children}
         </div>
+        <Footer siteTitle={data.site.siteMetadata.title} />
       </>
     )}
   />
