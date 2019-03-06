@@ -14,19 +14,7 @@ const RouteStops = ({ trips, shapes, agency }) => {
     };
   });
 
-  let mostStopTrips = directionOptions
-    .map(d => d.value)
-    .map(v => {
-      let tripsThisWay = trips.filter(t => {
-        return t.direction === v;
-      });
-      let mostStopsTrip = tripsThisWay.sort((a, b) => {
-        return b.stopTimes.length - a.stopTimes.length;
-      })[0];
-      return mostStopsTrip;
-    });
-
-  let stopList = mostStopTrips[direction].stopTimes.map(st => ({
+  let stopList = trips[direction].stopTimes.map(st => ({
     ...st.stop,
     timepoint: st.timepoint
   }));

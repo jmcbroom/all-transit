@@ -54,7 +54,11 @@ export default ({ data, pageContext }) => {
       menuItem: "Stops",
       render: () => (
         <Tab.Pane>
-          <RouteStops trips={r.trips} shapes={r.shapes} agency={r.agencyId} />
+          <RouteStops
+            trips={r.longTrips}
+            shapes={r.shapes}
+            agency={r.agencyId}
+          />
         </Tab.Pane>
       )
     }
@@ -92,6 +96,28 @@ export const query = graphql`
           direction
           geom
         }
+        longTrips: longestTripsList {
+          tripHeadsign
+          directionId
+          stopTimes: stopTimesByFeedIndexAndTripIdList(
+            orderBy: STOP_SEQUENCE_ASC
+          ) {
+            stopSequence
+            timepoint
+            arrivalTime {
+              seconds
+              minutes
+              hours
+            }
+            stop: stopByFeedIndexAndStopId {
+              stopId
+              stopName
+              stopDesc
+              stopLat
+              stopLon
+            }
+          }
+        }
         trips: tripsByFeedIndexAndRouteIdList {
           id: tripId
           headsign: tripHeadsign
@@ -104,6 +130,7 @@ export const query = graphql`
             arrivalTime {
               hours
               minutes
+              seconds
             }
             stop: stopByFeedIndexAndStopId {
               stopId
