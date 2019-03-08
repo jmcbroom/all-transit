@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
-import Footer from './footer';
+import Footer from "./footer";
 // import 'semantic-ui-css/semantic.min.css'
 import "semantic-ui-less/semantic.less";
-const Layout = ({ children }) => (
+const Layout = ({ title, children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -19,7 +19,7 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={`${data.site.siteMetadata.title} / ${title}`} />
         <div
           style={{
             margin: "0 auto",
@@ -30,7 +30,6 @@ const Layout = ({ children }) => (
         >
           {children}
         </div>
-        <Footer siteTitle={data.site.siteMetadata.title} />
       </>
     )}
   />

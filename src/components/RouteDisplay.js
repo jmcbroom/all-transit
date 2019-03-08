@@ -1,44 +1,24 @@
 import React from "react";
 import { Link } from "gatsby";
-import { Header, Label } from "semantic-ui-react";
+import { Header, Label, Divider } from "semantic-ui-react";
 
-const RouteDisplay = ({ route, inline }) =>
-  inline === false ? (
-    <React.Fragment>
-      <Header
-        as="h4"
-        style={{ display: "flex", justifyContent: "space-between" }}
+const RouteDisplay = ({ route }) => (
+  <Link to={`/${route.agencyId}/route/${route.routeShortName}`}>
+    <Label size="large" inline>
+      <Label
+        size="large"
+        style={{
+          backgroundColor: `#${route.routeColor}`,
+          color: `#${route.routeTextColor}`,
+          fontWeight: 700,
+          fontSize: "1.1em"
+        }}
       >
-        <Label size="large" color="grey">
-          {route.routeShortName}
-        </Label>
-        <Link to={`${route.agencyId}/route/${route.routeShortName}`}>
-          {route.routeLongName}
-        </Link>
-      </Header>
-    </React.Fragment>
-  ) : (
-    <div style={{ display: "inline-block" }}>
-      <Header as="h4">
-        <Label
-          size="large"
-          color={`#${route.routeColor}`}
-          style={{
-            background: `#${route.routeColor}`,
-            text: `white`,
-            opacity: 0.75
-          }}
-        >
-          {route.routeShortName}
-        </Label>
-        <Link
-          to={`${route.agencyId}/route/${route.routeShortName}`}
-          style={{ marginLeft: ".5rem" }}
-        >
-          {route.routeLongName}
-        </Link>
-      </Header>
-    </div>
-  );
+        {route.routeShortName}
+      </Label>
+      <span style={{ padding: "0px 5px" }}>{route.routeLongName}</span>
+    </Label>
+  </Link>
+);
 
 export default RouteDisplay;

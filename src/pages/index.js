@@ -21,31 +21,24 @@ const agencies = {
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <div
-      style={{
-        display: "grid",
-        gridTemplate: `100px 100px / 1fr 1fr`,
-        gridGap: 10
-      }}
-    >
-      {data.postgres.agencies.map(a => (
-        <section
-          key={a.agencyId}
-          style={{
-            border: `.5em solid ${agencies[a.agencyId].color}`,
-            background: "#eee",
-            opacity: 0.85,
-            padding: 10
-          }}
-        >
-          <Link to={`/${a.agencyId}`}>
-            <h3>{a.agencyName}</h3>
-          </Link>
-          <p>{a.routes.length} routes</p>
-        </section>
-      ))}
-    </div>
-    <AllAgencyMap agencies={data.postgres.agencies} />
+    {data.postgres.agencies.map(a => (
+      <Card key={a.agencyId} />
+      // <section
+      //   key={a.agencyId}
+      //   style={{
+      //     border: `.5em solid ${agencies[a.agencyId].color}`,
+      //     background: "#eee",
+      //     opacity: 0.85,
+      //     padding: 10
+      //   }}
+      // >
+      //   <Link to={`/${a.agencyId}`}>
+      //     <h3>{a.agencyName}</h3>
+      //   </Link>
+      //   <p>{a.routes.length} routes</p>
+      // </section>
+    ))}
+    {/* <AllAgencyMap agencies={data.postgres.agencies} /> */}
   </Layout>
 );
 

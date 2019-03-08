@@ -235,6 +235,7 @@
 @brown            : #A5673F;
 @grey             : #767676;
 @black            : #1B1C1D;
+@ddot             : #aaabbb;
 
 /*---  Light Colors  ---*/
 @lightRed         : #FF695E;

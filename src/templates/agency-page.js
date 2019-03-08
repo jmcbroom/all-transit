@@ -70,7 +70,7 @@ export default ({ data }) => {
   ];
 
   return (
-    <Layout>
+    <Layout title={a.agencyName}>
       <Menu>
         <Menu.Item header>{a.agencyName}</Menu.Item>
       </Menu>
