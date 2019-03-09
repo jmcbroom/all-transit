@@ -7,6 +7,7 @@ import AgencyMap from "../components/AgencyMap";
 import { Tab, Menu } from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
+import RouteDisplay from "../components/RouteDisplay";
 
 export default ({ data }) => {
   const a = data.postgres.agency[0];
@@ -24,9 +25,10 @@ export default ({ data }) => {
             dir: rs.direction,
             color: `#${r.routeColor}`,
             textColor: `#${r.routeTextColor}`,
-            order: r.routeSortOrder,
+            order: parseInt(r.routeSortOrder),
             short: r.routeShortName,
-            long: r.routeLongName
+            long: r.routeLongName,
+            agency: a.agencyId
           },
           geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
         };
@@ -69,12 +71,16 @@ export default ({ data }) => {
     }
   ];
 
+  let items = [
+    {
+      header: true,
+      content: <Menu.Header content={a.agencyName} />
+    }
+  ];
+
   return (
     <Layout title={a.agencyName}>
-      <Menu>
-        <Menu.Item header>{a.agencyName}</Menu.Item>
-      </Menu>
-      <Tab menu={{ attached: false }} panes={panes} />
+      <Tab menu={{ attached: false, items: items }} panes={panes} />
     </Layout>
   );
 };
@@ -83,6 +89,7 @@ export const query = graphql`
   query($id: String!) {
     postgres {
       agency: allAgenciesList(condition: { agencyId: $id }) {
+        agencyId
         agencyName
         agencyUrl
         agencyPhone

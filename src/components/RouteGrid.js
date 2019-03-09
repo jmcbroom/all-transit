@@ -1,15 +1,15 @@
 import React from "react";
 import RouteDisplay from "./RouteDisplay";
-import { List } from "semantic-ui-react";
+import { List, Grid } from "semantic-ui-react";
 
 export const RouteGrid = ({ routes }) => (
-  <List divided>
+  <Grid columns={3} stackable>
     {routes.map((r, i) => {
       return (
-        <List.Item key={r.routeLongName}>
+        <Grid.Column key={r.routeLongName} style={{ padding: ".25rem .25rem" }}>
           <RouteDisplay route={r} />
-        </List.Item>
+        </Grid.Column>
       );
     })}
-  </List>
+  </Grid>
 );

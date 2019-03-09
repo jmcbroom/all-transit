@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
 import RouteDisplay from "../components/RouteDisplay";
-import { Tab, Menu } from "semantic-ui-react";
+import { Tab, Menu, Segment } from "semantic-ui-react";
 import wkx from "wkx";
 import RouteSchedule from "../components/RouteSchedule";
 
@@ -34,14 +34,6 @@ export default ({ data, pageContext }) => {
 
   const panes = [
     {
-      menuItem: "Map",
-      render: () => (
-        <Tab.Pane>
-          <RouteMap shapes={features} />
-        </Tab.Pane>
-      )
-    },
-    {
       menuItem: "Schedule",
       render: () => (
         <Tab.Pane>
@@ -50,6 +42,14 @@ export default ({ data, pageContext }) => {
             shapes={r.shapes}
             feedIndex={pageContext.feedIndex}
           />
+        </Tab.Pane>
+      )
+    },
+    {
+      menuItem: "Route Map",
+      render: () => (
+        <Tab.Pane>
+          <RouteMap shapes={features} />
         </Tab.Pane>
       )
     },
@@ -65,19 +65,21 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <div>
-        <Menu>
-          <Menu.Item>
-            <RouteDisplay route={r} />
-          </Menu.Item>
-          <Menu.Menu position="right" inline>
-            <Menu.Item onClick={() => setTabIndex(0)}>Map</Menu.Item>
-            <Menu.Item onClick={() => setTabIndex(1)}>Schedule</Menu.Item>
-            <Menu.Item onClick={() => setTabIndex(2)}>Stops</Menu.Item>
-          </Menu.Menu>
-        </Menu>
-        <Tab activeIndex={tabIndex} panes={panes} />
-      </div>
+      <Menu inline>
+        <Menu.Menu position="left">
+          <RouteDisplay route={r} fluid="false" background="white" />
+        </Menu.Menu>
+        <Menu.Menu position="right">
+          <Menu.Item onClick={() => setTabIndex(0)}>Schedule</Menu.Item>
+          <Menu.Item onClick={() => setTabIndex(1)}>Route Map</Menu.Item>
+          <Menu.Item onClick={() => setTabIndex(2)}>Stops</Menu.Item>
+        </Menu.Menu>
+      </Menu>
+      <Tab
+        activeIndex={tabIndex}
+        menu={{ style: { display: "none" } }}
+        panes={panes}
+      />
     </Layout>
   );
 };

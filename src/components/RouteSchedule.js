@@ -100,7 +100,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
           alignContent: "center"
         }}
       >
-        <Table unstackable selectable collapsing compact celled striped>
+        <Table unstackable selectable collapsing compact celled striped fluid>
           <Table.Header>
             <Table.Row>
               {timepointList.map(t => (

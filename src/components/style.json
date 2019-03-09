@@ -52,7 +52,7 @@
       "type": "vector"
     }
   },
-  "sprite": "mapbox://sprites/jmcbroom/cj7vfzaa231c02spklbu7bn1z",
+  "sprite": "mapbox://sprites/jmcbroom/cjt0vinb600uv1fqrsfw7ehy8",
   "glyphs": "mapbox://fonts/jmcbroom/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -3625,7 +3625,7 @@
         "text-size": { "base": 1, "stops": [[15, 11], [20, 14]] },
         "text-max-angle": 30,
         "symbol-spacing": 250,
-        "text-font": ["Mark Offc Pro Thin", "Arial Unicode MS Regular"],
+        "text-font": ["Inter Regular", "Arial Unicode MS Regular"],
         "symbol-placement": "line",
         "text-padding": 1,
         "visibility": "visible",
@@ -3654,13 +3654,10 @@
         ["in", "class", "link", "pedestrian", "street", "street_limited"]
       ],
       "layout": {
-        "text-size": { "base": 1, "stops": [[11, 9], [20, 17]] },
+        "text-size": { "base": 1, "stops": [[16, 12], [20, 15]] },
         "text-max-angle": 30,
         "symbol-spacing": 250,
-        "text-font": [
-          "Super Grotesk Offc Pro Medium",
-          "Arial Unicode MS Regular"
-        ],
+        "text-font": ["Inter Regular", "Arial Unicode MS Regular"],
         "symbol-placement": "line",
         "text-padding": 1,
         "visibility": "visible",
@@ -3670,7 +3667,7 @@
       },
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
-        "text-halo-color": "hsla(0, 0%, 100%, 0.9)",
+        "text-halo-color": "hsla(0, 0%, 100%, 1)",
         "text-opacity": 0.85,
         "text-halo-width": 6,
         "text-halo-blur": 2
@@ -3692,15 +3689,12 @@
         "trunk"
       ],
       "layout": {
-        "text-size": { "base": 1, "stops": [[9, 11], [20, 18]] },
+        "text-size": { "base": 1, "stops": [[9, 10], [20, 16]] },
         "text-max-angle": 30,
         "symbol-spacing": 250,
-        "text-font": [
-          "Super Grotesk Offc Pro Medium",
-          "Arial Unicode MS Regular"
-        ],
+        "text-padding": 20,
+        "text-font": ["Inter Semi Bold", "Arial Unicode MS Regular"],
         "symbol-placement": "line",
-        "text-padding": 1,
         "visibility": "visible",
         "text-rotation-alignment": "map",
         "text-field": "{name_en}",
@@ -3708,7 +3702,7 @@
       },
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
-        "text-halo-color": "hsla(0, 0%, 100%, 0.9)",
+        "text-halo-color": "hsla(0, 0%, 100%, 1)",
         "text-halo-width": 4
       }
     },

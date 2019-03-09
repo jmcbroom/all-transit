@@ -18,9 +18,9 @@ class RouteMap extends React.Component {
     });
 
     this.map.on("load", m => {
-      this.map.fitBounds(bbox(shapes[0]), {
-        padding: 40
-      });
+      // this.map.fitBounds(bbox(shapes[0]), {
+      //   padding: 40
+      // });
 
       this.map.addLayer(
         {
