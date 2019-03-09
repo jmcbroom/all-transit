@@ -9,6 +9,7 @@ mapboxgl.accessToken =
 class RouteMap extends React.Component {
   componentDidMount() {
     const shapes = this.props.shapes;
+    const stops = this.props.stops;
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -44,6 +45,18 @@ class RouteMap extends React.Component {
               base: 1.5,
               stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
             }
+          }
+        },
+        "road-label-small"
+      );
+      this.map.addLayer(
+        {
+          id: "stops",
+          type: "circle",
+          minzoom: 15,
+          source: {
+            type: "geojson",
+            data: stops
           }
         },
         "road-label-small"

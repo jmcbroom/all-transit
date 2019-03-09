@@ -14,9 +14,22 @@ export default ({ data, pageContext }) => {
 
   const longTrips = r.longTrips.sort((a, b) => a.directionId - b.directionId);
 
+  let stopFeatures = [];
+
+  longTrips.forEach(lt => {
+    let stops = lt.stopTimes.map(st => st.stop.geojson);
+    stopFeatures = stopFeatures.concat(stops);
+  });
+
+  let stops = {
+    type: "FeatureCollection",
+    features: stopFeatures
+  };
+
+  console.log(stops);
+
   // generate GeoJSON features
   const features = r.shapes.map(s => {
-    let wkbBuffer = new Buffer(s.geom, "hex");
     return {
       type: "Feature",
       properties: {
@@ -28,9 +41,11 @@ export default ({ data, pageContext }) => {
         desc: r.routeDesc,
         direction: s.direction
       },
-      geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
+      ...s.geojson
     };
   });
+
+  console.log(features);
 
   const panes = [
     {
@@ -49,7 +64,7 @@ export default ({ data, pageContext }) => {
       menuItem: "Route Map",
       render: () => (
         <Tab.Pane>
-          <RouteMap shapes={features} />
+          <RouteMap shapes={features} stops={stops} />
         </Tab.Pane>
       )
     },
@@ -102,7 +117,7 @@ export const query = graphql`
         shapes: routeShapesByFeedIndexAndRouteIdList {
           dir
           direction
-          geom
+          geojson
         }
         longTrips: longestTripsList {
           tripHeadsign
@@ -123,6 +138,7 @@ export const query = graphql`
               stopDesc
               stopLat
               stopLon
+              geojson
             }
           }
         }

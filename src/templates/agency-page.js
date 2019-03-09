@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
 import _ from "lodash";
-import wkx from "wkx";
 import Layout from "../components/layout";
 import AgencyMap from "../components/AgencyMap";
-import { Tab, Menu } from "semantic-ui-react";
+import { Tab, Menu, Grid, List } from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
 import RouteDisplay from "../components/RouteDisplay";
 
 export default ({ data }) => {
+  console.log(data);
+
   const a = data.postgres.agency[0];
 
   const routes = _.uniqBy(a.routes, "routeLongName");
+
+  const [mapRoutes, setMapRoutes] = useState([]);
 
   // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes
     .map(r => {
       let m = r.shapes.map(rs => {
-        let wkbBuffer = new Buffer(rs.geom, "hex");
         return {
           type: "Feature",
           properties: {
@@ -30,7 +32,7 @@ export default ({ data }) => {
             long: r.routeLongName,
             agency: a.agencyId
           },
-          geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
+          ...rs.geojson
         };
       });
       return m;
@@ -38,6 +40,7 @@ export default ({ data }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
+  console.log(routeShapes);
   // put those features in a single FeatureCollection
   const routeFeatures = {
     type: "FeatureCollection",
@@ -49,7 +52,25 @@ export default ({ data }) => {
       menuItem: "Map",
       render: () => (
         <Tab.Pane>
-          <AgencyMap routeFeatures={routeFeatures} />
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={12}>
+                <AgencyMap
+                  routeFeatures={routeFeatures}
+                  setMapRoutes={setMapRoutes}
+                />
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <List>
+                  {/* {mapRoutes.map(r => (
+                    <List.Item>
+                      <RouteDisplay route={r} />
+                    </List.Item>
+                  ))} */}
+                </List>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Tab.Pane>
       )
     },
@@ -111,7 +132,7 @@ export const query = graphql`
           agencyId
           shapes: routeShapesByFeedIndexAndRouteIdList {
             direction
-            geom
+            geojson
           }
         }
       }
