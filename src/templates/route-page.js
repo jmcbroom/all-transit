@@ -75,9 +75,9 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Menu inline>
+      <Menu>
         <Menu.Menu position="left">
-          <RouteDisplay route={r} fluid="false" background="white" />
+          <RouteDisplay route={r} background="white" />
         </Menu.Menu>
         <Menu.Menu position="right">
           <Menu.Item onClick={() => setTabIndex(0)}>Schedule</Menu.Item>

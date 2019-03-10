@@ -81,7 +81,9 @@ class AgencyMap extends React.Component {
             "text-allow-overlap": true
           },
           paint: {
-            "text-color": ["concat", "#", ["get", "routeColor"]]
+            "text-color": ["concat", "#", ["get", "routeColor"]],
+            "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
+            "text-halo-width": 2
           }
         },
         "road-label-small"
@@ -94,7 +96,7 @@ class AgencyMap extends React.Component {
             type: "geojson",
             data: routes
           },
-          minzoom: 10,
+          minzoom: 8,
           filter: ["==", "routeSortOrder", 1],
           layout: {
             "symbol-placement": "line",
@@ -111,7 +113,9 @@ class AgencyMap extends React.Component {
             "text-allow-overlap": true
           },
           paint: {
-            "text-color": ["concat", "#", ["get", "routeColor"]]
+            "text-color": ["concat", "#", ["get", "routeColor"]],
+            "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
+            "text-halo-width": 4
           }
         },
         "road-label-small"

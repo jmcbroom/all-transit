@@ -18,8 +18,9 @@ class StopMap extends React.Component {
           type: "Feature",
           properties: {
             direction: r.direction,
-            color: `#${route.routeColor}`,
-            textColor: `#${route.routeTextColor}`
+            routeColor: route.routeColor,
+            routeTextColor: route.routeTextColor,
+            routeSortOrder: route.routeSortOrder
           },
           ...r.geojson
         };

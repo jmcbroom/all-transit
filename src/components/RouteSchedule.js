@@ -66,7 +66,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
           floating
           button
           labeled
-          height={10}
           value={service}
           icon="calendar alternate outline"
           className="icon"
@@ -80,7 +79,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
           placeholder="Choose an option"
           selection
           floating
-          inline
           labeled
           button
           value={direction}
@@ -97,7 +95,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
           alignContent: "center"
         }}
       >
-        <Table unstackable selectable collapsing compact celled striped fluid>
+        <Table unstackable selectable collapsing compact celled striped>
           <Table.Header>
             <Table.Row>
               {timepointList.map(t => (
@@ -126,12 +124,16 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
                     st => st.stop.stopId === t.stop.stopId && st.timepoint === 1
                   );
                   if (filtered.length === 0) {
-                    return <Table.Cell>-</Table.Cell>;
+                    return (
+                      <Table.Cell key={`${t.stop.stopId}_${tr.tripId}`}>
+                        -
+                      </Table.Cell>
+                    );
                   } else {
                     let st = filtered[0];
                     return (
                       <Table.Cell
-                        key={st.stop.stopId}
+                        key={`${st.stop.stopId}_${tr.tripId}`}
                         style={{
                           fontWeight:
                             st.arrivalTime.hours > 11 &&

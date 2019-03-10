@@ -1,17 +1,24 @@
 import React from "react";
 import RouteDisplay from "./RouteDisplay";
-import { Segment } from "semantic-ui-react";
+import { List } from "semantic-ui-react";
 import formatTime from "./Helpers";
 
 export const StopTimeList = ({ list }) => {
   return (
-    <Segment.Group>
+    <List divided>
       {list.map(t => (
-        <Segment>
-          {formatTime(t.arrivalTime)}
-          <RouteDisplay route={t.trip.route} inline />
-        </Segment>
+        <List.Item key={t.trip.tripId}>
+          <RouteDisplay
+            route={t.trip.route}
+            size="tiny"
+            inline
+            style={{ width: "10em" }}
+          />
+          <List.Content>
+            <List.Header>{formatTime(t.arrivalTime)}</List.Header>
+          </List.Content>
+        </List.Item>
       ))}
-    </Segment.Group>
+    </List>
   );
 };
