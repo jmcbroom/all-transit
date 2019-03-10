@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import AllAgencyMap from "../components/AllAgencyMap";
-import { Card, Header, Grid, List, Divider } from "semantic-ui-react";
+import { Card, Grid, List } from "semantic-ui-react";
 
 const agencies = {
   ddot: {
@@ -91,7 +91,7 @@ export const query = graphql`
           shapes: routeShapesByFeedIndexAndRouteIdList {
             dir
             direction
-            geom
+            geojson
           }
         }
       }

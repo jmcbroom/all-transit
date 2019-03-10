@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "gatsby";
-import { Dropdown, List, Icon } from "semantic-ui-react";
+import { Dropdown, List } from "semantic-ui-react";
 import _ from "lodash";
 
 const RouteStops = ({ trips, shapes, agency }) => {
@@ -23,7 +22,6 @@ const RouteStops = ({ trips, shapes, agency }) => {
     <div>
       <Dropdown
         onChange={(e, { value }) => {
-          console.log(value);
           setDirection(value);
         }}
         options={directionOptions}

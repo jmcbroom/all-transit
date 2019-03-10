@@ -9,8 +9,6 @@ import { RouteGrid } from "../components/RouteGrid";
 import RouteDisplay from "../components/RouteDisplay";
 
 export default ({ data }) => {
-  console.log(data);
-
   const a = data.postgres.agency[0];
 
   const routes = _.uniqBy(a.routes, "routeLongName");
@@ -24,13 +22,13 @@ export default ({ data }) => {
         return {
           type: "Feature",
           properties: {
-            dir: rs.direction,
-            color: `#${r.routeColor}`,
-            textColor: `#${r.routeTextColor}`,
-            order: parseInt(r.routeSortOrder),
-            short: r.routeShortName,
-            long: r.routeLongName,
-            agency: a.agencyId
+            direction: rs.direction,
+            routeColor: r.routeColor,
+            routeTextColor: r.routeTextColor,
+            routeSortOrder: parseInt(r.routeSortOrder),
+            routeShortName: r.routeShortName,
+            routeLongName: r.routeLongName,
+            agencyId: a.agencyId
           },
           ...rs.geojson
         };
@@ -40,7 +38,6 @@ export default ({ data }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
-  console.log(routeShapes);
   // put those features in a single FeatureCollection
   const routeFeatures = {
     type: "FeatureCollection",
@@ -52,21 +49,21 @@ export default ({ data }) => {
       menuItem: "Map",
       render: () => (
         <Tab.Pane>
-          <Grid>
+          <Grid centered>
             <Grid.Row>
-              <Grid.Column width={12}>
+              <Grid.Column width={10}>
                 <AgencyMap
                   routeFeatures={routeFeatures}
                   setMapRoutes={setMapRoutes}
                 />
               </Grid.Column>
-              <Grid.Column width={4}>
-                <List>
-                  {/* {mapRoutes.map(r => (
-                    <List.Item>
-                      <RouteDisplay route={r} />
+              <Grid.Column width={6}>
+                <List style={{ height: "60vh", overflowY: "scroll" }}>
+                  {mapRoutes.map(r => (
+                    <List.Item key={r.properties.routeShortName}>
+                      <RouteDisplay route={r.properties} />
                     </List.Item>
-                  ))} */}
+                  ))}
                 </List>
               </Grid.Column>
             </Grid.Row>
@@ -132,7 +129,7 @@ export const query = graphql`
           agencyId
           shapes: routeShapesByFeedIndexAndRouteIdList {
             direction
-            geojson
+            geojson: simpleGeojson
           }
         }
       }

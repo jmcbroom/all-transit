@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import { Header, Label, Divider, Button } from "semantic-ui-react";
+import { Label, Button } from "semantic-ui-react";
 
 const RouteDisplay = ({ route, background, size }) => {
   if (size === null) {
@@ -10,7 +10,6 @@ const RouteDisplay = ({ route, background, size }) => {
     <Link to={`/${route.agencyId}/route/${route.routeShortName}`}>
       <Button
         size={size}
-        inline
         compact
         fluid
         style={{ textAlign: "left", background: background }}

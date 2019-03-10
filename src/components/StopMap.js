@@ -1,6 +1,5 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import wkx from "wkx";
 import style from "./style.json";
 
 mapboxgl.accessToken =
@@ -14,7 +13,6 @@ class StopMap extends React.Component {
 
     let routeFeatures = routes
       .map(r => {
-        let wkbBuffer = new Buffer(r.geom, "hex");
         let route = r.routeByFeedIndexAndRouteId;
         return {
           type: "Feature",
@@ -23,12 +21,10 @@ class StopMap extends React.Component {
             color: `#${route.routeColor}`,
             textColor: `#${route.routeTextColor}`
           },
-          geometry: wkx.Geometry.parse(wkbBuffer).toGeoJSON()
+          ...r.geojson
         };
       })
       .sort((a, b) => a.properties.order < b.properties.order);
-
-    console.log(routeFeatures);
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,

@@ -4,8 +4,7 @@ import Layout from "../components/layout";
 import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
 import RouteDisplay from "../components/RouteDisplay";
-import { Tab, Menu, Segment } from "semantic-ui-react";
-import wkx from "wkx";
+import { Tab, Menu } from "semantic-ui-react";
 import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
@@ -26,8 +25,6 @@ export default ({ data, pageContext }) => {
     features: stopFeatures
   };
 
-  console.log(stops);
-
   // generate GeoJSON features
   const features = r.shapes.map(s => {
     return {
@@ -44,8 +41,6 @@ export default ({ data, pageContext }) => {
       ...s.geojson
     };
   });
-
-  console.log(features);
 
   const panes = [
     {
@@ -117,7 +112,7 @@ export const query = graphql`
         shapes: routeShapesByFeedIndexAndRouteIdList {
           dir
           direction
-          geojson
+          geojson: simpleGeojson
         }
         longTrips: longestTripsList {
           tripHeadsign

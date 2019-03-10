@@ -21,9 +21,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
     );
     // then sort by the lowest/earliest arrivalTime
   });
-  console.log(filteredTrips);
-  console.log(filteredTrips.map(t => t.stopTimes[0].arrivalTime));
-
   let sortedTrips = _.sortBy(filteredTrips, [
     t =>
       t.stopTimes[0].arrivalTime.hours * 60 + t.stopTimes[0].arrivalTime.minutes

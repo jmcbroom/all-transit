@@ -15,7 +15,7 @@ class RouteMap extends React.Component {
       container: this.mapContainer,
       style: style,
       bounds: bbox(shapes[0]),
-      minZoom: 10
+      minZoom: 8
     });
 
     this.map.on("load", m => {

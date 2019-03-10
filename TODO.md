@@ -19,16 +19,16 @@ Here's what we should do before we launch.
 ### Route shapes
 
 - [*] DDOT
-- [ ] SMART
-- [ ] The Ride
-- [ ] Transit Windsor
+- [*] SMART
+- [*] The Ride
+- [*] Transit Windsor
 
 ### Agency information
 
-- [ ] DDOT
-- [ ] SMART
-- [ ] The Ride
-- [ ] Transit Windsor
+- [-] DDOT
+- [-] SMART
+- [-] The Ride
+- [-] Transit Windsor
 
 ## Design
 

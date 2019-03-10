@@ -89,6 +89,7 @@ export const query = graphql`
         stopDesc
         stopLat
         stopLon
+        geojson
         routeShapes: routeShapesList {
           routeByFeedIndexAndRouteId {
             agencyId
@@ -100,7 +101,7 @@ export const query = graphql`
           }
           direction
           dir
-          geom
+          geojson: simpleGeojson
         }
         times: stopTimesByFeedIndexAndStopIdList {
           trip: tripByFeedIndexAndTripId {

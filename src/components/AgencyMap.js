@@ -10,7 +10,7 @@ mapboxgl.accessToken =
 class AgencyMap extends React.Component {
   componentDidMount() {
     const routes = this.props.routeFeatures;
-
+    const setMapRoutes = this.props.setMapRoutes;
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: style,
@@ -33,7 +33,6 @@ class AgencyMap extends React.Component {
       this.map.fitBounds(bbox(routes), {
         padding: 20
       });
-      console.log(routes);
       this.map.addLayer(
         {
           id: "routes",
@@ -47,7 +46,7 @@ class AgencyMap extends React.Component {
             "line-cap": "round"
           },
           paint: {
-            "line-color": ["get", "color"],
+            "line-color": ["concat", "#", ["get", "routeColor"]],
             "line-opacity": 1,
             "line-width": {
               base: 1.5,
@@ -65,16 +64,16 @@ class AgencyMap extends React.Component {
             type: "geojson",
             data: routes
           },
-          filter: ["in", "order", 2, 3],
+          filter: ["in", "routeSortOrder", 2, 3],
           minzoom: 12.25,
           layout: {
             "symbol-placement": "line",
-            "text-field": ["get", "short"],
+            "text-field": ["get", "routeShortName"],
             "text-font": ["Inter Extra Bold"],
             "text-line-height": 12,
             "symbol-spacing": 250,
             "text-rotation-alignment": "viewport",
-            "icon-image": ["get", "agency"],
+            "icon-image": ["get", "agencyId"],
             "icon-rotation-alignment": "viewport",
             "icon-text-fit": "width",
             "icon-text-fit-padding": [4, 8, 2, 8],
@@ -82,7 +81,7 @@ class AgencyMap extends React.Component {
             "text-allow-overlap": true
           },
           paint: {
-            "text-color": ["get", "color"]
+            "text-color": ["concat", "#", ["get", "routeColor"]]
           }
         },
         "road-label-small"
@@ -96,14 +95,14 @@ class AgencyMap extends React.Component {
             data: routes
           },
           minzoom: 10,
-          filter: ["==", "order", 1],
+          filter: ["==", "routeSortOrder", 1],
           layout: {
             "symbol-placement": "line",
-            "text-field": ["get", "short"],
+            "text-field": ["get", "routeShortName"],
             "text-font": ["Inter Extra Bold"],
             "text-line-height": 12,
             "text-rotation-alignment": "viewport",
-            "icon-image": ["get", "agency"],
+            "icon-image": ["get", "agencyId"],
             "icon-rotation-alignment": "viewport",
             "icon-text-fit": "width",
             "symbol-spacing": 250,
@@ -112,19 +111,25 @@ class AgencyMap extends React.Component {
             "text-allow-overlap": true
           },
           paint: {
-            "text-color": ["get", "color"]
+            "text-color": ["concat", "#", ["get", "routeColor"]]
           }
         },
         "road-label-small"
       );
 
-      this.map.on("click", e => {
-        console.log(e);
-      });
+      this.map.on("click", e => {});
 
       this.map.on("moveend", e => {
         let routes = this.map.queryRenderedFeatures({ layers: ["routes"] });
-        console.log(_.uniqBy(routes, "properties.short"));
+        let uniq = _.uniqBy(routes, "properties.routeShortName");
+        let sorted1 = _.sortBy(
+          uniq,
+          a => parseInt(a.properties.routeShortName) || 9999
+        );
+        let sorted = _.sortBy(sorted1, a => {
+          return parseInt(a.properties.routeSortOrder);
+        });
+        setMapRoutes(sorted);
       });
     });
   }

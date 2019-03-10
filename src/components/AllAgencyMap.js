@@ -2,7 +2,6 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
-import wkx from "wkx";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -17,7 +16,6 @@ class AllAgencyMap extends React.Component {
         let routes = a.routes
           .map(r => {
             let m = r.shapes.map(rs => {
-              let wkb = new Buffer(rs.geom, "hex");
               return {
                 type: "Feature",
                 properties: {
@@ -30,7 +28,7 @@ class AllAgencyMap extends React.Component {
                   long: r.routeLongName,
                   agency: a.agencyId
                 },
-                geometry: wkx.Geometry.parse(wkb).toGeoJSON()
+                ...rs.geojson
               };
             });
             return m;
