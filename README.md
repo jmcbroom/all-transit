@@ -2,6 +2,8 @@
 
 ## setup
 
+test
+
 `.env.development` is where you can specify your Postgres connection string.
 
 For best results, port-forward from our shared database:
