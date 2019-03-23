@@ -140,7 +140,7 @@ class AgencyMap extends React.Component {
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "60vh" }} />
+      <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />
     );
   }
 }

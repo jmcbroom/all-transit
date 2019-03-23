@@ -1,40 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import "semantic-ui-less/semantic.less";
+import {
+  Sticky,
+  Sidebar,
+  Button,
+  Segment,
+  Menu,
+  Icon,
+  Image
+} from "semantic-ui-react";
 
-const Layout = ({ title, color, children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+let gridStyle = {
+  display: "grid",
+  gridTemplateRows: `50px 200px 1fr 60px`,
+  gridGap: 10,
+  gridTemplateAreas: `"h"
+  "m"
+  "i"
+  "f"`
+};
+
+const Layout = ({ title, color, children }) => {
+  let [visible, setVisible] = useState(false);
+
+  return (
+    <StaticQuery
+      query={graphql`
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
-    render={data => (
-      <>
-        <Header
-          siteTitle={`${data.site.siteMetadata.title}`}
-          color={color || "rebeccapurple"}
-        />
-        <div
-          style={{
-            margin: "0 auto",
-            maxWidth: 960,
-            padding: "0px .54rem .725rem",
-            paddingTop: 0
-          }}
-        >
-          {children}
-        </div>
-      </>
-    )}
-  />
-);
+      `}
+      render={data => (
+        <>
+          <Sidebar.Pushable as={Segment}>
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              icon="labeled"
+              inverted
+              // onHide={() => setVisible(false)}
+              vertical
+              visible={visible}
+              width="thin"
+            >
+              <Menu.Item as="a">
+                <Icon name="home" />
+                Home
+              </Menu.Item>
+              <Menu.Item as="a">
+                <Icon name="gamepad" />
+                Games
+              </Menu.Item>
+              <Menu.Item as="a">
+                <Icon name="camera" />
+                Channels
+              </Menu.Item>
+            </Sidebar>
+
+            <Sidebar.Pusher>
+              <div
+                className="vh-100 w-100 items-center justify-center"
+                style={gridStyle}
+              >
+                <div
+                  style={{
+                    gridArea: "h",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end"
+                  }}
+                >
+                  <Header siteTitle={title}>
+                    <Button
+                      icon={visible ? "close" : "sidebar"}
+                      onClick={() => setVisible(visible ? false : true)}
+                    />
+                  </Header>
+                </div>
+                {children}
+              </div>
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </>
+      )}
+    />
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired

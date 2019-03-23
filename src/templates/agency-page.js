@@ -65,21 +65,8 @@ export default ({ data, pageContext }) => {
         <Tab.Pane>
           <Grid centered stackable>
             <Grid.Row>
-              <Grid.Column width={10}>
-                <AgencyMap
-                  routeFeatures={routeFeatures}
-                  setMapRoutes={setMapRoutes}
-                />
-              </Grid.Column>
-              <Grid.Column width={6}>
-                <List style={{ height: "60vh", overflowY: "scroll" }}>
-                  {mapRoutes.map(r => (
-                    <List.Item key={r.properties.routeShortName}>
-                      <RouteDisplay route={r.properties} />
-                    </List.Item>
-                  ))}
-                </List>
-              </Grid.Column>
+              <Grid.Column width={10} />
+              <Grid.Column width={6} />
             </Grid.Row>
           </Grid>
         </Tab.Pane>
@@ -104,34 +91,22 @@ export default ({ data, pageContext }) => {
   ];
 
   return (
-    <Layout title={a.agencyName} color={feeds[a.routes[0].feedIndex - 1].color}>
-      <Menu attached>
-        <Menu.Menu position="left">
-          <Menu.Header>
-            <Label>{a.agencyName}</Label>
-          </Menu.Header>
-        </Menu.Menu>
-        <Menu.Menu position="right">
-          <Menu.Item onClick={() => setTabIndex(0)}>Info</Menu.Item>
-          <Menu.Item onClick={() => setTabIndex(1)}>Map</Menu.Item>
-          <Menu.Item onClick={() => setTabIndex(2)}>Routes</Menu.Item>
-        </Menu.Menu>
-      </Menu>
-      <Tab
-        activeIndex={tabIndex}
-        menu={{ style: { display: "none" } }}
-        panes={panes}
-        attached
-      />
-      <Breadcrumb attached>
-        <Link to={`/`}>
-          <Breadcrumb.Section>Buses</Breadcrumb.Section>
-        </Link>
-        <Breadcrumb.Divider>></Breadcrumb.Divider>
-        <Breadcrumb.Section active>
-          {feeds[pageContext.feedIndex - 1].display}
-        </Breadcrumb.Section>
-      </Breadcrumb>
+    <Layout title={a.agencyName}>
+      <AgencyMap routeFeatures={routeFeatures} setMapRoutes={setMapRoutes} />
+      <List
+        style={{
+          gridArea: "i",
+          maxHeight: "40vh",
+          overflowY: "scroll",
+          padding: 20
+        }}
+      >
+        {mapRoutes.map(r => (
+          <List.Item key={r.properties.routeShortName}>
+            <RouteDisplay route={r.properties} />
+          </List.Item>
+        ))}
+      </List>
     </Layout>
   );
 };

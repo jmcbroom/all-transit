@@ -1,34 +1,22 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
+import { Button } from "semantic-ui-react";
 
-const Header = ({ siteTitle, color }) => (
-  <div
-    style={{
-      background: color,
-      marginBottom: "1.05rem",
-      color: "#000"
-    }}
-  >
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: 960,
-        padding: ".5rem 1.0875rem"
-      }}
-    >
-      <h3 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: "black",
-            textDecoration: "none"
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h3>
-    </div>
+const Header = ({ siteTitle, color, children }) => (
+  <div style={{ display: "flex", alignItems: "center" }}>
+    {children}
+    <h3 style={{ margin: 0 }}>
+      <Link
+        to="/"
+        style={{
+          color: "black",
+          textDecoration: "none"
+        }}
+      >
+        {siteTitle}
+      </Link>
+    </h3>
   </div>
 );
 

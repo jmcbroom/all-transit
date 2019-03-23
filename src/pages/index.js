@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import { Card, List, Message, Segment, Header } from "semantic-ui-react";
+import AllAgencyMap from "../components/AllAgencyMap";
 
 const agencies = {
   ddot: {
@@ -24,43 +25,44 @@ const agencies = {
 };
 
 const IndexPage = ({ data }) => (
-  <Layout title="Overview">
-    <Message attached>
-      <Message.Content>Welcome</Message.Content>
-    </Message>
-    <Card.Group itemsPerRow={4} stackable>
-      {data.postgres.agencies.map(a => (
-        <Card key={a.agencyId} fluid>
-          <Card.Content
-            style={{
-              background: agencies[a.agencyId].color,
-              backgroundOpacity: 0.1
-            }}
-          >
-            <Card.Header as="a" href={`/${a.agencyId}`}>
-              {a.agencyName}
-            </Card.Header>
-            <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
-          </Card.Content>
-          <Card.Content extra>
-            <List>
-              <List.Item
-                as="a"
-                href={a.agencyUrl}
-                icon="linkify"
-                content="Website"
-              />
-              <List.Item
-                as="a"
-                href={a.agencyFareUrl}
-                icon="ticket"
-                content="Fares/Passes"
-              />
-            </List>
-          </Card.Content>
-        </Card>
-      ))}
-    </Card.Group>
+  <Layout title={"Welcome"}>
+    <AllAgencyMap agencies={data.postgres.agencies} />
+
+    <div style={{ gridArea: "i" }}>
+      <Card.Group itemsPerRow={4} stackable>
+        {data.postgres.agencies.map(a => (
+          <Card key={a.agencyId}>
+            <Card.Content
+              style={{
+                background: agencies[a.agencyId].color,
+                backgroundOpacity: 0.1
+              }}
+            >
+              <Card.Header as="a" href={`/${a.agencyId}`}>
+                {a.agencyName}
+              </Card.Header>
+              <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
+            </Card.Content>
+            {/* <Card.Content extra>
+              <List>
+                <List.Item
+                  as="a"
+                  href={a.agencyUrl}
+                  icon="linkify"
+                  content="Website"
+                />
+                <List.Item
+                  as="a"
+                  href={a.agencyFareUrl}
+                  icon="ticket"
+                  content="Fares/Passes"
+                />
+              </List>
+            </Card.Content> */}
+          </Card>
+        ))}
+      </Card.Group>
+    </div>
   </Layout>
 );
 

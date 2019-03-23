@@ -7,9 +7,12 @@ const RouteDisplay = ({ route, background, size }) => {
     size = "large";
   }
   return (
-    <Link to={`/${route.agencyId}/route/${route.routeShortName}`}>
+    <Link
+      prefetch={false}
+      to={`/${route.agencyId}/route/${route.routeShortName}`}
+    >
       <Button
-        size={size}
+        size={"tiny"}
         compact
         fluid
         style={{ textAlign: "left", background: background }}

@@ -157,7 +157,10 @@ class AllAgencyMap extends React.Component {
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "85vh" }} />
+      <div
+        ref={el => (this.mapContainer = el)}
+        style={{ height: "100%", gridArea: "m" }}
+      />
     );
   }
 }

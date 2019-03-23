@@ -77,10 +77,11 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout
-      title={feeds[pageContext.feedIndex - 1].display}
+      title={`${feeds[pageContext.feedIndex - 1].display} ${r.routeLongName}`}
       color={feeds[pageContext.feedIndex - 1].color}
     >
-      <Breadcrumb>
+      <RouteMap shapes={features} stops={stops} />
+      {/* <Breadcrumb>
         <Link to={`/`}>
           <Breadcrumb.Section>Buses</Breadcrumb.Section>
         </Link>
@@ -107,7 +108,7 @@ export default ({ data, pageContext }) => {
         activeIndex={tabIndex}
         menu={{ style: { display: "none" } }}
         panes={panes}
-      />
+      /> */}
     </Layout>
   );
 };
