@@ -7,7 +7,7 @@ import StopMap from "../components/StopMap";
 import StopInfo from "../components/StopInfo";
 
 import feeds from "../feeds";
-import { Tab } from "semantic-ui-react";
+import { Grid, Header, Segment } from "semantic-ui-react";
 import { StopTimeList } from "../components/StopTimeList";
 
 export default class Stop extends React.Component {
@@ -40,41 +40,19 @@ export default class Stop extends React.Component {
       );
     });
 
-    const panes = [
-      {
-        menuItem: "Home",
-        render: () => (
-          <Tab.Pane>
-            <StopInfo stop={s} />
-          </Tab.Pane>
-        )
-      },
-      {
-        menuItem: "Stop Times",
-        render: () => (
-          <Tab.Pane>
-            <StopTimeList list={uniq} />
-          </Tab.Pane>
-        )
-      },
-      {
-        menuItem: "Nearby",
-        render: () => (
-          <Tab.Pane>
-            <StopMap lat={s.stopLat} lon={s.stopLon} routes={s.routeShapes} />
-          </Tab.Pane>
-        )
-      }
-    ];
-
     return (
       <Layout>
-        <div>
-          <h1>
-            {s.stopName} / {s.stopDesc}
-          </h1>
-          <Tab menu={{ attached: false }} panes={panes} />
-        </div>
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column width={10}>
+              <StopMap lat={s.stopLat} lon={s.stopLon} routes={s.routeShapes} />
+            </Grid.Column>
+            <Grid.Column width={6}>
+              <StopInfo stop={s} />
+              <StopTimeList list={uniq} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Layout>
     );
   }
@@ -107,6 +85,8 @@ export const query = graphql`
           trip: tripByFeedIndexAndTripId {
             tripId
             route: routeByFeedIndexAndRouteId {
+              routeColor
+              routeTextColor
               routeShortName
               routeLongName
               agencyId

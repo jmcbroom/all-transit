@@ -56,7 +56,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: `/${a.agencyId}`,
       component: path.resolve("./src/templates/agency-page.js"),
       context: {
-        id: a.agencyId
+        id: a.agencyId,
+        feedIndex: agencies.indexOf(a.agencyId) + 1
       }
     });
   });

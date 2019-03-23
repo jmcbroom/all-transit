@@ -28,44 +28,39 @@ const IndexPage = ({ data }) => (
     <Message attached>
       <Message.Content>Welcome</Message.Content>
     </Message>
-    <Header as="h5" attached>
-      Detroit regional bus systems
-    </Header>
-    <Segment attached padded="very">
-      <Card.Group itemsPerRow={2} stackable centered>
-        {data.postgres.agencies.map(a => (
-          <Card key={a.agencyId} fluid>
-            <Card.Content
-              style={{
-                background: agencies[a.agencyId].color,
-                backgroundOpacity: 0.1
-              }}
-            >
-              <Card.Header as="a" href={`/${a.agencyId}`}>
-                {a.agencyName}
-              </Card.Header>
-              <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
-            </Card.Content>
-            <Card.Content extra>
-              <List>
-                <List.Item
-                  as="a"
-                  href={a.agencyUrl}
-                  icon="linkify"
-                  content="Website"
-                />
-                <List.Item
-                  as="a"
-                  href={a.agencyFareUrl}
-                  icon="ticket"
-                  content="Fares/Passes"
-                />
-              </List>
-            </Card.Content>
-          </Card>
-        ))}
-      </Card.Group>
-    </Segment>
+    <Card.Group itemsPerRow={4} stackable>
+      {data.postgres.agencies.map(a => (
+        <Card key={a.agencyId} fluid>
+          <Card.Content
+            style={{
+              background: agencies[a.agencyId].color,
+              backgroundOpacity: 0.1
+            }}
+          >
+            <Card.Header as="a" href={`/${a.agencyId}`}>
+              {a.agencyName}
+            </Card.Header>
+            <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
+          </Card.Content>
+          <Card.Content extra>
+            <List>
+              <List.Item
+                as="a"
+                href={a.agencyUrl}
+                icon="linkify"
+                content="Website"
+              />
+              <List.Item
+                as="a"
+                href={a.agencyFareUrl}
+                icon="ticket"
+                content="Fares/Passes"
+              />
+            </List>
+          </Card.Content>
+        </Card>
+      ))}
+    </Card.Group>
   </Layout>
 );
 

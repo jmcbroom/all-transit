@@ -1,19 +1,33 @@
 import React, { useState } from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import _ from "lodash";
+import feeds from "../feeds";
 import Layout from "../components/layout";
 import AgencyMap from "../components/AgencyMap";
-import { Tab, Menu, Grid, List } from "semantic-ui-react";
+import {
+  Tab,
+  Menu,
+  Grid,
+  List,
+  Breadcrumb,
+  Label,
+  Header,
+  Button
+} from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
 import RouteDisplay from "../components/RouteDisplay";
 
-export default ({ data }) => {
+export default ({ data, pageContext }) => {
   const a = data.postgres.agency[0];
 
   const routes = _.uniqBy(a.routes, "routeLongName");
 
   const [mapRoutes, setMapRoutes] = useState([]);
+
+  const [tabIndex, setTabIndex] = useState(0);
+
+  console.log(feeds);
 
   // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes
@@ -49,7 +63,7 @@ export default ({ data }) => {
       menuItem: "Map",
       render: () => (
         <Tab.Pane>
-          <Grid centered>
+          <Grid centered stackable>
             <Grid.Row>
               <Grid.Column width={10}>
                 <AgencyMap
@@ -89,16 +103,35 @@ export default ({ data }) => {
     }
   ];
 
-  let items = [
-    {
-      header: true,
-      content: <Menu.Header content={a.agencyName} />
-    }
-  ];
-
   return (
-    <Layout title={a.agencyName}>
-      <Tab menu={{ attached: false, items: items }} panes={panes} />
+    <Layout title={a.agencyName} color={feeds[a.routes[0].feedIndex - 1].color}>
+      <Menu attached>
+        <Menu.Menu position="left">
+          <Menu.Header>
+            <Label>{a.agencyName}</Label>
+          </Menu.Header>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+          <Menu.Item onClick={() => setTabIndex(0)}>Info</Menu.Item>
+          <Menu.Item onClick={() => setTabIndex(1)}>Map</Menu.Item>
+          <Menu.Item onClick={() => setTabIndex(2)}>Routes</Menu.Item>
+        </Menu.Menu>
+      </Menu>
+      <Tab
+        activeIndex={tabIndex}
+        menu={{ style: { display: "none" } }}
+        panes={panes}
+        attached
+      />
+      <Breadcrumb attached>
+        <Link to={`/`}>
+          <Breadcrumb.Section>Buses</Breadcrumb.Section>
+        </Link>
+        <Breadcrumb.Divider>></Breadcrumb.Divider>
+        <Breadcrumb.Section active>
+          {feeds[pageContext.feedIndex - 1].display}
+        </Breadcrumb.Section>
+      </Breadcrumb>
     </Layout>
   );
 };

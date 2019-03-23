@@ -1,4 +1,4 @@
-export const formatTime = arrivalTime => {
+export const formatTime = (arrivalTime, ampm = false) => {
   let minutes =
     arrivalTime.minutes !== null
       ? arrivalTime.minutes.toString().padStart(2, "0")
@@ -13,7 +13,13 @@ export const formatTime = arrivalTime => {
     hours = arrivalTime.hours - 24;
   }
 
-  return `${hours}:${minutes}`;
+  if (ampm === false) {
+    return `${hours}:${minutes}`;
+  } else if (ampm === true && arrivalTime.hours > 12) {
+    return `${hours}:${minutes}pm`;
+  } else {
+    return `${hours}:${minutes}am`;
+  }
 };
 
 export default formatTime;

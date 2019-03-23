@@ -17,7 +17,6 @@ const RouteDisplay = ({ route, background, size }) => {
         <Button.Content>
           <Label
             size={size}
-            circular
             style={{
               backgroundColor: `#${route.routeColor}`,
               color: `#${route.routeTextColor}`,

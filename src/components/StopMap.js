@@ -1,6 +1,7 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
 import style from "./style.json";
+import { Container, Sticky } from "semantic-ui-react";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -52,7 +53,7 @@ class StopMap extends React.Component {
             "line-cap": "round"
           },
           paint: {
-            "line-color": ["get", "color"],
+            "line-color": ["concat", "#", ["get", "routeColor"]],
             "line-opacity": 0.9,
             "line-width": {
               base: 1.5,
@@ -67,7 +68,12 @@ class StopMap extends React.Component {
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "50vh" }} />
+      <Sticky>
+        <div
+          ref={el => (this.mapContainer = el)}
+          style={{ minHeight: "35vh" }}
+        />
+      </Sticky>
     );
   }
 }

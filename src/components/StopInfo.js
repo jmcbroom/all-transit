@@ -1,31 +1,22 @@
-import React from 'react';
-import _ from 'lodash';
-import RouteDisplay from './RouteDisplay';
-import { Header } from 'semantic-ui-react';
+import React from "react";
+import _ from "lodash";
+import RouteDisplay from "./RouteDisplay";
+import { List } from "semantic-ui-react";
 
 const StopInfo = ({ stop }) => {
-
   let uniqRoutes = _.uniqBy(stop.times, t => {
-    return t.trip.route.routeLongName
-  }).map(ur => ur.trip.route)
-
-  const routeGridStyle = {
-    display: 'grid', 
-    gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`, 
-    gridGap: '1rem',
-    margin: '1em 0 1em 0'
-  }
+    return t.trip.route.routeLongName;
+  }).map(ur => ur.trip.route);
 
   return (
-    <div>
-      <Header as='h4'>Routes that stop here: </Header>
-      <div style={routeGridStyle}>
-        {uniqRoutes.map(ur => (
-          <RouteDisplay key={ur.routeShortName} route={ur} />
-        ))}
-      </div>
-    </div>
-  )
-}
+    <List>
+      {uniqRoutes.map(ur => (
+        <List.Item key={ur.routeLongName}>
+          <RouteDisplay key={ur.routeShortName} route={ur} size="tiny" />
+        </List.Item>
+      ))}
+    </List>
+  );
+};
 
 export default StopInfo;

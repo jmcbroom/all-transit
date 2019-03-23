@@ -1,6 +1,8 @@
 const feeds = [
   {
     name: "ddot",
+    color: "rgba(0, 68, 69, 0.5)",
+    display: "DDOT",
     services: {
       "1": "weekday",
       "2": "saturday",
@@ -9,6 +11,8 @@ const feeds = [
   },
   {
     name: "smart",
+    color: "rgba(170, 22, 0, 0.5)",
+    display: "SMART",
     services: {
       "2": "weekday",
       "3": "saturday",
@@ -17,6 +21,8 @@ const feeds = [
   },
   {
     name: "the-ride",
+    display: "The Ride",
+    color: "rgba(4, 50, 124, 0.5)",
     services: {
       "3_merged_287881": "weekday",
       "3_merged_287885": "weekday",
@@ -34,6 +40,8 @@ const feeds = [
   },
   {
     name: "transit-windsor",
+    color: "rgba(0, 157, 211, 0.5)",
+    display: "Transit Windsor",
     services: {
       // "7": "weekday",
       "8": "saturday",

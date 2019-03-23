@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
+import feeds from "../feeds";
 import RouteDisplay from "../components/RouteDisplay";
-import { Tab, Menu } from "semantic-ui-react";
+import { Tab, Menu, Breadcrumb } from "semantic-ui-react";
 import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
+
   const [tabIndex, setTabIndex] = useState(0);
 
   const longTrips = r.longTrips.sort((a, b) => a.directionId - b.directionId);
@@ -74,7 +76,23 @@ export default ({ data, pageContext }) => {
   ];
 
   return (
-    <Layout>
+    <Layout
+      title={feeds[pageContext.feedIndex - 1].display}
+      color={feeds[pageContext.feedIndex - 1].color}
+    >
+      <Breadcrumb>
+        <Link to={`/`}>
+          <Breadcrumb.Section>Buses</Breadcrumb.Section>
+        </Link>
+        <Breadcrumb.Divider>></Breadcrumb.Divider>
+        <Link to={`/${feeds[pageContext.feedIndex - 1].name}`}>
+          <Breadcrumb.Section>
+            {feeds[pageContext.feedIndex - 1].display}
+          </Breadcrumb.Section>
+        </Link>
+        <Breadcrumb.Divider>></Breadcrumb.Divider>
+        <Breadcrumb.Section active>Route: {r.routeLongName}</Breadcrumb.Section>
+      </Breadcrumb>
       <Menu>
         <Menu.Menu position="left">
           <RouteDisplay route={r} background="white" />

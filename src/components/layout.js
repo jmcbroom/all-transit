@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import "semantic-ui-less/semantic.less";
 
-const Layout = ({ title, children }) => (
+const Layout = ({ title, color, children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -17,12 +17,15 @@ const Layout = ({ title, children }) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={`${data.site.siteMetadata.title} / ${title}`} />
+        <Header
+          siteTitle={`${data.site.siteMetadata.title}`}
+          color={color || "rebeccapurple"}
+        />
         <div
           style={{
             margin: "0 auto",
             maxWidth: 960,
-            padding: "0px 1.0875rem 1.45rem",
+            padding: "0px .54rem .725rem",
             paddingTop: 0
           }}
         >

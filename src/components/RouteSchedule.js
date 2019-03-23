@@ -3,7 +3,7 @@ import feeds from "../feeds";
 import _ from "lodash";
 import formatTime from "./Helpers";
 
-import { Dropdown, Table, Menu } from "semantic-ui-react";
+import { Dropdown, Table, Menu, Sticky } from "semantic-ui-react";
 
 const RouteSchedule = ({ trips, shapes, feedIndex }) => {
   const [service, setService] = useState("weekday");
@@ -91,7 +91,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
         style={{
           overflowX: "auto",
           overflowY: "auto",
-          height: "60vh",
           alignContent: "center"
         }}
       >

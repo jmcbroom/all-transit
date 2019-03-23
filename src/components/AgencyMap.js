@@ -18,8 +18,6 @@ class AgencyMap extends React.Component {
       minZoom: 7
     });
 
-    this.map.addControl(new mapboxgl.FullscreenControl());
-
     this.map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -28,6 +26,8 @@ class AgencyMap extends React.Component {
         trackUserLocation: true
       })
     );
+
+    this.map.addControl(new mapboxgl.FullscreenControl());
 
     this.map.on("load", m => {
       this.map.fitBounds(bbox(routes), {
