@@ -36,6 +36,8 @@ class StopMap extends React.Component {
       minZoom: 10
     });
 
+    this.map.addControl(new mapboxgl.FullscreenControl());
+
     this.map.on("load", m => {
       this.map.addLayer(
         {

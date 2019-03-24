@@ -54,8 +54,12 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
   });
 
   return (
-    <div>
-      <Menu secondary>
+    <div
+      style={{
+        gridArea: "i"
+      }}
+    >
+      <Menu secondary size="mini">
         <Dropdown
           onChange={(e, { value }) => {
             setService(value);
@@ -89,9 +93,11 @@ const RouteSchedule = ({ trips, shapes, feedIndex }) => {
       </Menu>
       <div
         style={{
-          overflowX: "auto",
-          overflowY: "auto",
-          alignContent: "center"
+          overflowY: "scroll",
+          overflowX: "scroll",
+          width: "100vw",
+          height: "calc(100% + 80px)",
+          WebkitOverflowScrolling: "touch"
         }}
       >
         <Table unstackable selectable collapsing compact celled striped>

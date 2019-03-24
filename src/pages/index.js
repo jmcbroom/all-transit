@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
-import { Card, List, Message, Segment, Header } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import AllAgencyMap from "../components/AllAgencyMap";
 
 const agencies = {

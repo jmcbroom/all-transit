@@ -7,7 +7,7 @@ import StopMap from "../components/StopMap";
 import StopInfo from "../components/StopInfo";
 
 import feeds from "../feeds";
-import { Grid, Header, Segment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { StopTimeList } from "../components/StopTimeList";
 
 export default class Stop extends React.Component {

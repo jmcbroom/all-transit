@@ -15,12 +15,14 @@ import {
 
 let gridStyle = {
   display: "grid",
-  gridTemplateRows: `50px 200px 1fr 60px`,
-  gridGap: 10,
+  gridTemplateRows: `30px 120px 1fr 60px`,
+  // gridGap: 10,
+  height: "100vh",
+  width: "100vw",
   gridTemplateAreas: `"h"
   "m"
   "i"
-  "f"`
+  "i"`
 };
 
 const Layout = ({ title, color, children }) => {
@@ -65,10 +67,7 @@ const Layout = ({ title, color, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <div
-                className="vh-100 w-100 items-center justify-center"
-                style={gridStyle}
-              >
+              <div style={gridStyle}>
                 <div
                   style={{
                     gridArea: "h",

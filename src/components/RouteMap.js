@@ -18,6 +18,8 @@ class RouteMap extends React.Component {
       minZoom: 8
     });
 
+    this.map.addControl(new mapboxgl.FullscreenControl());
+
     this.map.on("load", m => {
       // this.map.fitBounds(bbox(shapes[0]), {
       //   padding: 40
@@ -66,7 +68,10 @@ class RouteMap extends React.Component {
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ height: "50vh" }} />
+      <div
+        ref={el => (this.mapContainer = el)}
+        style={{ maxHeight: "200px" }}
+      />
     );
   }
 }

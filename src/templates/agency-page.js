@@ -96,8 +96,9 @@ export default ({ data, pageContext }) => {
       <List
         style={{
           gridArea: "i",
-          maxHeight: "40vh",
+          // maxHeight: "40vh",
           overflowY: "scroll",
+          WebkitOverflowScrolling: "touch",
           padding: 20
         }}
       >
