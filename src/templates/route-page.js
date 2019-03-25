@@ -41,38 +41,12 @@ export default ({ data, pageContext }) => {
     };
   });
 
+  let color = feeds[pageContext.feedIndex - 1].color
+
   return (
-    <Layout title={r.routeLongName} color={feeds[pageContext.feedIndex - 1].color}>
+    <Layout title={r.routeLongName} color={color}>
       <RouteMap shapes={features} stops={stops} />
-      <RouteSchedule trips={r.trips} shapes={r.shapes} feedIndex={pageContext.feedIndex} />
-      {/* <Breadcrumb>
-        <Link to={`/`}>
-          <Breadcrumb.Section>Buses</Breadcrumb.Section>
-        </Link>
-        <Breadcrumb.Divider>></Breadcrumb.Divider>
-        <Link to={`/${feeds[pageContext.feedIndex - 1].name}`}>
-          <Breadcrumb.Section>
-            {feeds[pageContext.feedIndex - 1].display}
-          </Breadcrumb.Section>
-        </Link>
-        <Breadcrumb.Divider>></Breadcrumb.Divider>
-        <Breadcrumb.Section active>Route: {r.routeLongName}</Breadcrumb.Section>
-      </Breadcrumb>
-      <Menu>
-        <Menu.Menu position="left">
-          <RouteDisplay route={r} background="white" />
-        </Menu.Menu>
-        <Menu.Menu position="right">
-          <Menu.Item onClick={() => setTabIndex(0)}>Schedule</Menu.Item>
-          <Menu.Item onClick={() => setTabIndex(1)}>Route Map</Menu.Item>
-          <Menu.Item onClick={() => setTabIndex(2)}>Stops</Menu.Item>
-        </Menu.Menu>
-      </Menu>
-      <Tab
-        activeIndex={tabIndex}
-        menu={{ style: { display: "none" } }}
-        panes={panes}
-      /> */}
+      <RouteSchedule trips={r.trips} shapes={r.shapes} feedIndex={pageContext.feedIndex} color={r.routeColor} />
     </Layout>
   );
 };
