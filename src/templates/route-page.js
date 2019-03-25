@@ -41,40 +41,10 @@ export default ({ data, pageContext }) => {
     };
   });
 
-  const panes = [
-    {
-      menuItem: "Schedule",
-      render: () => <Tab.Pane />
-    },
-    {
-      menuItem: "Route Map",
-      render: () => (
-        <Tab.Pane>
-          <RouteMap shapes={features} stops={stops} />
-        </Tab.Pane>
-      )
-    },
-    {
-      menuItem: "Stops",
-      render: () => (
-        <Tab.Pane>
-          <RouteStops trips={longTrips} shapes={r.shapes} agency={r.agencyId} />
-        </Tab.Pane>
-      )
-    }
-  ];
-
   return (
-    <Layout
-      title={`${feeds[pageContext.feedIndex - 1].display} ${r.routeLongName}`}
-      color={feeds[pageContext.feedIndex - 1].color}
-    >
+    <Layout title={r.routeLongName} color={feeds[pageContext.feedIndex - 1].color}>
       <RouteMap shapes={features} stops={stops} />
-      <RouteSchedule
-        trips={r.trips}
-        shapes={r.shapes}
-        feedIndex={pageContext.feedIndex}
-      />
+      <RouteSchedule trips={r.trips} shapes={r.shapes} feedIndex={pageContext.feedIndex} />
       {/* <Breadcrumb>
         <Link to={`/`}>
           <Breadcrumb.Section>Buses</Breadcrumb.Section>
@@ -110,9 +80,7 @@ export default ({ data, pageContext }) => {
 export const query = graphql`
   query($routeNo: String!, $feedIndex: Int!) {
     postgres {
-      route: allRoutesList(
-        condition: { routeShortName: $routeNo, feedIndex: $feedIndex }
-      ) {
+      route: allRoutesList(condition: { routeShortName: $routeNo, feedIndex: $feedIndex }) {
         agencyId
         routeShortName
         routeLongName
@@ -130,9 +98,7 @@ export const query = graphql`
         longTrips: longestTripsList {
           tripHeadsign
           directionId
-          stopTimes: stopTimesByFeedIndexAndTripIdList(
-            orderBy: STOP_SEQUENCE_ASC
-          ) {
+          stopTimes: stopTimesByFeedIndexAndTripIdList(orderBy: STOP_SEQUENCE_ASC) {
             stopSequence
             timepoint
             arrivalTime {
@@ -155,9 +121,7 @@ export const query = graphql`
           headsign: tripHeadsign
           direction: directionId
           service: serviceId
-          stopTimes: stopTimesByFeedIndexAndTripIdList(
-            condition: { timepoint: 1 }
-          ) {
+          stopTimes: stopTimesByFeedIndexAndTripIdList(condition: { timepoint: 1 }) {
             timepoint
             arrivalTime {
               hours

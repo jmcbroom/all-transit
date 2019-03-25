@@ -1,27 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
-import Header from "./header";
+import SiteHeader from "./SiteHeader";
 import "semantic-ui-less/semantic.less";
-import {
-  Sticky,
-  Sidebar,
-  Button,
-  Segment,
-  Menu,
-  Icon,
-  Image
-} from "semantic-ui-react";
+import { Sticky, Sidebar, Button, Segment, Menu, Icon, Image } from "semantic-ui-react";
 
 let gridStyle = {
   display: "grid",
-  gridTemplateRows: `30px 120px 1fr 60px`,
+  gridTemplateRows: `50px minmax(150px, 1fr) 50px 2fr`,
   // gridGap: 10,
   height: "100vh",
   width: "100vw",
   gridTemplateAreas: `"h"
   "m"
-  "i"
+  "l"
   "i"`
 };
 
@@ -76,12 +68,9 @@ const Layout = ({ title, color, children }) => {
                     alignItems: "flex-end"
                   }}
                 >
-                  <Header siteTitle={title}>
-                    <Button
-                      icon={visible ? "close" : "sidebar"}
-                      onClick={() => setVisible(visible ? false : true)}
-                    />
-                  </Header>
+                  <SiteHeader siteTitle={title} color={color}>
+                    <Button icon={visible ? "grav" : "grav"} onClick={() => setVisible(visible ? false : true)} />
+                  </SiteHeader>
                 </div>
                 {children}
               </div>

@@ -4,8 +4,7 @@ import bbox from "@turf/bbox";
 import style from "./style.json";
 import "mapbox-gl/dist/mapbox-gl.css";
 import _ from "lodash";
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
+mapboxgl.accessToken = "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 
 class AgencyMap extends React.Component {
   componentDidMount() {
@@ -56,80 +55,77 @@ class AgencyMap extends React.Component {
         },
         "road-label-small"
       );
-      this.map.addLayer(
-        {
-          id: "routes-all-labels",
-          type: "symbol",
-          source: {
-            type: "geojson",
-            data: routes
-          },
-          filter: ["in", "routeSortOrder", 2, 3],
-          minzoom: 12.25,
-          layout: {
-            "symbol-placement": "line",
-            "text-field": ["get", "routeShortName"],
-            "text-font": ["Inter Extra Bold"],
-            "text-line-height": 12,
-            "symbol-spacing": 250,
-            "text-rotation-alignment": "viewport",
-            "icon-image": ["get", "agencyId"],
-            "icon-rotation-alignment": "viewport",
-            "icon-text-fit": "width",
-            "icon-text-fit-padding": [4, 8, 2, 8],
-            "text-size": 12,
-            "text-allow-overlap": true
-          },
-          paint: {
-            "text-color": ["concat", "#", ["get", "routeColor"]],
-            "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
-            "text-halo-width": 2
-          }
-        },
-        "road-label-small"
-      );
-      this.map.addLayer(
-        {
-          id: "routes-important-labels",
-          type: "symbol",
-          source: {
-            type: "geojson",
-            data: routes
-          },
-          minzoom: 8,
-          filter: ["==", "routeSortOrder", 1],
-          layout: {
-            "symbol-placement": "line",
-            "text-field": ["get", "routeShortName"],
-            "text-font": ["Inter Extra Bold"],
-            "text-line-height": 12,
-            "text-rotation-alignment": "viewport",
-            "icon-image": ["get", "agencyId"],
-            "icon-rotation-alignment": "viewport",
-            "icon-text-fit": "width",
-            "symbol-spacing": 250,
-            "icon-text-fit-padding": [6, 10, 4, 10],
-            "text-size": 14,
-            "text-allow-overlap": true
-          },
-          paint: {
-            "text-color": ["concat", "#", ["get", "routeColor"]],
-            "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
-            "text-halo-width": 4
-          }
-        },
-        "road-label-small"
-      );
+      // this.map.addLayer(
+      //   {
+      //     id: "routes-all-labels",
+      //     type: "symbol",
+      //     source: {
+      //       type: "geojson",
+      //       data: routes
+      //     },
+      //     filter: ["in", "routeSortOrder", 2, 3],
+      //     minzoom: 12.25,
+      //     layout: {
+      //       "symbol-placement": "line",
+      //       "text-field": ["get", "routeShortName"],
+      //       "text-font": ["Inter Extra Bold"],
+      //       "text-line-height": 12,
+      //       "symbol-spacing": 250,
+      //       "text-rotation-alignment": "viewport",
+      //       "icon-image": ["get", "agencyId"],
+      //       "icon-rotation-alignment": "viewport",
+      //       "icon-text-fit": "width",
+      //       "icon-text-fit-padding": [4, 8, 2, 8],
+      //       "text-size": 12,
+      //       "text-allow-overlap": true
+      //     },
+      //     paint: {
+      //       "text-color": ["concat", "#", ["get", "routeColor"]],
+      //       "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
+      //       "text-halo-width": 2
+      //     }
+      //   },
+      //   "road-label-small"
+      // );
+      // this.map.addLayer(
+      //   {
+      //     id: "routes-important-labels",
+      //     type: "symbol",
+      //     source: {
+      //       type: "geojson",
+      //       data: routes
+      //     },
+      //     minzoom: 8,
+      //     filter: ["==", "routeSortOrder", 1],
+      //     layout: {
+      //       "symbol-placement": "line",
+      //       "text-field": ["get", "routeShortName"],
+      //       "text-font": ["Inter Extra Bold"],
+      //       "text-line-height": 12,
+      //       "text-rotation-alignment": "viewport",
+      //       "icon-image": ["get", "agencyId"],
+      //       "icon-rotation-alignment": "viewport",
+      //       "icon-text-fit": "width",
+      //       "symbol-spacing": 250,
+      //       "icon-text-fit-padding": [6, 10, 4, 10],
+      //       "text-size": 14,
+      //       "text-allow-overlap": true
+      //     },
+      //     paint: {
+      //       "text-color": ["concat", "#", ["get", "routeColor"]],
+      //       "text-halo-color": ["concat", "#", ["get", "routeTextColor"]],
+      //       "text-halo-width": 4
+      //     }
+      //   },
+      //   "road-label-small"
+      // );
 
       this.map.on("click", e => {});
 
       this.map.on("moveend", e => {
         let routes = this.map.queryRenderedFeatures({ layers: ["routes"] });
         let uniq = _.uniqBy(routes, "properties.routeShortName");
-        let sorted1 = _.sortBy(
-          uniq,
-          a => parseInt(a.properties.routeShortName) || 9999
-        );
+        let sorted1 = _.sortBy(uniq, a => parseInt(a.properties.routeShortName) || 9999);
         let sorted = _.sortBy(sorted1, a => {
           return parseInt(a.properties.routeSortOrder);
         });
@@ -139,9 +135,7 @@ class AgencyMap extends React.Component {
   }
 
   render() {
-    return (
-      <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />
-    );
+    return <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />;
   }
 }
 
