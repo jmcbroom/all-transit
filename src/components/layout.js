@@ -3,11 +3,19 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import "semantic-ui-less/semantic.less";
-import { Sticky, Sidebar, Button, Segment, Menu, Icon, Image } from "semantic-ui-react";
+import {
+  Sticky,
+  Sidebar,
+  Button,
+  Segment,
+  Menu,
+  Icon,
+  Image
+} from "semantic-ui-react";
 
 let gridStyle = {
   display: "grid",
-  gridTemplateRows: `50px minmax(150px, 1fr) 50px 2fr`,
+  gridTemplateRows: `50px minmax(20vh, 40vh) 50px 2fr`,
   // gridGap: 10,
   height: "100vh",
   width: "100vw",
@@ -61,7 +69,10 @@ const Layout = ({ title, color, children }) => {
                   }}
                 >
                   <SiteHeader siteTitle={title} color={color}>
-                    <Button icon={visible ? "grav" : "grav"} onClick={() => setVisible(visible ? false : true)} />
+                    <Button
+                      icon={visible ? "grav" : "grav"}
+                      onClick={() => setVisible(visible ? false : true)}
+                    />
                   </SiteHeader>
                 </div>
                 {children}

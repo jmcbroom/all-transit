@@ -23,8 +23,6 @@ export default ({ data, pageContext }) => {
 
   const routes = _.uniqBy(a.routes, "routeLongName");
 
-  const [mapRoutes, setMapRoutes] = useState([]);
-
   const [tabIndex, setTabIndex] = useState(0);
 
   console.log(feeds);
@@ -52,54 +50,24 @@ export default ({ data, pageContext }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
+  const [mapRoutes, setMapRoutes] = useState([]);
   // put those features in a single FeatureCollection
   const routeFeatures = {
     type: "FeatureCollection",
     features: routeShapes
   };
 
-  const panes = [
-    {
-      menuItem: "Map",
-      render: () => (
-        <Tab.Pane>
-          <Grid centered stackable>
-            <Grid.Row>
-              <Grid.Column width={10} />
-              <Grid.Column width={6} />
-            </Grid.Row>
-          </Grid>
-        </Tab.Pane>
-      )
-    },
-    {
-      menuItem: "Fares",
-      render: () => (
-        <Tab.Pane>
-          <RouteInfo fares={a.fares} url={a.agencyUrl} />
-        </Tab.Pane>
-      )
-    },
-    {
-      menuItem: "Routes",
-      render: () => (
-        <Tab.Pane>
-          <RouteGrid routes={routes} />
-        </Tab.Pane>
-      )
-    }
-  ];
+  let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
-    <Layout title={a.agencyName}>
+    <Layout title={a.agencyName} color={color}>
       <AgencyMap routeFeatures={routeFeatures} setMapRoutes={setMapRoutes} />
       <List
         style={{
           gridArea: "i",
-          // maxHeight: "40vh",
           overflowY: "scroll",
           WebkitOverflowScrolling: "touch",
-          padding: 20
+          padding: 10
         }}
       >
         {mapRoutes.map(r => (

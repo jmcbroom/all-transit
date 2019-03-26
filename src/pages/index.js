@@ -26,8 +26,12 @@ const agencies = {
 
 const IndexPage = ({ data }) => (
   <Layout title={"Welcome"}>
-    <AllAgencyMap agencies={data.postgres.agencies} />
-
+    <div style={{ gridArea: "m / m / l / l" }}>
+      <AllAgencyMap
+        agencies={data.postgres.agencies}
+        style={{ gridTemplateAreas: "m l" }}
+      />
+    </div>
     <div style={{ gridArea: "i" }}>
       <Card.Group itemsPerRow={4} stackable>
         {data.postgres.agencies.map(a => (

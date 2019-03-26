@@ -2,6 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
+import chroma from "chroma-js";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
@@ -21,7 +22,9 @@ class AllAgencyMap extends React.Component {
                 properties: {
                   feedIndex: i + 1,
                   dir: rs.direction,
-                  color: `#${r.routeColor}`,
+                  color: chroma(r.routeColor)
+                    .brighten()
+                    .hex(),
                   textColor: `#${r.routeTextColor}`,
                   order: r.routeSortOrder,
                   short: r.routeShortName,
@@ -157,10 +160,7 @@ class AllAgencyMap extends React.Component {
 
   render() {
     return (
-      <div
-        ref={el => (this.mapContainer = el)}
-        style={{ height: "100%", gridArea: "m" }}
-      />
+      <div ref={el => (this.mapContainer = el)} style={{ height: "100%" }} />
     );
   }
 }

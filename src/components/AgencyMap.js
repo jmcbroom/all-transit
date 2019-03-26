@@ -4,7 +4,8 @@ import bbox from "@turf/bbox";
 import style from "./style.json";
 import "mapbox-gl/dist/mapbox-gl.css";
 import _ from "lodash";
-mapboxgl.accessToken = "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 
 class AgencyMap extends React.Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ class AgencyMap extends React.Component {
 
     this.map.addControl(new mapboxgl.FullscreenControl());
 
-    this.map.on("load", m => {
+    this.map.on("load", () => {
       this.map.fitBounds(bbox(routes), {
         padding: 20
       });
@@ -120,12 +121,13 @@ class AgencyMap extends React.Component {
       //   "road-label-small"
       // );
 
-      this.map.on("click", e => {});
-
       this.map.on("moveend", e => {
         let routes = this.map.queryRenderedFeatures({ layers: ["routes"] });
         let uniq = _.uniqBy(routes, "properties.routeShortName");
-        let sorted1 = _.sortBy(uniq, a => parseInt(a.properties.routeShortName) || 9999);
+        let sorted1 = _.sortBy(
+          uniq,
+          a => parseInt(a.properties.routeShortName) || 9999
+        );
         let sorted = _.sortBy(sorted1, a => {
           return parseInt(a.properties.routeSortOrder);
         });
@@ -135,7 +137,9 @@ class AgencyMap extends React.Component {
   }
 
   render() {
-    return <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />;
+    return (
+      <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />
+    );
   }
 }
 
