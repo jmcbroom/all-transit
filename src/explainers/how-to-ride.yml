@@ -1,0 +1,63 @@
+slug: how-to-ride
+title: How to Ride
+subtitle: How do I catch the bus?
+level: 120
+pages:
+  - title: Look first
+    subtitle: sub
+    slug: 1
+    elements:
+      - type: text
+        content: Check the app or website to see if any detours or delays are affecting your bus
+      - type: image
+        content: sad-bus-rider.png
+      - type: text
+        content: Check for a real-time prediction
+  - title: Show up
+    subtitle: sub
+    slug: 2
+    elements:
+      - type: text
+        content: Head out to your nearest bus stop
+      - type: text
+        content: When the bus is approaching, look at the route sign above the windshield
+      - type: text
+        content: Is that your bus? Flag the operator to stop!
+      - type: text
+        content: Is it a bus on another route? Flag the operator to keep moving -- you'll save time for everyone on board
+      - type: text
+        content: Bringing your wheels? Find more info on traveling with mobility devices, strollers or bicycles here...
+  - title: Get on the bus
+    subtitle: sub
+    slug: 3
+    elements:
+      - type: text
+        content: Board at the front door
+      - type: text
+        content: The farebox is beside the bus operator. Use the farebox to pay your fare or swipe your pass (more...)
+      - type: topic
+        name: pay-your-fare
+      - type: text
+        content: If you have any questions, ask the bus operator. Operators are trained professionals and they're happy to help!
+  - title: Take a seat
+    subtitle: sub
+    slug: 4
+    elements:
+      - type: text
+        content: After paying your fare, move in to the cabin and take a seat
+      - type: text
+        content: As a courtesy, please leave seats near the front for older customers and persons using mobility devices
+      - type: text
+        content: If the bus is crowded, you can stand -- just hold on to a grab-rail and keep clear of the doorways
+  - title: Get off the bus
+    subtitle: sub
+    slug: 5
+    elements:
+      - type: text
+        content: The bus drops off at designated stops along the route
+      - type: text
+        content: Notice the pull-cord along the windows. A block before you want to deboard, give the cord a gentle tug -- the operator will let you off at the next stop
+      - type: text
+        content: Exit at the back door. That way, new customers can board safely and quickly at the front door
+      - type: text
+        content: We'll see you next time!     

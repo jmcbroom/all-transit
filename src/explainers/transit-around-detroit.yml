@@ -1,0 +1,41 @@
+slug: transit-around-detroit
+title: Transit in and around Detroit
+subtitle: Know your agencies
+level: 105
+pages:
+  - title: All transit agencies work similarly
+    subtitle:
+    slug: 1
+    elements:
+      - type: text
+        content: Regardless of which transit system you're using, the fundamentals apply
+      - type: text
+        content: Your Dart card is valid for fare on any transit system
+      - type: text
+        content: This website contains useful info about all of these systems
+  - title: Different transit systems cover different areas
+    subtitle: 
+    slug: 2
+    elements: 
+      - type: text
+        content: DDOT provides local bus service in Detroit
+      - type: text
+        content: SMART provides local bus service in many suburban communities
+      - type: text
+        content: FAST connects Detroit and the suburbs
+      - type: text
+        content: TheRide provides local bus service in Washtenaw County, including Ann Arbor and Ypsilanti
+      - type: text
+        content: People Mover and QLine provide local rail service in downtown and Midtown Detroit
+      - type: text
+        content: The systems connect -- you can use multiple transit systems to make a single trip...
+  - title: Use transit for your daily needs
+    subtitle: Just try it
+    slug: 3
+    elements:
+      - type: text
+        content: Transit isn't just for ball games or events
+      - type: text
+        content: Transit routes serve places you go every day -- work, class, appointments, grocery stores and more
+      - type: text
+        content: You can use transit _in addition to_ other ways of getting around. Try transit one or two days a week to get a feel for it
