@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
+import { StaticQuery, graphql, Link } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import "semantic-ui-less/semantic.less";
 import {
@@ -42,12 +42,14 @@ const Layout = ({ title, color, children }) => {
               // onHide={() => setVisible(false)}
               vertical
               visible={visible}
-              width="thin"
+              width="wide"
             >
+                <Link to={`/`}>
               <Menu.Item as="a">
                 <Icon name="home" />
                 Home
               </Menu.Item>
+                </Link>
             </Sidebar>
             <Sidebar.Pusher>
               <div style={{appStyle}}>

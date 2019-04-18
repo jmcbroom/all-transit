@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
-import { Card } from "semantic-ui-react";
+import { Card, Header, Segment } from "semantic-ui-react";
 import AllAgencyMap from "../components/AllAgencyMap";
 
 const agencies = {
@@ -26,13 +26,18 @@ const agencies = {
 
 const IndexPage = ({ data }) => (
   <Layout title={"Detroit transit guide"}>
+    <Segment.Group>
     {data.allExplainersYaml.edges.map(e => e.node).map(n => (
-      <div>
+      <Segment>
         <Link to={`/help/${n.slug}`} >
+          <Header as="h3">
           {n.title}
+          </Header>
+          <Header sub>{n.subtitle}</Header>
         </Link>
-      </div>
+      </Segment>
     ))}
+    </Segment.Group>
   </Layout>
 );
 
@@ -67,6 +72,7 @@ export const query = graphql`
       edges {
         node {
           title
+          subtitle
           slug
         }
       }

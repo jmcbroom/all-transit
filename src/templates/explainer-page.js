@@ -7,14 +7,14 @@ export default ({ data, pageContext }) => {
   let page = data.allExplainersYaml.edges[0].node
   return (
     <Layout title={page.title}>
-      <Header as="h3">{page.subtitle}</Header>
       <Segment.Group>
+        <Segment><Header as="h3">{page.subtitle}</Header></Segment>
         {page.pages.map(p => (
           <Segment>
             <Header as="h4">{p.title}</Header>
-            {p.elements.map(e => (
+            {/* {p.elements.map(e => (
               <p>{e.content}</p>
-            ))}
+            ))} */}
          </Segment>
         ))}
       </Segment.Group>
