@@ -13,20 +13,12 @@ import {
   Image
 } from "semantic-ui-react";
 
-let gridStyle = {
-  display: "grid",
-  gridTemplateRows: `50px minmax(20vh, 40vh) 50px 2fr`,
-  // gridGap: 10,
-  height: "100vh",
-  width: "100vw",
-  gridTemplateAreas: `"h"
-  "m"
-  "l"
-  "i"`
-};
-
 const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
+
+  let appStyle = {
+    height: '100vh'
+  }
 
   return (
     <StaticQuery
@@ -40,7 +32,7 @@ const Layout = ({ title, color, children }) => {
         }
       `}
       render={data => (
-        <>
+        <div style={appStyle}>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
               as={Menu}
@@ -57,29 +49,19 @@ const Layout = ({ title, color, children }) => {
                 Home
               </Menu.Item>
             </Sidebar>
-
             <Sidebar.Pusher>
-              <div style={gridStyle}>
-                <div
-                  style={{
-                    gridArea: "h",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end"
-                  }}
-                >
-                  <SiteHeader siteTitle={title} color={color}>
-                    <Button
-                      icon={visible ? "grav" : "grav"}
-                      onClick={() => setVisible(visible ? false : true)}
-                    />
-                  </SiteHeader>
-                </div>
-                {children}
+              <div style={{appStyle}}>
+              <SiteHeader siteTitle={title} color={color}>
+              <Button
+                icon={visible ? "grav" : "grav"}
+                onClick={() => setVisible(visible ? false : true)}
+                />
+              </SiteHeader>
+              {children}
               </div>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
-        </>
+        </div>
       )}
     />
   );

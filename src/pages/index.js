@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
 import { Card } from "semantic-ui-react";
@@ -25,48 +25,14 @@ const agencies = {
 };
 
 const IndexPage = ({ data }) => (
-  <Layout title={"Welcome"}>
-    <div style={{ gridArea: "m / m / l / l" }}>
-      <AllAgencyMap
-        agencies={data.postgres.agencies}
-        style={{ gridTemplateAreas: "m l" }}
-      />
-    </div>
-    <div style={{ gridArea: "i" }}>
-      <Card.Group itemsPerRow={4} stackable>
-        {data.postgres.agencies.map(a => (
-          <Card key={a.agencyId}>
-            <Card.Content
-              style={{
-                background: agencies[a.agencyId].color,
-                backgroundOpacity: 0.1
-              }}
-            >
-              <Card.Header as="a" href={`/${a.agencyId}`}>
-                {a.agencyName}
-              </Card.Header>
-              <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
-            </Card.Content>
-            {/* <Card.Content extra>
-              <List>
-                <List.Item
-                  as="a"
-                  href={a.agencyUrl}
-                  icon="linkify"
-                  content="Website"
-                />
-                <List.Item
-                  as="a"
-                  href={a.agencyFareUrl}
-                  icon="ticket"
-                  content="Fares/Passes"
-                />
-              </List>
-            </Card.Content> */}
-          </Card>
-        ))}
-      </Card.Group>
-    </div>
+  <Layout title={"Detroit transit guide"}>
+    {data.allExplainersYaml.edges.map(e => e.node).map(n => (
+      <div>
+        <Link to={`/help/${n.slug}`} >
+          {n.title}
+        </Link>
+      </div>
+    ))}
   </Layout>
 );
 
@@ -94,6 +60,14 @@ export const query = graphql`
             direction
             geojson
           }
+        }
+      }
+    }
+    allExplainersYaml {
+      edges {
+        node {
+          title
+          slug
         }
       }
     }
