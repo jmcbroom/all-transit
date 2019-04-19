@@ -37,20 +37,23 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
     });
 
   let sortedTrips = filteredTrips.sort((a, b) => {
-    let c = null
-    let d = null
+    let c = null;
+    let d = null;
 
     for (let t of timepointList) {
-        let aFilter = a.stopTimes.filter(st => st.stop.stopId === t.stop.stopId)
-        let bFilter = b.stopTimes.filter(st => st.stop.stopId === t.stop.stopId)
-        if(bFilter.length > 0 && aFilter.length > 0) {
-          c = aFilter[0]
-          d = bFilter[0]
-          break;
-        }
+      let aFilter = a.stopTimes.filter(st => st.stop.stopId === t.stop.stopId);
+      let bFilter = b.stopTimes.filter(st => st.stop.stopId === t.stop.stopId);
+      if (bFilter.length > 0 && aFilter.length > 0) {
+        c = aFilter[0];
+        d = bFilter[0];
+        break;
       }
-      return (c.arrivalTime.hours * 60 + c.arrivalTime.minutes) > (d.arrivalTime.hours * 60 + d.arrivalTime.minutes)
-  })
+    }
+    return (
+      c.arrivalTime.hours * 60 + c.arrivalTime.minutes >
+      d.arrivalTime.hours * 60 + d.arrivalTime.minutes
+    );
+  });
 
   let serviceOptions = services.map((s, i) => {
     return {
@@ -86,6 +89,8 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
     t.stop.stopName.replace("Ave", "").replace("Hwy", "")
   );
 
+  console.log(listArray, timepoints);
+
   let cellStyle = {
     display: "flex",
     flexDirection: "column",
@@ -105,10 +110,11 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
             ...style,
             ...cellStyle,
             background: "#eee",
-            borderRight: `2px dotted #bbb`,
+            borderLeft: `${columnIndex === 0 ? 2 : 0}px solid #ddd`,
+            borderRight: `2px solid #ddd`,
             borderBottom:
               rowIndex % 5 === 0 && rowIndex > 0
-                ? `2px solid #ddd`
+                ? `2px dashed #ddd`
                 : `0px solid #ddd`
           }}
         >
@@ -123,10 +129,11 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
             ...style,
             ...cellStyle,
             fontWeight: time.hours > 11 && time.hours < 24 ? 600 : 400,
+            borderLeft: `${columnIndex === 0 ? 2 : 0}px solid #ddd`,
             borderRight: `2px solid #ddd`,
             borderBottom:
               rowIndex % 5 === 0 && rowIndex > 0
-                ? `2px solid #ddd`
+                ? `2px dashed #ddd`
                 : `0px solid #ddd`
           }}
         >
@@ -143,13 +150,14 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
         style={{
           ...style,
           ...cellStyle,
+          borderLeft: `${columnIndex === 0 ? 2 : 0}px solid #555`,
           borderRight: `2px solid #555`,
           borderTop: `2px solid #555`,
           borderBottom: `2px solid #555`,
-          background: `#${color}`,
-          color: 'white',
+          background: "#222",
+          color: "white",
           fontWeight: 600,
-          characterSpacing: '-1px',
+          characterSpacing: "-1px",
           padding: 3,
           fontSize: 11,
           lineHeight: "1em"
@@ -166,7 +174,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
     <>
       <div
         style={{
-          gridArea: "l",
           display: "flex",
           padding: 5,
           alignItems: "center",
@@ -204,12 +211,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           style={{ minWidth: 100, maxWidth: 200 }}
         />
       </div>
-
-      <div
-        style={{
-          gridArea: "i"
-        }}
-      >
+      <div style={{ height: "60vh", width: "100%" }}>
         <ScrollSync>
           {({
             clientHeight,
@@ -222,8 +224,8 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           }) => (
             <AutoSizer>
               {({ width, height }) => {
-                let columnWidth = 90;
-                let headerHeight = 50;
+                let columnWidth = 100;
+                let headerHeight = 60;
                 return (
                   <>
                     <Grid
@@ -235,7 +237,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
                       rowCount={1}
                       scrollLeft={scrollLeft}
                       width={width - scrollbarSize()}
-                      style={{pointerEvents: 'none'}}
+                      style={{ pointerEvents: "none" }}
                     />
                     <Grid
                       onScroll={onScroll}

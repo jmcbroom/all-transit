@@ -4999,6 +4999,14 @@ gatsby-transformer-sharp@^2.1.8:
     probe-image-size "^4.0.0"
     sharp "^0.21.0"
 
+gatsby-transformer-yaml-netlify@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-netlify/-/gatsby-transformer-yaml-netlify-1.0.0-alpha.1.tgz#c8d1dea770e87bfbf5d9a6ed765f9ef8c689cb22"
+  integrity sha512-XHqzvWkInyM0IPj1KGsQ5ZCPa+h51OuEWuG6oR4Rt+z5yJSH1Mfhv09KdiHAMxyMLYmJ3TlAPd7lEmtVOg01hQ==
+  dependencies:
+    js-yaml "^3.10.0"
+    lodash "^4.17.4"
+
 gatsby-transformer-yaml@^2.1.11:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml/-/gatsby-transformer-yaml-2.1.11.tgz#712e684b083201034a9748ba3b281f363a82c60e"

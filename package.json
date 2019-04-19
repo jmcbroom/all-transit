@@ -18,6 +18,7 @@
     "gatsby-source-pg": "^0.1.2",
     "gatsby-transformer-sharp": "^2.1.8",
     "gatsby-transformer-yaml": "^2.1.11",
+    "gatsby-transformer-yaml-netlify": "^1.0.0-alpha.1",
     "less": "^3.9.0",
     "mapbox-gl": "^0.52.0",
     "mapillary-js": "^2.14.1",

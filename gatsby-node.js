@@ -38,12 +38,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           agencyName
           agencyUrl
         }
-        routes: allRoutesList(condition: {feedIndex: 1}) {
+        routes: allRoutesList {
           agencyId
           routeShortName
           routeLongName
         }
-        stops: allStopsList(condition: {feedIndex: 1}, first: 500) {
+        stops: allStopsList(first: 100) {
           feedIndex
           stopId
         }
@@ -51,8 +51,16 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       allExplainersYaml {
         edges {
           node {
-           title
-           slug
+            title
+            slug
+          }
+        }
+      }
+      allDestinationsYaml {
+        edges {
+          node {
+            name
+            slug
           }
         }
       }
@@ -61,14 +69,25 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   result.data.allExplainersYaml.edges.forEach(e => {
     createPage({
-      path: `/help/${e.node.slug}`,
+      path: `/help-with/${e.node.slug}`,
       component: path.resolve("./src/templates/explainer-page.js"),
       context: {
         slug: e.node.slug,
         title: e.node.title
       }
-    })
-  })
+    });
+  });
+
+  result.data.allDestinationsYaml.edges.forEach(e => {
+    createPage({
+      path: `/get-to/${e.node.slug}`,
+      component: path.resolve("./src/templates/destination-page.js"),
+      context: {
+        slug: e.node.slug,
+        name: e.node.name
+      }
+    });
+  });
 
   result.data.postgres.agencies.forEach(a => {
     createPage({

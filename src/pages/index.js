@@ -2,8 +2,15 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
-import { Card, Header, Segment } from "semantic-ui-react";
-import AllAgencyMap from "../components/AllAgencyMap";
+import {
+  Card,
+  Header,
+  Segment,
+  Grid,
+  Divider,
+  Icon,
+  Button
+} from "semantic-ui-react";
 
 const agencies = {
   ddot: {
@@ -26,18 +33,21 @@ const agencies = {
 
 const IndexPage = ({ data }) => (
   <Layout title={"Detroit transit guide"}>
-    <Segment.Group>
-    {data.allExplainersYaml.edges.map(e => e.node).map(n => (
-      <Segment>
-        <Link to={`/help/${n.slug}`} >
-          <Header as="h3">
-          {n.title}
-          </Header>
-          <Header sub>{n.subtitle}</Header>
-        </Link>
-      </Segment>
-    ))}
-    </Segment.Group>
+    <Segment placeholder textAlign="center">
+      <Header icon>Need basic information about the bus?</Header>
+      <Button>Take me to the guide</Button>
+    </Segment>
+    <Segment placeholder>
+      <Grid columns={2} relaxed="very" stackable>
+        <Grid.Column>
+          <Header as="h4">I'm new to the bus</Header>
+        </Grid.Column>
+        <Grid.Column>
+          <Header as="h4">I know what's up</Header>
+        </Grid.Column>
+      </Grid>
+      <Divider vertical>Or</Divider>
+    </Segment>
   </Layout>
 );
 
@@ -50,31 +60,6 @@ export const query = graphql`
         agencyLongName
         agencyUrl
         agencyFareUrl
-        routes: routesByFeedIndexAndAgencyIdList {
-          agencyId
-          routeShortName
-          routeLongName
-          routeDesc
-          routeType
-          routeUrl
-          routeColor
-          routeTextColor
-          routeSortOrder
-          shapes: routeShapesByFeedIndexAndRouteIdList {
-            dir
-            direction
-            geojson
-          }
-        }
-      }
-    }
-    allExplainersYaml {
-      edges {
-        node {
-          title
-          subtitle
-          slug
-        }
       }
     }
   }
