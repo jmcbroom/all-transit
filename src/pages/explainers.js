@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { Card, Icon, Image, Label, Segment } from 'semantic-ui-react';
+import _ from 'lodash';
 
 import Layout from "../components/layout";
 
 const Explainers = ({ data }) => (
-  <Layout title={"Explainers"}>
+  <Layout title={"Overview"}>
     <Card.Group itemsPerRow={2}>
       {data.allExplainersYaml.edges.map(e => (
         <Card>
@@ -22,10 +23,10 @@ const Explainers = ({ data }) => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <a>
-              <Icon name='file' />
-              {e.node.pages.length} pages
-            </a>
+            <Link to={`/help-with/${_.replace(_.lowerCase(e.node.title), / /g, '-')}`}>
+              <Icon name='play' />
+              {e.node.pages.length} pointers
+            </Link>
           </Card.Content>
         </Card>
       ))}
