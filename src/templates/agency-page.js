@@ -25,8 +25,6 @@ export default ({ data, pageContext }) => {
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  console.log(feeds);
-
   // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes
     .map(r => {
@@ -50,18 +48,10 @@ export default ({ data, pageContext }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
-  const [mapRoutes, setMapRoutes] = useState([]);
-  // put those features in a single FeatureCollection
-  const routeFeatures = {
-    type: "FeatureCollection",
-    features: routeShapes
-  };
-
   let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
     <Layout title={a.agencyName} color={color}>
-      <AgencyMap routeFeatures={routeFeatures} setMapRoutes={setMapRoutes} />
       <List
         style={{
           gridArea: "i",
@@ -70,9 +60,9 @@ export default ({ data, pageContext }) => {
           padding: 10
         }}
       >
-        {mapRoutes.map(r => (
-          <List.Item key={r.properties.routeShortName}>
-            <RouteDisplay route={r.properties} />
+        {routes.map(r => (
+          <List.Item key={r.routeShortName}>
+            <RouteDisplay route={r} />
           </List.Item>
         ))}
       </List>

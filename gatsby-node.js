@@ -38,7 +38,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           agencyName
           agencyUrl
         }
-        routes: allRoutesList {
+        routes: allRoutesList(condition: {feedIndex: 1}) {
           agencyId
           routeShortName
           routeLongName
