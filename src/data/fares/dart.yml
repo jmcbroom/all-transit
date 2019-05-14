@@ -1,4 +1,5 @@
-agency: SMART
+agency: DART
+description: These passes work on both DDOT and SMART.
 passes:
   - duration: 4 hours
     cost:

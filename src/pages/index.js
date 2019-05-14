@@ -35,18 +35,11 @@ const IndexPage = ({ data }) => (
   <Layout title={"Detroit transit guide"}>
     <Segment placeholder textAlign="center">
       <Header icon>Need basic information about the bus?</Header>
-      <Button>Take me to the guide</Button>
+      <Button as='a' href={`./explainers`}  >Take me to the guide</Button>
     </Segment>
-    <Segment placeholder>
-      <Grid columns={2} relaxed="very" stackable>
-        <Grid.Column>
-          <Header as="h4">I'm new to the bus</Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Header as="h4">I know what's up</Header>
-        </Grid.Column>
-      </Grid>
-      <Divider vertical>Or</Divider>
+    <Segment placeholder textAlign="center">
+      <Header icon>How much is the fare?</Header>
+      <Button as='a' href={`./fares`}  >The bus costs money</Button>
     </Segment>
   </Layout>
 );
