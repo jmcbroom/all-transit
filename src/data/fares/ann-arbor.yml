@@ -1,27 +1,20 @@
-agency: DDOT
+agency: The Ride
 passes:
-  - duration: 4 hours
+  - duration: 90 minutes
     cost:
-      regular: $2.00
-      reduced: $1.00
+      regular: $1.50
+      reduced: $0.75
     purchase:
       - on-board
-  - duration: 24 hours
+  - duration: 1 day
     cost:
-      regular: $5.00
-      reduced: $2.50
-    purchase:
-      - on-board  
-  - duration: 7 days
-    cost:
-      regular: $5.00
-      reduced: $2.50
+      regular: $4.50
     purchase:
       - on-board
-  - duration: 31 days
+  - duration: 30 days
     cost:
-      regular: $5.00
-      reduced: $2.50
+      regular: $58.00
+      reduced: $29.00
     purchase:
       - on-board
 reduced:

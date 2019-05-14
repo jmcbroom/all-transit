@@ -1,27 +1,20 @@
-agency: DDOT
+agency: Transit Windsor
 passes:
-  - duration: 4 hours
+  - duration: single ride
     cost:
-      regular: $2.00
-      reduced: $1.00
+      regular: $3.00
+      reduced: $.00
     purchase:
       - on-board
-  - duration: 24 hours
+  - duration: one day
     cost:
-      regular: $5.00
-      reduced: $2.50
-    purchase:
-      - on-board  
-  - duration: 7 days
-    cost:
-      regular: $5.00
-      reduced: $2.50
+      regular: $9.00
     purchase:
       - on-board
-  - duration: 31 days
+  - duration: month long pass
     cost:
-      regular: $5.00
-      reduced: $2.50
+      regular: $95.70
+      reduced: $48.40
     purchase:
       - on-board
 reduced:

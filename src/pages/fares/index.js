@@ -5,17 +5,16 @@ import Layout from "../../components/layout";
 import { Segment, Table, Icon, Grid, Header, Image } from "semantic-ui-react";
 
 const Fares = ({ data }) => {
+  console.log(data);
 
-  console.log(data)
-
-  let agencies = data.allFaresYaml.edges.map(e => e.node)
+  let agencies = data.allFaresYaml.edges.map(e => e.node);
 
   return (
     <Layout title="Fares">
       <Grid columns={2} stretched stackable>
         <Grid.Column width={10}>
           <Segment textAlign="center" vertical>
-            <Header as="h3">Pay for the bus, ya Lucas animal.</Header>
+            <Header as="h3">Pay for the bus with cash.</Header>
           </Segment>
         </Grid.Column>
         <Grid.Column width={6}>
@@ -26,40 +25,34 @@ const Fares = ({ data }) => {
         </Grid.Column>
       </Grid>
 
-
-     
+      <Table celled striped stackable>
         {agencies.map(a => (
- <Table celled striped stackable>
-           <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell colSpan="3">
-                {`${a.agency} Fares`}
-              </Table.HeaderCell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.HeaderCell>Duration</Table.HeaderCell>
-              <Table.HeaderCell>Cost</Table.HeaderCell>
-              <Table.HeaderCell>Where to buy</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header> 
-          {a.passes.map(p => (
-            <Table.Body>
+          <>
+            <Table.Header>
               <Table.Row>
-                <Table.Cell>
-                  {p.duration}
-                </Table.Cell>
-                <Table.Cell>
-                  {p.cost.regular}
-                </Table.Cell>
-                <Table.Cell>
-                  something
-                </Table.Cell>
+                <Table.HeaderCell colSpan="3" style={{ background: "#ddd" }}>
+                  {`${a.agency} Fares`}
+                </Table.HeaderCell>
               </Table.Row>
-            </Table.Body>
-          ))}
-      </Table>
+
+              <Table.Row>
+                <Table.HeaderCell>Duration</Table.HeaderCell>
+                <Table.HeaderCell>Cost</Table.HeaderCell>
+                <Table.HeaderCell>Where to buy</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            {a.passes.map(p => (
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>{p.duration}</Table.Cell>
+                  <Table.Cell>{p.cost.regular}</Table.Cell>
+                  <Table.Cell>something</Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            ))}
+          </>
         ))}
+      </Table>
     </Layout>
   );
 };

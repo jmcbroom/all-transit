@@ -1,6 +1,6 @@
-import React from "./node_modules/react";
-import { graphql } from "./node_modules/gatsby";
-import { Header, Segment } from "./node_modules/semantic-ui-react";
+import React from "react";
+import { graphql } from "gatsby";
+import { Header, Segment } from "semantic-ui-react";
 import Layout from "../components/layout";
 
 export default ({ data, pageContext }) => {

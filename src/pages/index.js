@@ -9,7 +9,8 @@ import {
   Grid,
   Divider,
   Icon,
-  Button
+  Button,
+  Label
 } from "semantic-ui-react";
 
 const agencies = {
@@ -39,6 +40,7 @@ const IndexPage = ({ data }) => {
         <Grid.Row>
           <Grid.Column>
             <Segment.Group attached>
+              <Label attached="top">Learn the system</Label>
               <Segment>
                 <Link to={`/explainers`}>How to ride</Link>
               </Segment>
@@ -48,13 +50,44 @@ const IndexPage = ({ data }) => {
               <Segment>
                 <Link to={`/system-map`}>System map</Link>
               </Segment>
+            </Segment.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment.Group>
+              <Label attached="top">Local transit agencies</Label>
               <Segment>
-                <Link to={`/destinations`}>Go out of town</Link>
+                <Link to={`/ddot`}>DDOT</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/smart`}>SMART</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/the-ride`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/transit-windsor`}>Windsor</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Label attached="top">Go out of town</Label>
+              <Segment>
+                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/get-to/cleveland`}>Cleveland</Link>
               </Segment>
             </Segment.Group>
           </Grid.Column>
           <Grid.Column>
             <Segment.Group>
+              <Label attached="top">Local transit agencies</Label>
               <Segment>
                 <Link to={`/ddot`}>DDOT</Link>
               </Segment>
