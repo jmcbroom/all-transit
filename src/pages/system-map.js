@@ -4,8 +4,10 @@ import AllAgencyMap from "../components/AllAgencyMap";
 import { graphql } from "gatsby";
 
 const SystemMap = ({ data }) => (
-  <Layout>
-    <AllAgencyMap agencies={data.postgres.agencies} />
+  <Layout title={"System map"}>
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <AllAgencyMap agencies={data.postgres.agencies} />
+    </div>
   </Layout>
 );
 

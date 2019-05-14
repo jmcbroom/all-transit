@@ -31,25 +31,52 @@ const agencies = {
   }
 };
 
-const IndexPage = ({ data }) => (
-  <Layout title={"Detroit transit guide"}>
-    <Segment placeholder textAlign="center">
-      <Header icon>Need basic information about the bus?</Header>
-      <Button>Take me to the guide</Button>
-    </Segment>
-    <Segment placeholder>
-      <Grid columns={2} relaxed="very" stackable>
-        <Grid.Column>
-          <Header as="h4">I'm new to the bus</Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Header as="h4">I know what's up</Header>
-        </Grid.Column>
+const IndexPage = ({ data }) => {
+  console.log(data);
+  return (
+    <Layout title={"Detroit transit guide"}>
+      <Grid columns={2} stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Segment>
+                <Link to={`/explainers`}>How to ride</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/fares`}>Fares</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/system-map`}>System map</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/destinations`}>Go out of town</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment.Group>
+              <Segment>
+                <Link to={`/ddot`}>DDOT</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/smart`}>SMART</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/the-ride`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/transit-windsor`}>Windsor</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
-      <Divider vertical>Or</Divider>
-    </Segment>
-  </Layout>
-);
+    </Layout>
+  );
+};
 
 export const query = graphql`
   {
@@ -64,4 +91,5 @@ export const query = graphql`
     }
   }
 `;
+
 export default IndexPage;
