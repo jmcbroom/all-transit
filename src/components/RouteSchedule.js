@@ -50,8 +50,9 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
       }
     }
     return (
-      c.arrivalTime.hours * 60 + c.arrivalTime.minutes >
-      d.arrivalTime.hours * 60 + d.arrivalTime.minutes
+      c.arrivalTime.hours * 60 +
+      c.arrivalTime.minutes -
+      (d.arrivalTime.hours * 60 + d.arrivalTime.minutes)
     );
   });
 
