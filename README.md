@@ -20,4 +20,4 @@ to develop, `gatsby develop` will start at `localhost:8080`
 
 ## trip planner
 
-is currently running at `http://159.89.225.251:8080/`
+is NOT currently running at `http://159.89.225.251:8080/` (but that's where it would be)
