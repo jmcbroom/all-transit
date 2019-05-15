@@ -41,12 +41,17 @@ export default ({ data, pageContext }) => {
     };
   });
 
-  let color = feeds[pageContext.feedIndex - 1].color
+  let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
-    <Layout title={r.routeLongName} color={color}>
+    <Layout title={r.routeLongName} color={`#${r.routeColor}`}>
       <RouteMap shapes={features} stops={stops} />
-      <RouteSchedule trips={r.trips} shapes={r.shapes} feedIndex={pageContext.feedIndex} color={r.routeColor} />
+      <RouteSchedule
+        trips={r.trips}
+        shapes={r.shapes}
+        feedIndex={pageContext.feedIndex}
+        color={r.routeColor}
+      />
     </Layout>
   );
 };
@@ -54,7 +59,9 @@ export default ({ data, pageContext }) => {
 export const query = graphql`
   query($routeNo: String!, $feedIndex: Int!) {
     postgres {
-      route: allRoutesList(condition: { routeShortName: $routeNo, feedIndex: $feedIndex }) {
+      route: allRoutesList(
+        condition: { routeShortName: $routeNo, feedIndex: $feedIndex }
+      ) {
         agencyId
         routeShortName
         routeLongName
@@ -72,7 +79,9 @@ export const query = graphql`
         longTrips: longestTripsList {
           tripHeadsign
           directionId
-          stopTimes: stopTimesByFeedIndexAndTripIdList(orderBy: STOP_SEQUENCE_ASC) {
+          stopTimes: stopTimesByFeedIndexAndTripIdList(
+            orderBy: STOP_SEQUENCE_ASC
+          ) {
             stopSequence
             timepoint
             arrivalTime {
@@ -95,7 +104,9 @@ export const query = graphql`
           headsign: tripHeadsign
           direction: directionId
           service: serviceId
-          stopTimes: stopTimesByFeedIndexAndTripIdList(condition: { timepoint: 1 }) {
+          stopTimes: stopTimesByFeedIndexAndTripIdList(
+            condition: { timepoint: 1 }
+          ) {
             timepoint
             arrivalTime {
               hours

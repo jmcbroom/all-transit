@@ -12,7 +12,8 @@ import {
   Breadcrumb,
   Label,
   Header,
-  Button
+  Button,
+  Segment
 } from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
@@ -51,21 +52,60 @@ export default ({ data, pageContext }) => {
   let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
-    <Layout title={a.agencyName} color={color}>
-      <List
-        style={{
-          gridArea: "i",
-          overflowY: "scroll",
-          WebkitOverflowScrolling: "touch",
-          padding: 10
-        }}
-      >
-        {routes.map(r => (
-          <List.Item key={r.routeShortName}>
-            <RouteDisplay route={r} />
-          </List.Item>
-        ))}
-      </List>
+    <Layout title={a.agencyName}>
+      <Grid columns={2} stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <List
+              style={{
+                overflowY: "scroll",
+                WebkitOverflowScrolling: "touch",
+                padding: 10,
+                maxHeight: "50vh"
+              }}
+            >
+              {routes.map(r => (
+                <List.Item key={r.routeShortName}>
+                  <RouteDisplay route={r} />
+                </List.Item>
+              ))}
+            </List>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment.Group>
+              <Label attached="top">Local transit agencies</Label>
+              <Segment>
+                <Link to={`/ddot`}>DDOT</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/smart`}>SMART</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/the-ride`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/transit-windsor`}>Windsor</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Label attached="top">Go out of town</Label>
+              <Segment>
+                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/get-to/cleveland`}>Cleveland</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </Layout>
   );
 };

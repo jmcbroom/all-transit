@@ -85,26 +85,6 @@ const IndexPage = ({ data }) => {
               </Segment>
             </Segment.Group>
           </Grid.Column>
-          <Grid.Column>
-            <Segment.Group>
-              <Label attached="top">Local transit agencies</Label>
-              <Segment>
-                <Link to={`/ddot`}>DDOT</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/smart`}>SMART</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/the-ride`}>Ann Arbor</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/transit-windsor`}>Windsor</Link>
-              </Segment>
-            </Segment.Group>
-          </Grid.Column>
         </Grid.Row>
       </Grid>
     </Layout>

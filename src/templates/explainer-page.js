@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { Header, Segment } from "semantic-ui-react";
+import SwipeableViews from "react-swipeable-views";
 import Layout from "../components/layout";
 
 export default ({ data, pageContext }) => {
@@ -8,14 +9,16 @@ export default ({ data, pageContext }) => {
   return (
     <Layout title={page.title}>
       <Header as="h3">{page.subtitle}</Header>
-      {page.pages.map(p => (
-        <Segment>
-          <Header as="h4">{p.title}</Header>
-          {p.elements.map(e => (
-            <p>{e.content}</p>
-          ))}
-        </Segment>
-      ))}
+      <SwipeableViews>
+        {page.pages.map(p => (
+          <Segment>
+            <Header as="h4">{p.title}</Header>
+            {p.elements.map(e => (
+              <p>{e.content}</p>
+            ))}
+          </Segment>
+        ))}
+      </SwipeableViews>
     </Layout>
   );
 };
