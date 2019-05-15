@@ -36,6 +36,15 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
       return st.timepoint === 1;
     });
 
+  let x = filteredTrips.sort((a, b) => {
+    return (
+      b.stopTimes.map(s => s.timepoint).reduce((acc, val) => acc + val) -
+      a.stopTimes.map(s => s.timepoint).reduce((acc, val) => acc + val)
+    );
+  });
+
+  console.log(x);
+
   let sortedTrips = filteredTrips.sort((a, b) => {
     let c = null;
     let d = null;
