@@ -1,0 +1,7 @@
+name: Ann Arbor
+slug: ann-arbor
+methods:
+  - name: Greyhound
+    cost: 8
+  - name: Amtrak
+    cost: 12

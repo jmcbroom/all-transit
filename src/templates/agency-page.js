@@ -12,7 +12,8 @@ import {
   Breadcrumb,
   Label,
   Header,
-  Button
+  Button,
+  Segment
 } from "semantic-ui-react";
 import { RouteInfo } from "../components/RouteInfo";
 import { RouteGrid } from "../components/RouteGrid";
@@ -24,8 +25,6 @@ export default ({ data, pageContext }) => {
   const routes = _.uniqBy(a.routes, "routeLongName");
 
   const [tabIndex, setTabIndex] = useState(0);
-
-  console.log(feeds);
 
   // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes
@@ -50,32 +49,63 @@ export default ({ data, pageContext }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
-  const [mapRoutes, setMapRoutes] = useState([]);
-  // put those features in a single FeatureCollection
-  const routeFeatures = {
-    type: "FeatureCollection",
-    features: routeShapes
-  };
-
   let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
-    <Layout title={a.agencyName} color={color}>
-      <AgencyMap routeFeatures={routeFeatures} setMapRoutes={setMapRoutes} />
-      <List
-        style={{
-          gridArea: "i",
-          overflowY: "scroll",
-          WebkitOverflowScrolling: "touch",
-          padding: 10
-        }}
-      >
-        {mapRoutes.map(r => (
-          <List.Item key={r.properties.routeShortName}>
-            <RouteDisplay route={r.properties} />
-          </List.Item>
-        ))}
-      </List>
+    <Layout title={a.agencyName}>
+      <Grid columns={2} stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <List
+              style={{
+                overflowY: "scroll",
+                WebkitOverflowScrolling: "touch",
+                padding: 10,
+                maxHeight: "50vh"
+              }}
+            >
+              {routes.map(r => (
+                <List.Item key={r.routeShortName}>
+                  <RouteDisplay route={r} />
+                </List.Item>
+              ))}
+            </List>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment.Group>
+              <Label attached="top">Local transit agencies</Label>
+              <Segment>
+                <Link to={`/ddot`}>DDOT</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/smart`}>SMART</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/the-ride`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/transit-windsor`}>Windsor</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Label attached="top">Go out of town</Label>
+              <Segment>
+                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/get-to/cleveland`}>Cleveland</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </Layout>
   );
 };

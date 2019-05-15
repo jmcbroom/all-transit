@@ -9,11 +9,11 @@ const SiteHeader = ({ siteTitle, color, children }) => (
       alignItems: "center",
       justifyContent: "space-between",
       width: "100%",
-      padding: 5,
+      padding: 10,
       background: color
     }}
   >
-    <Header as="h3" content={siteTitle} style={{ margin: 0 }} />
+    <Header as="h1" content={siteTitle} style={{ margin: 0 }} />
     {children}
   </div>
 );

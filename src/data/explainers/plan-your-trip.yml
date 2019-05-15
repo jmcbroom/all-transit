@@ -1,0 +1,30 @@
+slug: plan-your-trip
+title: Plan Your Trip
+subtitle: How do I get where I need to go?
+level: 110
+pages:
+  - title: Enter your start address
+    subtitle: 
+    slug: 1
+    elements: 
+      - type: text
+        content: Where are you leaving from?
+  - title: Enter your end address
+    subtitle:
+    slug: 2 
+    elements:
+      - type: text
+        content: Where are you going to?
+  - title: Enter when you want to travel
+    subtitle: 
+    slug: 3
+    elements:
+      - type: text
+        content: What time do you anticipate needing to leave to make it to your destination on time?
+  - title: Review the options
+    subtitle:
+    slug: 4
+    elements: 
+      - type: text
+        content: A trip planner returns more than one option, which one seems best for you? Differences might be number of buses involved, wait time, walk distance between places, and more
+    

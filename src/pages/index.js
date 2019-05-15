@@ -1,9 +1,17 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
-import { Card } from "semantic-ui-react";
-import AllAgencyMap from "../components/AllAgencyMap";
+import {
+  Card,
+  Header,
+  Segment,
+  Grid,
+  Divider,
+  Icon,
+  Button,
+  Label
+} from "semantic-ui-react";
 
 const agencies = {
   ddot: {
@@ -24,51 +32,64 @@ const agencies = {
   }
 };
 
-const IndexPage = ({ data }) => (
-  <Layout title={"Welcome"}>
-    <div style={{ gridArea: "m / m / l / l" }}>
-      <AllAgencyMap
-        agencies={data.postgres.agencies}
-        style={{ gridTemplateAreas: "m l" }}
-      />
-    </div>
-    <div style={{ gridArea: "i" }}>
-      <Card.Group itemsPerRow={4} stackable>
-        {data.postgres.agencies.map(a => (
-          <Card key={a.agencyId}>
-            <Card.Content
-              style={{
-                background: agencies[a.agencyId].color,
-                backgroundOpacity: 0.1
-              }}
-            >
-              <Card.Header as="a" href={`/${a.agencyId}`}>
-                {a.agencyName}
-              </Card.Header>
-              <Card.Meta>{agencies[a.agencyId].description}</Card.Meta>
-            </Card.Content>
-            {/* <Card.Content extra>
-              <List>
-                <List.Item
-                  as="a"
-                  href={a.agencyUrl}
-                  icon="linkify"
-                  content="Website"
-                />
-                <List.Item
-                  as="a"
-                  href={a.agencyFareUrl}
-                  icon="ticket"
-                  content="Fares/Passes"
-                />
-              </List>
-            </Card.Content> */}
-          </Card>
-        ))}
-      </Card.Group>
-    </div>
-  </Layout>
-);
+const IndexPage = ({ data }) => {
+  console.log(data);
+  return (
+    <Layout title={"Detroit transit guide"}>
+      <Grid columns={2} stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Label attached="top">Learn the system</Label>
+              <Segment>
+                <Link to={`/explainers`}>How to ride</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/fares`}>Fares</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/system-map`}>System map</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment.Group>
+              <Label attached="top">Local transit agencies</Label>
+              <Segment>
+                <Link to={`/ddot`}>DDOT</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/smart`}>SMART</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/the-ride`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                {" "}
+                <Link to={`/transit-windsor`}>Windsor</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment.Group attached>
+              <Label attached="top">Go out of town</Label>
+              <Segment>
+                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
+              </Segment>
+              <Segment>
+                <Link to={`/get-to/cleveland`}>Cleveland</Link>
+              </Segment>
+            </Segment.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Layout>
+  );
+};
 
 export const query = graphql`
   {
@@ -79,24 +100,9 @@ export const query = graphql`
         agencyLongName
         agencyUrl
         agencyFareUrl
-        routes: routesByFeedIndexAndAgencyIdList {
-          agencyId
-          routeShortName
-          routeLongName
-          routeDesc
-          routeType
-          routeUrl
-          routeColor
-          routeTextColor
-          routeSortOrder
-          shapes: routeShapesByFeedIndexAndRouteIdList {
-            dir
-            direction
-            geojson
-          }
-        }
       }
     }
   }
 `;
+
 export default IndexPage;

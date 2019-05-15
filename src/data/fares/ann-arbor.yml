@@ -1,0 +1,23 @@
+agency: The Ride
+passes:
+  - duration: 90 minutes
+    cost:
+      regular: $1.50
+      reduced: $0.75
+    purchase:
+      - on-board
+  - duration: 1 day
+    cost:
+      regular: $4.50
+    purchase:
+      - on-board
+  - duration: 30 days
+    cost:
+      regular: $58.00
+      reduced: $29.00
+    purchase:
+      - on-board
+reduced:
+  - type: Student
+  - type: Whatever
+  - type: Senior

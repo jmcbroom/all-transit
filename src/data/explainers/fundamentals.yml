@@ -1,0 +1,60 @@
+slug: fundamentals
+title: Fundamentals
+subtitle: Where do I start?
+level: 100
+pages:
+  - title: Buses have routes
+    subtitle: 
+    slug: 1
+    elements:
+      - type: text
+        content: Routes follow a consistent path from a start point to an end point
+      - type: text
+        content: Some routes stick to one road, some routes travel on a few different roads
+      - type: text
+        content: Each route has a number and a name
+      - type: text
+        content: Route names can give "hints" about the type of service offered (FAST, Park & Ride, Express, and more)
+  - title: There are many routes
+    subtitle: 
+    slug: 2
+    elements:
+      - type: text
+        content: Dozens of routes criss-cross the area
+      - type: text
+        content: Pick a few routes in your neighborhood to get started
+      - type: text
+        content: The more routes you know, the further you can go!
+  - title: Routes have stops
+    subtitle:
+    slug: 3 
+    elements:
+      - type: text
+        content: Along each route, designated bus stops mark where you can board
+      - type: text
+        content: Once you're on the bus, you can deboard at bus stops along the way
+      - type: text
+        content: Some bus stops have shelters, benches and other features. We're in the process of improving info and amenities at bus stops all over time
+  - title: Routes run on schedules
+    subtitle:
+    slug: 4 
+    elements:
+      - type: text
+        content: Each route makes many trips per day
+      - type: text
+        content: Schedules tell you when to expect a bus
+      - type: text
+        content: A weekday, Saturday and Sunday will all observe different schedules
+      - type: text
+        content: Schedules give key info, like first trip, last trip and how often trips come by
+  - title: Ready to go?
+    subtitle:
+    slug: 5
+    elements: 
+      - type: text
+        content: Ready to explore? Browse routes, stops and schedules
+      - type: text
+        content: Need a little guidance? We can help you plan a trip
+      - type: text
+        content: All set to hop on? Here's how...
+  

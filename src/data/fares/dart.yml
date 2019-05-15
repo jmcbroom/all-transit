@@ -1,0 +1,19 @@
+agency: DART
+description: These passes work on both DDOT and SMART.
+passes:
+  - duration: 7 days
+    cost:
+      regular: $5.00
+      reduced: $2.50
+    purchase:
+      - on-board
+  - duration: 31 days
+    cost:
+      regular: $5.00
+      reduced: $2.50
+    purchase:
+      - on-board
+reduced:
+  - type: Student
+  - type: Whatever
+  - type: Senior

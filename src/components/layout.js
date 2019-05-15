@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
+import { StaticQuery, graphql, Link } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import "semantic-ui-less/semantic.less";
 import {
@@ -13,20 +13,12 @@ import {
   Image
 } from "semantic-ui-react";
 
-let gridStyle = {
-  display: "grid",
-  gridTemplateRows: `50px minmax(20vh, 40vh) 50px 2fr`,
-  // gridGap: 10,
-  height: "100vh",
-  width: "100vw",
-  gridTemplateAreas: `"h"
-  "m"
-  "l"
-  "i"`
-};
-
 const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
+
+  let appStyle = {
+    height: "100vh"
+  };
 
   return (
     <StaticQuery
@@ -40,7 +32,7 @@ const Layout = ({ title, color, children }) => {
         }
       `}
       render={data => (
-        <>
+        <div style={appStyle}>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
               as={Menu}
@@ -50,36 +42,53 @@ const Layout = ({ title, color, children }) => {
               // onHide={() => setVisible(false)}
               vertical
               visible={visible}
-              width="thin"
+              width="wide"
             >
-              <Menu.Item as="a">
-                <Icon name="home" />
-                Home
-              </Menu.Item>
+              <Link to={`/`}>
+                <Menu.Item as="a">
+                  <Icon name="home" />
+                  Home
+                </Menu.Item>
+              </Link>
+              <Link to={`/ddot`}>
+                <Menu.Item as="a">
+                  <Icon name="home" />
+                  DDOT
+                </Menu.Item>
+              </Link>
+              <Link to={`/smart`}>
+                <Menu.Item as="a">
+                  <Icon name="home" />
+                  SMART
+                </Menu.Item>
+              </Link>
+              <Link to={`/the-ride`}>
+                <Menu.Item as="a">
+                  <Icon name="home" />
+                  Ann Arbor
+                </Menu.Item>
+              </Link>
+              <Link to={`/transit-windsor`}>
+                <Menu.Item as="a">
+                  <Icon name="home" />
+                  Windsor
+                </Menu.Item>
+              </Link>
             </Sidebar>
 
             <Sidebar.Pusher>
-              <div style={gridStyle}>
-                <div
-                  style={{
-                    gridArea: "h",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end"
-                  }}
-                >
-                  <SiteHeader siteTitle={title} color={color}>
-                    <Button
-                      icon={visible ? "grav" : "grav"}
-                      onClick={() => setVisible(visible ? false : true)}
-                    />
-                  </SiteHeader>
-                </div>
-                {children}
+              <div style={{ appStyle }}>
+                <SiteHeader siteTitle={title} color={color}>
+                  <Button
+                    icon={visible ? "grav" : "grav"}
+                    onClick={() => setVisible(visible ? false : true)}
+                  />
+                </SiteHeader>
+                <div style={{ padding: 10 }}>{children}</div>
               </div>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
-        </>
+        </div>
       )}
     />
   );
