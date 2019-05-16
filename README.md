@@ -1,5 +1,9 @@
 # all-transit
 
+## the data
+
+see the Wiki for information about the data. most of it comes from GTFS but there is a bunch of manual work that also needed to be done.
+
 ## setup
 
 `.env.development` is where you can specify your Postgres connection string.
