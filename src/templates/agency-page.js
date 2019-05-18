@@ -13,18 +13,16 @@ import {
   Label,
   Header,
   Button,
-  Segment
+  Segment,
+  Table
 } from "semantic-ui-react";
-import { RouteInfo } from "../components/RouteInfo";
-import { RouteGrid } from "../components/RouteGrid";
 import RouteDisplay from "../components/RouteDisplay";
 
 export default ({ data, pageContext }) => {
   const a = data.postgres.agency[0];
+  const f = data.faresYaml;
 
   const routes = _.uniqBy(a.routes, "routeLongName");
-
-  const [tabIndex, setTabIndex] = useState(0);
 
   // get the routeShapes for the current agency and convert them to a flattened array of GeoJSON features
   const routeShapes = routes
@@ -54,57 +52,61 @@ export default ({ data, pageContext }) => {
   return (
     <Layout title={a.agencyName}>
       <Grid columns={2} stackable>
-        <Grid.Row>
-          <Grid.Column>
-            <List
-              style={{
-                overflowY: "scroll",
-                WebkitOverflowScrolling: "touch",
-                padding: 10,
-                maxHeight: "50vh"
-              }}
-            >
-              {routes.map(r => (
-                <List.Item key={r.routeShortName}>
-                  <RouteDisplay route={r} />
-                </List.Item>
-              ))}
+        <Grid.Column>
+          <Header color="grey" size="big" content="System info" />
+          <Segment size="regular">
+            <List>
+              <List.Item
+                icon={"desktop"}
+                content={<a href={a.agencyUrl}>{a.agencyUrl}</a>}
+              />
+              <List.Item icon={"phone"} content={a.agencyPhone} />
             </List>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment.Group>
-              <Label attached="top">Local transit agencies</Label>
-              <Segment>
-                <Link to={`/ddot`}>DDOT</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/smart`}>SMART</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/the-ride`}>Ann Arbor</Link>
-              </Segment>
-              <Segment>
-                {" "}
-                <Link to={`/transit-windsor`}>Windsor</Link>
-              </Segment>
-            </Segment.Group>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <Segment.Group attached>
-              <Label attached="top">Go out of town</Label>
-              <Segment>
-                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
-              </Segment>
-              <Segment>
-                <Link to={`/get-to/cleveland`}>Cleveland</Link>
-              </Segment>
-            </Segment.Group>
-          </Grid.Column>
-        </Grid.Row>
+          </Segment>
+          <Header color="grey" size="big" content="Fares" />
+          <Table unstackable celled size="large">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell />
+                <Table.HeaderCell>Regular</Table.HeaderCell>
+                <Table.HeaderCell>Reduced</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>Base fare</Table.Cell>
+                <Table.Cell>{f.base.regular}</Table.Cell>
+                <Table.Cell>{f.base.reduced}</Table.Cell>
+              </Table.Row>
+              {f.passes.map(p => (
+                <Table.Row>
+                  <Table.Cell>{`${p.duration} pass`}</Table.Cell>
+                  <Table.Cell>{p.cost.regular}</Table.Cell>
+                  <Table.Cell>{p.cost.reduced}</Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Grid.Column>
+        <Grid.Column>
+          <Header color="grey" size="big" content="Bus routes" />
+          <Grid
+            columns={2}
+            stackable
+            style={{
+              overflowY: "scroll",
+              WebkitOverflowScrolling: "touch",
+              maxHeight: "40vh",
+              paddingRight: "1em"
+            }}
+          >
+            {routes.map(r => (
+              <Grid.Column key={r.routeLongName} style={{ padding: ".25rem" }}>
+                <RouteDisplay route={r} />
+              </Grid.Column>
+            ))}
+          </Grid>
+        </Grid.Column>
       </Grid>
     </Layout>
   );
@@ -138,6 +140,22 @@ export const query = graphql`
             direction
             geojson: simpleGeojson
           }
+        }
+      }
+    }
+    faresYaml(agencyId: { eq: $id }) {
+      id
+      agencyId
+      base {
+        regular
+        reduced
+      }
+      passes {
+        duration
+        purchase
+        cost {
+          regular
+          reduced
         }
       }
     }

@@ -1,17 +1,15 @@
 agency: The Ride
+agencyId: the-ride
+base:
+  regular: $1.50
+  reduced: $0.75
 passes:
-  - duration: 90 minutes
-    cost:
-      regular: $1.50
-      reduced: $0.75
-    purchase:
-      - on-board
-  - duration: 1 day
+  - duration: daily
     cost:
       regular: $4.50
     purchase:
       - on-board
-  - duration: 30 days
+  - duration: 30 day
     cost:
       regular: $58.00
       reduced: $29.00

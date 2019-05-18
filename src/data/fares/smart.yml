@@ -1,4 +1,8 @@
 agency: SMART
+agencyId: smart
+base:
+  regular: $2.00
+  reduced: $1.00
 passes:
   - duration: 4 hours
     cost:
@@ -11,7 +15,7 @@ passes:
       regular: $5.00
       reduced: $2.50
     purchase:
-      - on-board  
+      - on-board
   - duration: 7 days
     cost:
       regular: $5.00

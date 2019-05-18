@@ -45,7 +45,9 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
 
   console.log(x);
 
-  let sortedTrips = filteredTrips.sort((a, b) => {
+  let manyStopTimeTrips = filteredTrips.filter(t => t.stopTimes.length > 1);
+
+  let sortedTrips = manyStopTimeTrips.sort((a, b) => {
     let c = null;
     let d = null;
 

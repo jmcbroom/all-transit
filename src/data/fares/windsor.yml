@@ -1,17 +1,15 @@
 agency: Transit Windsor
+agencyId: transit-windsor
+base:
+  regular: $3.00
+  reduced: $1.50
 passes:
-  - duration: single ride
-    cost:
-      regular: $3.00
-      reduced: $.00
-    purchase:
-      - on-board
-  - duration: one day
+  - duration: daily
     cost:
       regular: $9.00
     purchase:
       - on-board
-  - duration: month long pass
+  - duration: monthly
     cost:
       regular: $95.70
       reduced: $48.40

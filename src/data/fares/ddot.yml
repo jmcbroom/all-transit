@@ -1,24 +1,22 @@
 agency: DDOT
+agencyId: ddot
+base:
+  regular: $2.00
+  reduced: $1.00
 passes:
-  - duration: 4 hours
-    cost:
-      regular: $2.00
-      reduced: $1.00
-    purchase:
-      - on-board
-  - duration: 24 hours
-    cost:
-      regular: $5.00
-      reduced: $2.50
-    purchase:
-      - on-board  
-  - duration: 7 days
+  - duration: daily
     cost:
       regular: $5.00
       reduced: $2.50
     purchase:
       - on-board
-  - duration: 31 days
+  - duration: 7 day
+    cost:
+      regular: $5.00
+      reduced: $2.50
+    purchase:
+      - on-board
+  - duration: 31 day
     cost:
       regular: $5.00
       reduced: $2.50

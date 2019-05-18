@@ -44,7 +44,7 @@ export default ({ data, pageContext }) => {
   let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
-    <Layout title={r.routeLongName} color={`#${r.routeColor}`}>
+    <Layout title={r.routeLongName}>
       <RouteMap shapes={features} stops={stops} />
       <RouteSchedule
         trips={r.trips}
