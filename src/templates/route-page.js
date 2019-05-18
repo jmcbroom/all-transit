@@ -10,6 +10,8 @@ import RouteSchedule from "../components/RouteSchedule";
 export default ({ data, pageContext }) => {
   const r = data.postgres.route[0];
 
+  console.log(r);
+
   const longTrips = r.longTrips.sort((a, b) => a.directionId - b.directionId);
 
   let stopFeatures = [];

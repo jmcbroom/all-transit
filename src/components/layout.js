@@ -16,9 +16,7 @@ import {
 const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
 
-  let appStyle = {
-    height: "100vh"
-  };
+  let appStyle = {};
 
   return (
     <StaticQuery

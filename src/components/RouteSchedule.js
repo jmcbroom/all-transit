@@ -12,6 +12,8 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
   const [service, setService] = useState("weekday");
   const [direction, setDirection] = useState(0);
 
+  console.log(trips);
+
   let services = _.compact(
     _.uniq(trips.map(t => feeds[feedIndex - 1].services[t.service]))
   );
