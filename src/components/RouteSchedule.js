@@ -225,7 +225,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           style={{ minWidth: 100, maxWidth: 200 }}
         />
       </div>
-      <div style={{ height: "60vh", width: "100%" }}>
+      <div style={{ minHeight: "45vh", width: "100%", overflowX: "hidden" }}>
         <ScrollSync>
           {({
             clientHeight,

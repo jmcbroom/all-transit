@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
 import feeds from "../feeds";
-import { Tab } from "semantic-ui-react";
+import { Tab, Grid, Header } from "semantic-ui-react";
 import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
@@ -47,13 +47,21 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout title={r.routeLongName}>
-      <RouteMap shapes={features} stops={stops} />
-      <RouteSchedule
-        trips={r.trips}
-        shapes={r.shapes}
-        feedIndex={pageContext.feedIndex}
-        color={r.routeColor}
-      />
+      <Grid columns={2} stackable>
+        <Grid.Column>
+          <Header color="grey" size="big" content="Map" />
+          <RouteMap shapes={features} stops={stops} />
+        </Grid.Column>
+        <Grid.Column>
+          <Header color="grey" size="big" content="Schedule" />
+          <RouteSchedule
+            trips={r.trips}
+            shapes={r.shapes}
+            feedIndex={pageContext.feedIndex}
+            color={r.routeColor}
+          />
+        </Grid.Column>
+      </Grid>
     </Layout>
   );
 };

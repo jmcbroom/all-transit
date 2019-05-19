@@ -47,22 +47,18 @@ export default ({ data, pageContext }) => {
     .reduce((a, c) => a.concat(c), [])
     .sort((a, b) => b.properties.order - a.properties.order);
 
+  // put those features in a single FeatureCollection
+  const routeFeatures = {
+    type: "FeatureCollection",
+    features: routeShapes
+  };
+
   let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
     <Layout title={a.agencyName}>
       <Grid columns={2} stackable>
         <Grid.Column>
-          <Header color="grey" size="big" content="System info" />
-          <Segment size="regular">
-            <List>
-              <List.Item
-                icon={"desktop"}
-                content={<a href={a.agencyUrl}>{a.agencyUrl}</a>}
-              />
-              <List.Item icon={"phone"} content={a.agencyPhone} />
-            </List>
-          </Segment>
           <Header color="grey" size="big" content="Fares" />
           <Table unstackable celled size="large">
             <Table.Header>
@@ -87,8 +83,6 @@ export default ({ data, pageContext }) => {
               ))}
             </Table.Body>
           </Table>
-        </Grid.Column>
-        <Grid.Column>
           <Header color="grey" size="big" content="Bus routes" />
           <Grid
             columns={2}
@@ -106,6 +100,20 @@ export default ({ data, pageContext }) => {
               </Grid.Column>
             ))}
           </Grid>
+        </Grid.Column>
+        <Grid.Column>
+          <Header color="grey" size="big" content="System info" />
+          <Segment size="regular">
+            <List>
+              <List.Item
+                icon={"desktop"}
+                content={<a href={a.agencyUrl}>{a.agencyUrl}</a>}
+              />
+              <List.Item icon={"phone"} content={a.agencyPhone} />
+            </List>
+          </Segment>
+          <Header color="grey" size="big" content="System map" />
+          <AgencyMap routeFeatures={routeFeatures} />
         </Grid.Column>
       </Grid>
     </Layout>

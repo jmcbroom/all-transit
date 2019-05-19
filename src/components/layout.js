@@ -10,13 +10,16 @@ import {
   Segment,
   Menu,
   Icon,
-  Image
+  Image,
+  Container
 } from "semantic-ui-react";
 
 const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
 
-  let appStyle = {};
+  let appStyle = {
+    minHeight: "100%"
+  };
 
   return (
     <StaticQuery
@@ -75,14 +78,14 @@ const Layout = ({ title, color, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <div style={{ appStyle }}>
+              <div style={appStyle}>
                 <SiteHeader siteTitle={title} color={color}>
                   <Button
                     icon={visible ? "grav" : "grav"}
                     onClick={() => setVisible(visible ? false : true)}
                   />
                 </SiteHeader>
-                <div style={{ padding: 10 }}>{children}</div>
+                <div style={{ padding: 15 }}>{children}</div>
               </div>
             </Sidebar.Pusher>
           </Sidebar.Pushable>

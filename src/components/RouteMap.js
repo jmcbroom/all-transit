@@ -3,7 +3,8 @@ import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
 
-mapboxgl.accessToken = "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 
 class RouteMap extends React.Component {
   componentDidMount() {
@@ -66,7 +67,9 @@ class RouteMap extends React.Component {
   }
 
   render() {
-    return <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />;
+    return (
+      <div ref={el => (this.mapContainer = el)} style={{ height: "50vh" }} />
+    );
   }
 }
 

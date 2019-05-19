@@ -10,7 +10,7 @@ mapboxgl.accessToken =
 class AgencyMap extends React.Component {
   componentDidMount() {
     const routes = this.props.routeFeatures;
-    const setMapRoutes = this.props.setMapRoutes;
+
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: style,
@@ -120,25 +120,12 @@ class AgencyMap extends React.Component {
       //   },
       //   "road-label-small"
       // );
-
-      this.map.on("moveend", e => {
-        let routes = this.map.queryRenderedFeatures({ layers: ["routes"] });
-        let uniq = _.uniqBy(routes, "properties.routeShortName");
-        let sorted1 = _.sortBy(
-          uniq,
-          a => parseInt(a.properties.routeShortName) || 9999
-        );
-        let sorted = _.sortBy(sorted1, a => {
-          return parseInt(a.properties.routeSortOrder);
-        });
-        setMapRoutes(sorted);
-      });
     });
   }
 
   render() {
     return (
-      <div ref={el => (this.mapContainer = el)} style={{ gridArea: "m" }} />
+      <div ref={el => (this.mapContainer = el)} style={{ height: "50vh" }} />
     );
   }
 }
