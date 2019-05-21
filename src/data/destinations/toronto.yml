@@ -1,0 +1,29 @@
+name: Toronto
+slug: toronto
+methods:
+  - name: Greyhound
+    from: Greyhound station, 1001 Howard St, Detroit
+    to:
+    cost: $45-50 USD, one way
+    departures:
+      - depart: 01:00
+        arrive: 06:35
+      - depart: 07:10
+        arrive: 13:30
+      - depart: 13:55
+        arrive: 20:25
+      - depart: 16:00
+        arrive: 11:45
+  - name: VIA Rail
+    from: Windsor VIA Rail Station, Walker Rd, Windsor
+    to: Union Station, Toronto
+    cost: $40 CAD, one-way
+    departures:
+      - depart: 05:30
+        arrive: 10:04
+      - depart: 09:05
+        arrive: 13:11
+      - depart: 13:45
+        arrive: 17:52
+      - depart: 17:45
+        arrive: 21:51
