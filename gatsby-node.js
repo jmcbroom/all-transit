@@ -38,12 +38,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           agencyName
           agencyUrl
         }
-        routes: allRoutesList {
+        routes: allRoutesList(first: 1) {
           agencyId
           routeShortName
           routeLongName
         }
-        stops: allStopsList(first: 100) {
+        stops: allStopsList(first: 1) {
           feedIndex
           stopId
         }

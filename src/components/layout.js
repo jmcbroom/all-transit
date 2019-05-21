@@ -78,7 +78,6 @@ const Layout = ({ title, color, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <div style={{ height: "100vh" }}>
                 <SiteHeader siteTitle={title} color={color}>
                   <Button
                     icon={visible ? "grav" : "grav"}
@@ -86,7 +85,6 @@ const Layout = ({ title, color, children }) => {
                   />
                 </SiteHeader>
                 <div style={{ padding: 15 }}>{children}</div>
-              </div>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </div>
