@@ -18,7 +18,7 @@ const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
 
   let appStyle = {
-    minHeight: "100%"
+    height: "100%"
   };
 
   return (
@@ -33,7 +33,7 @@ const Layout = ({ title, color, children }) => {
         }
       `}
       render={data => (
-        <div style={appStyle}>
+        <div style={{ height: "100%" }}>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
               as={Menu}
@@ -78,7 +78,7 @@ const Layout = ({ title, color, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <div style={appStyle}>
+              <div style={{ height: "100vh" }}>
                 <SiteHeader siteTitle={title} color={color}>
                   <Button
                     icon={visible ? "grav" : "grav"}

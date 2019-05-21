@@ -10,7 +10,8 @@ import {
   Divider,
   Icon,
   Button,
-  Label
+  Label,
+  Dropdown
 } from "semantic-ui-react";
 
 const agencies = {
@@ -33,7 +34,19 @@ const agencies = {
 };
 
 const IndexPage = ({ data }) => {
-  console.log(data);
+  let destinations = data.allDestinationsYaml.edges
+    .map(e => e.node)
+    .map(n => {
+      return {
+        key: n.name,
+        text: n.name,
+        value: n.name,
+        icon: "arrow circle right"
+      };
+    });
+
+  console.log(destinations);
+
   return (
     <Layout title={"Detroit transit guide"}>
       <Grid columns={2} stackable>
@@ -75,13 +88,14 @@ const IndexPage = ({ data }) => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Segment.Group attached>
+            <Segment.Group>
               <Label attached="top">Go out of town</Label>
               <Segment>
-                <Link to={`/get-to/ann-arbor`}>Ann Arbor</Link>
-              </Segment>
-              <Segment>
-                <Link to={`/get-to/cleveland`}>Cleveland</Link>
+                <Dropdown
+                  options={destinations}
+                  placeholder="Get out of town"
+                  fluid
+                />
               </Segment>
             </Segment.Group>
           </Grid.Column>
@@ -100,6 +114,13 @@ export const query = graphql`
         agencyLongName
         agencyUrl
         agencyFareUrl
+      }
+    }
+    allDestinationsYaml {
+      edges {
+        node {
+          name
+        }
       }
     }
   }

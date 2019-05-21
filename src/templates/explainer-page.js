@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
-import { Header, Segment } from "semantic-ui-react";
+import { Header, Segment, Button } from "semantic-ui-react";
 import SwipeableViews from "react-swipeable-views";
 import Layout from "../components/layout";
 
 export default ({ data, pageContext }) => {
+  console.log(data);
   let page = data.allExplainersYaml.edges[0].node;
+
+  let [index, setIndex] = useState(0);
   return (
-    <Layout title={page.title}>
-      <Header as="h3">{page.subtitle}</Header>
-      <SwipeableViews>
+    <Layout
+      title={page.subtitle}
+      style={{ display: "flex", width: "100%", justifyContent: "space-around" }}
+    >
+      <Segment.Group horizontal attached="top">
+        <Segment textAlign="left">
+          <Button
+            icon="arrow left"
+            onClick={() => setIndex(index - 1)}
+            disabled={index === 0}
+          />
+          {/* {index > 0 ? <span>{page.pages[index - 1].title}</span> : ``} */}
+        </Segment>
+        <Segment textAlign="center">
+          <Header as="h3">
+            {index + 1}. {page.pages[index].title}
+          </Header>
+        </Segment>
+        <Segment textAlign="right">
+          <Button
+            icon="arrow right"
+            onClick={() => setIndex(index + 1)}
+            disabled={index + 1 === page.pages.length}
+          />
+          {/* {index + 1 < page.pages.length ? page.pages[index + 1].title : ``} */}
+        </Segment>
+      </Segment.Group>
+      <SwipeableViews index={index} animateHeight>
         {page.pages.map(p => (
           <Segment>
-            <Header as="h4">{p.title}</Header>
             {p.elements.map(e => (
               <p>{e.content}</p>
             ))}
