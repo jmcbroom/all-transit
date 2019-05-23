@@ -47,7 +47,7 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout title={r.routeLongName}>
-      <Grid columns={2} stackable>
+      <Grid columns={2} stackable padded>
         <Grid.Column>
           <Header color="grey" size="big" content="Map" />
           <RouteMap shapes={features} stops={stops} />

@@ -8,12 +8,13 @@ const SiteHeader = ({ siteTitle, color, children }) => (
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      backgroundColor: 'rgba(106, 170, 88, 0.25)',
       width: "100%",
       padding: 10,
       background: color
     }}
   >
-    <Header as="h1" content={siteTitle} style={{ margin: 0 }} />
+    <Header as="h2" content={siteTitle} style={{ margin: 0 }} />
     {children}
   </div>
 );

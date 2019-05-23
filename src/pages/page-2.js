@@ -11,11 +11,11 @@ const SecondPage = () => (
     <Header as='h1'>Detroit Transit Guide</Header>
     <Segment basic>
       <Grid>
-        <Grid.Row centered>
-          <Button.Group size='big' fluid>
-            <Button color='yellow'>LEARN THE SYSTEM</Button>
+        <Grid.Row>
+          <Button.Group fluid size='big' widths='seven' centered>
+            <Button color='yellow' style={{color: '#222'}}>New to the bus?</Button>
             <Button.Or />
-            <Button color='green'>I'M READY TO RIDE</Button>
+            <Button color='green'>I'm a rider</Button>
           </Button.Group>
         </Grid.Row>
         <Grid.Row columns={2} divided>
