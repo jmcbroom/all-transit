@@ -88,10 +88,10 @@ const IndexPage = ({ data }) => {
         <Grid.Row>
           <Button.Group fluid size="big" widths="seven" centered>
             <Button color="yellow" style={{ color: "#222" }}>
-              New to the bus?
+              Learn the system
             </Button>
             <Button.Or />
-            <Button color="green">I'm a rider</Button>
+            <Button color="green">I'm ready to ride</Button>
           </Button.Group>
         </Grid.Row>
 

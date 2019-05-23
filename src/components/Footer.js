@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Image, Button, List, Divider, Header } from "semantic-ui-react";
+import { Grid, Image, List, Header } from "semantic-ui-react";
 
 const Footer = () => {
   let resources = [
@@ -50,10 +50,6 @@ const Footer = () => {
             size="tiny"
             padded
           />
-          <Button.Group vertical style={{margin: '20px 0px 10px 0px'}}>
-          <Button fluid>Lost & found</Button>
-          <Button fluid>Resolve a fare violation</Button>
-          </Button.Group>
         </Grid.Column>
         <Grid.Column width={4}>
           <Header as="h4" content="Community resources" />
