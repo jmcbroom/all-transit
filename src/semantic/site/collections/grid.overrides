@@ -1,6 +1,3 @@
 /*******************************
          Theme Overrides
 *******************************/
-
-@stackableRowSpacing: 0
-@stackableGutter: 0

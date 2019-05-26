@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 
 const SystemMap = ({ data }) => (
   <Layout title={"System map"}>
-    <div style={{ height: "100vh", width: "100vw" }}>
+    <div style={{ height: "85vh", width: "100%" }}>
       <AllAgencyMap agencies={data.postgres.agencies} />
     </div>
   </Layout>

@@ -12,9 +12,8 @@ export default ({ data, pageContext }) => {
   return (
     <Layout
       title={page.subtitle}
-      style={{ display: "flex", width: "100%", justifyContent: "space-around" }}
     >
-      <Segment.Group horizontal attached="top">
+      <Segment.Group horizontal attached="top" style={{maxWidth: 800}}>
         <Segment textAlign="left">
           <Button
             icon="arrow left"
