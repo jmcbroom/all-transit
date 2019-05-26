@@ -4,9 +4,16 @@ import { StaticQuery, graphql, Link } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import Footer from "./Footer";
 import "semantic-ui-less/semantic.less";
-import { Sidebar, Button, Segment, Menu, Icon } from "semantic-ui-react";
+import {
+  Sidebar,
+  Button,
+  Segment,
+  Menu,
+  Icon,
+  Breadcrumb
+} from "semantic-ui-react";
 
-const Layout = ({ title, color, children }) => {
+const Layout = ({ title, color, breadcrumb, children }) => {
   let [visible, setVisible] = useState(false);
 
   return (
@@ -25,9 +32,8 @@ const Layout = ({ title, color, children }) => {
           <Sidebar.Pushable as={Segment}>
             <Sidebar
               as={Menu}
-              animation="uncover"
+              animation="slide along"
               icon="labeled"
-              inverted
               onHide={() => setVisible(false)}
               vertical
               visible={visible}
@@ -68,10 +74,12 @@ const Layout = ({ title, color, children }) => {
             <Sidebar.Pusher>
               <SiteHeader siteTitle={title} color={color}>
                 <Button
-                  icon={visible ? "grav" : "grav"}
+                  icon={visible ? "window close" : "content"}
+                  color="grey"
                   onClick={() => setVisible(visible ? false : true)}
                 />
               </SiteHeader>
+              {breadcrumb && <Breadcrumb size="small" sections={breadcrumb} />}
               {children}
               <Footer />
             </Sidebar.Pusher>

@@ -6,7 +6,7 @@ import { Grid, ScrollSync, AutoSizer } from "react-virtualized";
 import scrollbarSize from "dom-helpers/util/scrollbarSize";
 import "react-virtualized/styles.css"; // only needs to be imported once
 
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, Segment } from "semantic-ui-react";
 
 const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
   const [service, setService] = useState("weekday");
@@ -103,8 +103,6 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
     t.stop.stopName.replace("Ave", "").replace("Hwy", "")
   );
 
-  console.log(listArray, timepoints);
-
   let cellStyle = {
     display: "flex",
     flexDirection: "column",
@@ -123,6 +121,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           style={{
             ...style,
             ...cellStyle,
+            textAlign: "right",
             background: "#eee",
             borderLeft: `${columnIndex === 0 ? 2 : 0}px solid #ddd`,
             borderRight: `2px solid #ddd`,
@@ -168,12 +167,12 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           borderRight: `2px solid #555`,
           borderTop: `2px solid #555`,
           borderBottom: `2px solid #555`,
-          background: "#222",
-          color: "white",
+          background: "#ddd",
+          color: "black",
           fontWeight: 600,
           characterSpacing: "-1px",
           padding: 3,
-          fontSize: 11,
+          fontSize: 14,
           lineHeight: "1em"
         }}
       >
@@ -185,7 +184,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
   console.log(listArray);
 
   return (
-    <>
+    <Segment>
       <div
         style={{
           display: "flex",
@@ -238,8 +237,8 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           }) => (
             <AutoSizer>
               {({ width, height }) => {
-                let columnWidth = 100;
-                let headerHeight = 60;
+                let columnWidth = 110;
+                let headerHeight = 50;
                 return (
                   <>
                     <Grid
@@ -262,7 +261,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
                       width={width - scrollbarSize()}
                       scrollLeft={scrollLeft}
                       rowCount={listArray.length}
-                      rowHeight={24}
+                      rowHeight={25}
                     />
                   </>
                 );
@@ -271,7 +270,7 @@ const RouteSchedule = ({ trips, shapes, feedIndex, color }) => {
           )}
         </ScrollSync>
       </div>
-    </>
+    </Segment>
   );
 };
 

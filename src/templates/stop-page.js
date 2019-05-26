@@ -41,14 +41,16 @@ export default class Stop extends React.Component {
     });
 
     return (
-      <Layout>
-        <Grid stackable>
+      <Layout title={s.stopDesc}>
+        <Grid stackable padded>
           <Grid.Row>
-            <Grid.Column width={10}>
+            <Grid.Column width={8}>
               <StopMap lat={s.stopLat} lon={s.stopLon} routes={s.routeShapes} />
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={4}>
               <StopInfo stop={s} />
+            </Grid.Column>
+            <Grid.Column width={4}>
               <StopTimeList list={uniq} />
             </Grid.Column>
           </Grid.Row>

@@ -45,7 +45,7 @@ class RouteMap extends React.Component {
             "line-opacity": 1,
             "line-width": {
               base: 1.5,
-              stops: [[8.5, 0.5], [10, 0.75], [18, 26]]
+              stops: [[10, 1], [10.5, 2], [13, 4], [18, 26]]
             }
           }
         },

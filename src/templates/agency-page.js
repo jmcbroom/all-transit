@@ -42,14 +42,14 @@ export default ({ data, pageContext }) => {
   };
 
   return (
-    <Layout title={a.agencyName}>
-      <Grid columns={2} stackable padded>
-        <Grid.Column>
-          <Header color="grey" size="big" content="Fares" />
-          <Table unstackable celled size="large">
+    <Layout title={a.agencyName} breadcrumb={true}>
+      <Grid stackable padded>
+        <Grid.Column computer={10}>
+          <Header as="h3" color="grey" content="Fares" attached="top" />
+          <Table unstackable celled padded size="large" attached="bottom">
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell />
+                <Table.HeaderCell>-</Table.HeaderCell>
                 <Table.HeaderCell>Regular</Table.HeaderCell>
                 <Table.HeaderCell>Reduced</Table.HeaderCell>
               </Table.Row>
@@ -71,23 +71,25 @@ export default ({ data, pageContext }) => {
           </Table>
           <Header color="grey" size="big" content="Bus routes" />
           <Grid
-            columns={2}
-            stackable
+            padded
             style={{
               overflowY: "scroll",
-              WebkitOverflowScrolling: "touch",
-              maxHeight: "40vh",
-              paddingRight: "1em"
+              WebkitOverflowScrolling: "touch"
             }}
           >
             {routes.map(r => (
-              <Grid.Column key={r.routeLongName} style={{ padding: ".25rem" }}>
+              <Grid.Column
+                computer={8}
+                mobile={16}
+                key={r.routeLongName}
+                style={{ padding: 5 }}
+              >
                 <RouteDisplay route={r} />
               </Grid.Column>
             ))}
           </Grid>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column computer={6}>
           <Header color="grey" size="big" content="System info" />
           <Segment size="regular">
             <List>
