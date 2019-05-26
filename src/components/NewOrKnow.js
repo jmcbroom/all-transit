@@ -35,11 +35,13 @@ const NewOrKnow = ({ explainers }) => {
     <Grid padded>
       <Grid.Row>
         <Button.Group fluid size="big" widths="seven" centered>
-          <Button color="yellow" style={{ color: "#222" }}>
+          <Button color="yellow" style={{ color: "#222", cursor: "auto" }}>
             Learn the system
           </Button>
           <Button.Or />
-          <Button color="green">I'm ready to ride</Button>
+          <Button color="green" style={{ color: "#222", cursor: "auto" }}>
+            I'm ready to ride
+          </Button>
         </Button.Group>
       </Grid.Row>
 

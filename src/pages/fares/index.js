@@ -1,4 +1,5 @@
 import React from "react";
+import { graphql } from "gatsby";
 
 import Layout from "../../components/layout";
 import { Segment, Table, Grid, Header, Image } from "semantic-ui-react";
