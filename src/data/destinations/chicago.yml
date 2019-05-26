@@ -6,26 +6,26 @@ methods:
     to: Greyhound station, 630 W Harrison St, Chicago
     cost: $20-25 USD, one way
     departures:
-      - depart: 01:20
-        arrive: 05:40
-      - depart: 07:50
-        arrive: 13:15
-      - depart: 12:01
-        arrive: 07:45
+      - depart: "01:20"
+        arrive: "05:40"
+      - depart: "07:50"
+        arrive: "13:15"
+      - depart: "12:01"
+        arrive: "07:45"
         transfer:
           - Toledo
-      - depart: 15:35
-        arrive: 20:30
-      - depart: 18:55
-        arrive: 23:35
+      - depart: "15:35"
+        arrive: "20:30"
+      - depart: "18:55"
+        arrive: "23:35"
   - name: Amtrak
     from: Amtrak station, Baltimore St, Detroit
     to: Union Station, Clinton St, Chicago
     cost: $30-40 USD, one-way
     departures:
-      - depart: 06:33
-        arrive: 10:32
-      - depart: 10:45
-        arrive: 15:05
-      - depart: 18:18
-        arrive: 22:40
+      - depart: "06:33"
+        arrive: "10:32"
+      - depart: "10:45"
+        arrive: "15:05"
+      - depart: "18:18"
+        arrive: "22:40"

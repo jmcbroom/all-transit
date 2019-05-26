@@ -1,7 +1,0 @@
-name: Cleveland
-slug: cleveland
-methods:
-  - name: Greyhound
-    cost: 18
-  - name: Amtrak
-    cost: 24
