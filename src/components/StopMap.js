@@ -1,7 +1,7 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
 import style from "./style.json";
-import { Container, Sticky } from "semantic-ui-react";
+import { Sticky } from "semantic-ui-react";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";

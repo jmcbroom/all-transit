@@ -4,16 +4,7 @@ import { StaticQuery, graphql, Link } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import Footer from "./Footer";
 import "semantic-ui-less/semantic.less";
-import {
-  Sticky,
-  Sidebar,
-  Button,
-  Segment,
-  Menu,
-  Icon,
-  Image,
-  Container
-} from "semantic-ui-react";
+import { Sidebar, Button, Segment, Menu, Icon } from "semantic-ui-react";
 
 const Layout = ({ title, color, children }) => {
   let [visible, setVisible] = useState(false);
@@ -29,7 +20,7 @@ const Layout = ({ title, color, children }) => {
           }
         }
       `}
-      render={data => (
+      render={() => (
         <div style={{ height: "100%" }}>
           <Sidebar.Pushable as={Segment}>
             <Sidebar

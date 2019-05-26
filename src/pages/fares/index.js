@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "gatsby";
 
 import Layout from "../../components/layout";
-import { Segment, Table, Icon, Grid, Header, Image } from "semantic-ui-react";
+import { Segment, Table, Grid, Header, Image } from "semantic-ui-react";
 
 const Fares = ({ data }) => {
   console.log(data);

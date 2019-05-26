@@ -1,21 +1,9 @@
-import React, { useState } from "react";
-import { graphql, Link } from "gatsby";
+import React from "react";
+import { graphql } from "gatsby";
 import _ from "lodash";
-import feeds from "../feeds";
 import Layout from "../components/layout";
 import AgencyMap from "../components/AgencyMap";
-import {
-  Tab,
-  Menu,
-  Grid,
-  List,
-  Breadcrumb,
-  Label,
-  Header,
-  Button,
-  Segment,
-  Table
-} from "semantic-ui-react";
+import { Grid, List, Header, Segment, Table } from "semantic-ui-react";
 import RouteDisplay from "../components/RouteDisplay";
 
 export default ({ data, pageContext }) => {
@@ -52,8 +40,6 @@ export default ({ data, pageContext }) => {
     type: "FeatureCollection",
     features: routeShapes
   };
-
-  let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
     <Layout title={a.agencyName}>

@@ -3,7 +3,6 @@ import mapboxgl from "mapbox-gl";
 import bbox from "@turf/bbox";
 import style from "./style.json";
 import "mapbox-gl/dist/mapbox-gl.css";
-import _ from "lodash";
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA";
 

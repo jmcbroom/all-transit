@@ -1,10 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import RouteStops from "../components/RouteStops";
 import RouteMap from "../components/RouteMap";
-import feeds from "../feeds";
-import { Tab, Grid, Header } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import RouteSchedule from "../components/RouteSchedule";
 
 export default ({ data, pageContext }) => {
@@ -42,8 +40,6 @@ export default ({ data, pageContext }) => {
       ...s.geojson
     };
   });
-
-  let color = feeds[pageContext.feedIndex - 1].color;
 
   return (
     <Layout title={r.routeLongName}>

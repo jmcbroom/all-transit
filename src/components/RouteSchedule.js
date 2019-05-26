@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import feeds from "../feeds";
 import _ from "lodash";
 import formatTime from "./Helpers";
-import { Grid, List, ScrollSync, AutoSizer } from "react-virtualized";
+import { Grid, ScrollSync, AutoSizer } from "react-virtualized";
 import scrollbarSize from "dom-helpers/util/scrollbarSize";
 import "react-virtualized/styles.css"; // only needs to be imported once
 

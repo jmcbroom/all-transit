@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Header, Segment } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import Layout from "../components/layout";
 
-export default ({ data, pageContext }) => {
+export default ({ data }) => {
   let page = data.allDestinationsYaml.edges[0].node;
   return (
     <Layout title={`Get to ${page.name}`}>
