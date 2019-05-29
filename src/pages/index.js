@@ -5,12 +5,10 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import NewOrKnow from "../components/NewOrKnow";
 import {
-  Message,
   Grid,
-  Placeholder,
-  List,
   Segment,
-  Header
+  Header,
+  Image
 } from "semantic-ui-react";
 import { Detour } from "../components/Detour";
 
@@ -22,14 +20,17 @@ const IndexPage = ({ data }) => {
 
   let nokWidths = {
     mobile: 16,
-    computer: 8
+    computer: 12
   };
 
   return (
     <Layout title={"Detroit transit guide"} breadcrumb={false}>
-      <Grid style={{ width: "100vw" }} stackable padded>
-        <Grid.Column only="computer" computer={4}>
-          <Segment.Group>
+      <Grid style={{ width: "100vw" }} stackable>
+        <Grid.Row width={16} only="computer">
+          <Image src="https://dummyimage.com/1080x240/addbc0/000"/>
+        </Grid.Row>
+        <Grid.Column computer={2}>
+          {/* <Segment.Group>
             {agencies.map(a => {
               return (
                 <Segment>
@@ -40,16 +41,16 @@ const IndexPage = ({ data }) => {
             <Segment>
               <Header as="h4" content="Fares" />
             </Segment>
-          </Segment.Group>
+          </Segment.Group> */}
         </Grid.Column>
 
-        <Grid.Column computer={4} mobile={16} tablet={16}>
-          <Detour />
+        <Grid.Column computer={2} mobile={16} tablet={16}>
         </Grid.Column>
 
         <Grid.Column fluid {...nokWidths}>
           <NewOrKnow explainers={explainers} />
         </Grid.Column>
+
       </Grid>
     </Layout>
   );

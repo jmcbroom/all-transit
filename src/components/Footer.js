@@ -7,21 +7,15 @@ const Footer = () => {
     "Customer Service & Feedback",
     "Stop & Shelter Requests",
     "Accessibility",
-    "Programs",
-    "Events",
-    "Data",
     "Title VI",
-    "About Us"
+    "Programs",
+    "Events"
   ];
   let ipsum = [
-    "This",
-    "Stop & Shelter Requests",
-    "Accessibility",
-    "Programs",
-    "Events",
+    "Our Organization",
     "Data",
-    "Title VI",
-    "About Us"
+    "Employment Opportunities",
+    "Business Opportunities"
   ];
 
   let socialMedia = {
@@ -43,16 +37,19 @@ const Footer = () => {
       padded
       style={{ background: "rgba(106, 170, 88, 0.5)", paddingTop: "1em" }}
     >
-      <Grid.Row style={{paddingBottom: '3em'}}>
+      <Grid.Row style={{ paddingBottom: '3em' }}>
         <Grid.Column width={4}>
+
+
           <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ddot-logo.svg"
-            size="tiny"
+            src="https://detroitmi.gov/themes/custom/detroitmi/logo-white.png"
+            size='small'
+            inline
             padded
           />
         </Grid.Column>
         <Grid.Column width={4}>
-          <Header as="h4" content="Community resources" />
+          <Header as="h4" content="Resources" />
           <List>
             {resources.map(r => (
               <List.Item as="a" href={`/fake`}>
@@ -62,8 +59,8 @@ const Footer = () => {
           </List>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Header as="h4" content="Some other column" />
-          <List>
+          <Header as="h4" content="About us" />
+          <List >
             {ipsum.map(r => (
               <List.Item as="a" href={`/fake`}>
                 {r}
@@ -73,7 +70,7 @@ const Footer = () => {
         </Grid.Column>
         <Grid.Column width={4}>
           <Header as="h4" content="Connect with DDOT" />
-          <List size="large">
+          <List size='large' >
             {Object.keys(socialMedia).map(k => (
               <List.Item as="a" href={socialMedia[k].url}>
                 <List.Icon name={k} />
@@ -83,6 +80,12 @@ const Footer = () => {
               </List.Item>
             ))}
           </List>
+            <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ddot-logo.svg"
+                padded
+                inline
+                size='tiny'
+              />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row
@@ -93,7 +96,9 @@ const Footer = () => {
           fontSize: 12
         }}
       >
-        {`Some legalese, you agree not to sue us, we are going to track you, etcetera`}
+        <i>Privacy policy & Terms of use</i>
+        <br/>
+        <b>Copyright 2001-2019 by some people who work at City of Detroit</b>
       </Grid.Row>
     </Grid>
   );

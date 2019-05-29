@@ -1,8 +1,29 @@
-import React from "react";
-import { Header, Breadcrumb, Segment } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Header, Icon, List } from "semantic-ui-react";
+import { Detour } from "./Detour";
 
-const SiteHeader = ({ siteTitle, color, children }) => (
+let languages = {
+  EN: "English (US)",
+  ES: "Spanish",
+  AR: "Arabic",
+  FR: "French",
+  BN: "Bengali"
+};
+
+const SiteHeader = ({ siteTitle, children }) => {
+
+  return (
   <>
+    <Detour />
+    <div style={{padding: 5, textAlign: 'right', background: "rgba(106, 170, 88, 0.4)"}}>
+      <List horizontal>
+        <List.Item><Icon name='talk' size="regular" /></List.Item>
+        {Object.keys(languages).map(l => (
+          <List.Item>{l}</List.Item>
+        // <List.Item><Flag name={l} size="large" style={{fontSize: '1.5em'}} /></List.Item>
+        ))}
+      </List>
+    </div>
     <div
       style={{
         display: "flex",
@@ -14,13 +35,9 @@ const SiteHeader = ({ siteTitle, color, children }) => (
       }}
     >
       {children}
-      <Header
-        as="h2"
-        content={siteTitle}
-        style={{ margin: 0, marginLeft: 20 }}
-      />
+      <Header as="h2" content={siteTitle} style={{margin: 0, marginLeft: 20}}/>
     </div>
   </>
-);
+)};
 
 export default SiteHeader;

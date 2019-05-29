@@ -48,25 +48,25 @@ const Layout = ({ title, color, breadcrumb, children }) => {
               <Link to={`/ddot`}>
                 <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
-                  DDOT
+                  Plan a trip
                 </Menu.Item>
               </Link>
               <Link to={`/smart`}>
                 <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
-                  SMART
+                  Routes
                 </Menu.Item>
               </Link>
-              <Link to={`/the-ride`}>
+              <Link to={`/smart`}>
                 <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
-                  Ann Arbor
+                  Fares/Passes
                 </Menu.Item>
               </Link>
-              <Link to={`/transit-windsor`}>
-                <Menu.Item as="a">
+              <Link to={`/smart`}>
+                <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
-                  Windsor
+                  Feedback
                 </Menu.Item>
               </Link>
             </Sidebar>

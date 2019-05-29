@@ -1,6 +1,5 @@
 import React from "react";
-import RouteBadge from "./RouteBadge";
-import { List, Header, Grid, Segment } from "semantic-ui-react";
+import { Header, Grid, Segment } from "semantic-ui-react";
 import formatTime from "./Helpers";
 
 export const StopTimeList = ({ list }) => {
