@@ -74,17 +74,19 @@ export default ({ data, pageContext }) => {
             padded
             style={{
               overflowY: "scroll",
-              WebkitOverflowScrolling: "touch"
+              WebkitOverflowScrolling: "touch",
+              maxHeight: '70vh'
             }}
           >
             {routes.map(r => (
               <Grid.Column
                 computer={8}
+                tablet={8}
                 mobile={16}
                 key={r.routeLongName}
                 style={{ padding: 5 }}
               >
-                <RouteDisplay route={r} />
+                <RouteDisplay route={r} asLink />
               </Grid.Column>
             ))}
           </Grid>

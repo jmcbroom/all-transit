@@ -14,7 +14,6 @@ export const StopTimeList = ({ list }) => {
   console.log(am, pm, nite);
 
   return (
-    <>
       <Segment.Group attached="top">
         <Segment>
           <Header as="h3" content="Scheduled stops here" />
@@ -25,9 +24,10 @@ export const StopTimeList = ({ list }) => {
             padded
             style={{ fontFeatureSettings: "'tnum' 1" }}
             attached="top"
+            verticalAlign='middle'
           >
             {am.map(t => (
-              <Grid.Column width={3} textAlign="right" style={{ padding: 0 }}>
+              <Grid.Column width={4} textAlign="right" style={{ padding: 0 }}>
                 {formatTime(t.arrivalTime, false)}
               </Grid.Column>
             ))}
@@ -39,10 +39,11 @@ export const StopTimeList = ({ list }) => {
             padded
             style={{ fontFeatureSettings: "'tnum' 1" }}
             attached="top"
+            verticalAlign='middle'
           >
             {pm.map(t => (
-              <Grid.Column width={3} textAlign="right" style={{ padding: 0 }}>
-                {formatTime(t.arrivalTime, false)}
+              <Grid.Column width={4} textAlign="right" style={{ padding: 0 }}>
+                <b>{formatTime(t.arrivalTime, false)}</b>
               </Grid.Column>
             ))}
           </Grid>
@@ -55,13 +56,12 @@ export const StopTimeList = ({ list }) => {
             attached="top"
           >
             {nite.map(t => (
-              <Grid.Column width={3} textAlign="right" style={{ padding: 0 }}>
+              <Grid.Column width={4} textAlign="right" style={{ padding: 0 }}>
                 {formatTime(t.arrivalTime, false)}
               </Grid.Column>
             ))}
           </Grid>
         </Segment>
       </Segment.Group>
-    </>
   );
 };

@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
 import _ from "lodash";
 
 import Layout from "../components/layout";
 import StopMap from "../components/StopMap";
-import StopInfo from "../components/StopInfo";
+import RouteDisplay from "../components/RouteDisplay";
 
 import feeds from "../feeds";
-import { Grid } from "semantic-ui-react";
+import { Grid, Dropdown } from "semantic-ui-react";
 import { StopTimeList } from "../components/StopTimeList";
+
+const StopRoutes = ({ stop, list }) => {
+  let uniqRoutes = _.uniqBy(stop.times, t => {
+    return t.trip.route.routeLongName;
+  }).map(ur => ur.trip.route);
+
+  console.log(uniqRoutes)
+
+  let dropdownOptions = uniqRoutes.map(u => {
+    return({
+      key: u.routeShortName.toString(), text: u.routeLongName, value: u.routeShortName.toString(), content: <RouteDisplay key={u.routeShortName} route={u} size="big" />
+    })
+  })
+
+  console.log(dropdownOptions)
+
+  let [route, setRoute] = useState(uniqRoutes[0])
+
+  return (
+    <div>      
+      StopRoutes
+      <Dropdown
+        placeholder='select Friends'
+        fluid
+        selection
+        options={dropdownOptions}
+        / >
+
+      <StopTimeList list={list} />
+    </div>
+  )
+}
 
 export default class Stop extends React.Component {
   render() {
@@ -44,14 +76,11 @@ export default class Stop extends React.Component {
       <Layout title={s.stopDesc}>
         <Grid stackable padded>
           <Grid.Row>
-            <Grid.Column width={8}>
+            <Grid.Column width={10}>
               <StopMap lat={s.stopLat} lon={s.stopLon} routes={s.routeShapes} />
             </Grid.Column>
-            <Grid.Column width={4}>
-              <StopInfo stop={s} />
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <StopTimeList list={uniq} />
+            <Grid.Column width={6}>
+              <StopRoutes stop={s} list={uniq} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

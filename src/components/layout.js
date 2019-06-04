@@ -4,14 +4,16 @@ import { StaticQuery, graphql, Link } from "gatsby";
 import SiteHeader from "./SiteHeader";
 import Footer from "./Footer";
 import "semantic-ui-less/semantic.less";
-import {
-  Sidebar,
-  Button,
-  Segment,
-  Menu,
-  Icon,
-  Breadcrumb
-} from "semantic-ui-react";
+import { Sidebar, Button, Segment, Menu, Icon, List } from "semantic-ui-react";
+import { Detour } from "./Detour";
+
+let languages = {
+  EN: "English (US)",
+  ES: "Spanish",
+  AR: "Arabic",
+  FR: "French",
+  BN: "Bengali"
+};
 
 const Layout = ({ title, color, breadcrumb, children }) => {
   let [visible, setVisible] = useState(false);
@@ -30,15 +32,7 @@ const Layout = ({ title, color, breadcrumb, children }) => {
       render={() => (
         <div style={{ height: "100%" }}>
           <Sidebar.Pushable as={Segment}>
-            <Sidebar
-              as={Menu}
-              animation="slide along"
-              icon="labeled"
-              onHide={() => setVisible(false)}
-              vertical
-              visible={visible}
-              width="thin"
-            >
+            <Sidebar as={Menu} animation="slide along" icon="labeled" onHide={() => setVisible(false)} vertical visible={visible} width="thin">
               <Link to={`/`}>
                 <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
@@ -72,14 +66,22 @@ const Layout = ({ title, color, breadcrumb, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
+              <Segment.Group horizontal>
+                <Detour />
+                <Segment>
+                  <List horizontal>
+                    <List.Item>
+                      <Icon name="talk" size="regular" />
+                    </List.Item>
+                    {Object.keys(languages).map(l => (
+                      <List.Item>{l}</List.Item>
+                    ))}
+                  </List>
+                </Segment>
+              </Segment.Group>
               <SiteHeader siteTitle={title} color={color}>
-                <Button
-                  icon={visible ? "window close" : "content"}
-                  color="grey"
-                  onClick={() => setVisible(visible ? false : true)}
-                />
+                <Button icon={visible ? "window close" : "content"} color="grey" onClick={() => setVisible(visible ? false : true)} />
               </SiteHeader>
-              {breadcrumb && <Breadcrumb size="small" sections={breadcrumb} />}
               {children}
               <Footer />
             </Sidebar.Pusher>
