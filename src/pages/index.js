@@ -4,12 +4,8 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import NewOrKnow from "../components/NewOrKnow";
-import {
-  Grid,
-  Segment,
-  Header,
-  Image
-} from "semantic-ui-react";
+import bus from "../images/tourbus.jpg";
+import { Grid, Segment, Header, Image, Message } from "semantic-ui-react";
 import { Detour } from "../components/Detour";
 
 const IndexPage = ({ data }) => {
@@ -20,37 +16,30 @@ const IndexPage = ({ data }) => {
 
   let nokWidths = {
     mobile: 16,
-    computer: 12
+    computer: 8
   };
 
   return (
     <Layout title={"Detroit transit guide"} breadcrumb={false}>
-      <Grid style={{ width: "100vw" }} stackable>
-        <Grid.Row width={16} only="computer">
-          <Image src="https://dummyimage.com/1080x240/addbc0/000"/>
+      <Grid style={{ width: "100vw" }}>
+        <Grid.Row width={12} centered style={{ backgroundColor: "#A0D5B3", padding: 0 }} />
+        
+        <Grid.Row width={16} style={{ height: 48, padding: 0 }} className="flourish" />
+        
+        <Grid.Row width={16} className="imageflourish" />
+        
+        <Grid.Row width={16} style={{ height: 60 }} className="endflourish" />
+        
+        <Grid.Row width={16} centered>
+          <Grid.Column width={2} only='computer'>
+            fake
+          </Grid.Column>
+          <Grid.Column {...nokWidths} style={{marginTop: '-20px'}}>
+            <NewOrKnow explainers={explainers} />
+          </Grid.Column>
         </Grid.Row>
-        <Grid.Column computer={2}>
-          {/* <Segment.Group>
-            {agencies.map(a => {
-              return (
-                <Segment>
-                  <Header as="h4" content={a.agencyName} />
-                </Segment>
-              );
-            })}
-            <Segment>
-              <Header as="h4" content="Fares" />
-            </Segment>
-          </Segment.Group> */}
-        </Grid.Column>
 
-        <Grid.Column computer={2} mobile={16} tablet={16}>
-        </Grid.Column>
-
-        <Grid.Column fluid {...nokWidths}>
-          <NewOrKnow explainers={explainers} />
-        </Grid.Column>
-
+        <Grid.Row width={16} style={{ height: 90 }} className="negflourish" />
       </Grid>
     </Layout>
   );

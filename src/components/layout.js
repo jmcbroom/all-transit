@@ -32,7 +32,7 @@ const Layout = ({ title, color, breadcrumb, children }) => {
       render={() => (
         <div style={{ height: "100%" }}>
           <Sidebar.Pushable as={Segment}>
-            <Sidebar as={Menu} animation="slide along" icon="labeled" onHide={() => setVisible(false)} vertical visible={visible} width="thin">
+            <Sidebar as={Menu} animation="overlay" icon="labeled" onHide={() => setVisible(false)} vertical visible={visible} width="thin">
               <Link to={`/`}>
                 <Menu.Item as="a" onClick={() => setVisible(false)}>
                   <Icon name="home" />
@@ -66,9 +66,9 @@ const Layout = ({ title, color, breadcrumb, children }) => {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <Segment.Group horizontal>
+              {/* <Segment.Group horizontal basic>
                 <Detour />
-                <Segment>
+                <Segment textAlign='right' basic>
                   <List horizontal>
                     <List.Item>
                       <Icon name="talk" size="regular" />
@@ -78,9 +78,9 @@ const Layout = ({ title, color, breadcrumb, children }) => {
                     ))}
                   </List>
                 </Segment>
-              </Segment.Group>
+              </Segment.Group> */}
               <SiteHeader siteTitle={title} color={color}>
-                <Button icon={visible ? "window close" : "content"} color="grey" onClick={() => setVisible(visible ? false : true)} />
+                <Button style={{ marginTop: '-35px' }} floated='right' size='medium' icon={visible ? "window close" : "content"} basic onClick={() => setVisible(visible ? false : true)} />
               </SiteHeader>
               {children}
               <Footer />

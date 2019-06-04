@@ -35,7 +35,7 @@ const Footer = () => {
       stackable
       relaxed
       padded
-      style={{ background: "rgba(106, 170, 88, 0.5)", paddingTop: "1em" }}
+      style={{ background: "#a0d5b2", paddingTop: "1em" }}
     >
       <Grid.Row style={{ paddingBottom: '3em' }}>
         <Grid.Column width={4}>
@@ -91,8 +91,8 @@ const Footer = () => {
       <Grid.Row
         centered
         style={{
-          background: "rgba(0, 0, 0, 0.15)",
-          color: "#444",
+          background: "#00957C",
+          color: "#fff",
           fontSize: 12
         }}
       >

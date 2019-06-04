@@ -1,6 +1,7 @@
 import React from "react";
 import _ from 'lodash';
 import { Grid, Button, List } from "semantic-ui-react";
+import './neworknow.css'
 
 const NewOrKnow = ({ explainers }) => {
   const ready = [
@@ -44,13 +45,13 @@ const NewOrKnow = ({ explainers }) => {
   
   return (
     <Grid padded>
-      <Grid.Row>
-        <Button.Group fluid size="big" widths="seven" centered>
-          <Button color="green" style={{ color: "#222", cursor: "auto", color: '#fff' }}>
+      <Grid.Row >
+          <Button.Group fluid size="big" widths="seven" centered>
+          <Button basic color='green' style={{ cursor: "auto" }}>
             {_.upperCase("Catch your bus")}
           </Button>
           <Button.Or />
-          <Button color="yellow" style={{ color: "#222", cursor: "auto", color: "#fff" }}>
+          <Button basic color='yellow' style={{ cursor: "auto" }}>
             {_.upperCase("Learn the system")}
           </Button>
         </Button.Group>
