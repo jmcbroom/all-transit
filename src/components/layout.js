@@ -30,62 +30,71 @@ const Layout = ({ title, color, breadcrumb, children }) => {
         }
       `}
       render={() => (
-        <div style={{ height: "100%" }}>
-          <Sidebar.Pushable as={Segment}>
-            <Sidebar as={Menu} animation="overlay" icon="labeled" onHide={() => setVisible(false)} vertical visible={visible} width="thin">
-              <Link to={`/`}>
-                <Menu.Item as="a" onClick={() => setVisible(false)}>
-                  <Icon name="home" />
-                  Home
-                </Menu.Item>
-              </Link>
-              <Link to={`/ddot`}>
-                <Menu.Item as="a" onClick={() => setVisible(false)}>
-                  <Icon name="home" />
-                  Plan a trip
-                </Menu.Item>
-              </Link>
-              <Link to={`/smart`}>
-                <Menu.Item as="a" onClick={() => setVisible(false)}>
-                  <Icon name="home" />
-                  Routes
-                </Menu.Item>
-              </Link>
-              <Link to={`/smart`}>
-                <Menu.Item as="a" onClick={() => setVisible(false)}>
-                  <Icon name="home" />
-                  Fares/Passes
-                </Menu.Item>
-              </Link>
-              <Link to={`/smart`}>
-                <Menu.Item as="a" onClick={() => setVisible(false)}>
-                  <Icon name="home" />
-                  Feedback
-                </Menu.Item>
-              </Link>
-            </Sidebar>
+        <div style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
+          <div style={{ maxWidth: 1080 }}>
+            <Sidebar.Pushable as={Segment}>
+              <Sidebar as={Menu} animation="overlay" icon="labeled" onHide={() => setVisible(false)} vertical visible={visible} width="thin">
+                <Link to={`/`}>
+                  <Menu.Item as="a" onClick={() => setVisible(false)}>
+                    <Icon name="home" />
+                    Home
+                  </Menu.Item>
+                </Link>
+                <Link to={`/ddot`}>
+                  <Menu.Item as="a" onClick={() => setVisible(false)}>
+                    <Icon name="home" />
+                    Plan a trip
+                  </Menu.Item>
+                </Link>
+                <Link to={`/smart`}>
+                  <Menu.Item as="a" onClick={() => setVisible(false)}>
+                    <Icon name="home" />
+                    Routes
+                  </Menu.Item>
+                </Link>
+                <Link to={`/smart`}>
+                  <Menu.Item as="a" onClick={() => setVisible(false)}>
+                    <Icon name="home" />
+                    Fares/Passes
+                  </Menu.Item>
+                </Link>
+                <Link to={`/smart`}>
+                  <Menu.Item as="a" onClick={() => setVisible(false)}>
+                    <Icon name="home" />
+                    Feedback
+                  </Menu.Item>
+                </Link>
+              </Sidebar>
 
-            <Sidebar.Pusher>
-              {/* <Segment.Group horizontal basic>
-                <Detour />
-                <Segment textAlign='right' basic>
-                  <List horizontal>
-                    <List.Item>
-                      <Icon name="talk" size="regular" />
-                    </List.Item>
-                    {Object.keys(languages).map(l => (
-                      <List.Item>{l}</List.Item>
-                    ))}
-                  </List>
-                </Segment>
-              </Segment.Group> */}
-              <SiteHeader siteTitle={title} color={color}>
-                <Button style={{ marginTop: '-35px' }} floated='right' size='medium' icon={visible ? "window close" : "content"} basic onClick={() => setVisible(visible ? false : true)} />
-              </SiteHeader>
-              {children}
-              <Footer />
-            </Sidebar.Pusher>
-          </Sidebar.Pushable>
+              <Sidebar.Pusher>
+                <Segment.Group horizontal basic size="mini" attached="bottom" style={{ padding: 0, margin: 0 }}>
+                  <Detour />
+                  <Segment textAlign="right" basic>
+                    <List horizontal>
+                      <List.Item>
+                        <Icon name="talk" size="regular" />
+                      </List.Item>
+                      {Object.keys(languages).map(l => (
+                        <List.Item>{l}</List.Item>
+                      ))}
+                    </List>
+                  </Segment>
+                </Segment.Group>
+                <SiteHeader siteTitle={title} color={color}>
+                  <Button
+                    style={{ marginTop: "-35px" }}
+                    floated="right"
+                    size="medium"
+                    icon={visible ? "window close" : "content"}
+                    basic
+                    onClick={() => setVisible(visible ? false : true)}
+                  />
+                </SiteHeader>
+                {children}
+                <Footer />
+              </Sidebar.Pusher>
+            </Sidebar.Pushable>
+          </div>
         </div>
       )}
     />

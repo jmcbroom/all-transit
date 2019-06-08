@@ -1,27 +1,23 @@
 .flourish {
   background-image: url("../images/Rise016.svg");
-  background-repeat: no-repeat;
   background-size: cover;
   z-index: 3;
 }
 .negflourish {
   background-image: url("../images/Rise700.svg");
-  background-repeat: no-repeat;
   background-size: cover;
   z-index: 3;
 }
 .endflourish {
   background-image: url("../images/Rise310.svg");
-  background-repeat: no-repeat;
   background-size: cover;
   z-index: 3;
 }
 .imageflourish {
   background-image: url("../images/tourbus.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
-  margin-top: -30px;
-  margin-bottom: -50px;
+  margin-top: -60px;
+  margin-bottom: -60px;
   height: 300px;
 }
