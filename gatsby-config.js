@@ -50,6 +50,18 @@ module.exports = {
       options: {
         path: `./src/data/`
       }
+    },
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: `key0GBXJsOwkVBA9H`,
+        tables: [
+          {
+            baseId: `appsKles2IO74nY5V`,
+            tableName: `Events`
+          }
+        ]
+      }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
