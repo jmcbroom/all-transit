@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Header, Icon, List, Image, Divider, Message } from "semantic-ui-react";
+import React from "react";
+import { Image } from "semantic-ui-react";
 
-const SiteHeader = ({ siteTitle, children }) => {
+const SiteHeader = ({ children }) => {
   const headerStyle = {
     display: "flex",
     flexDirection: "row",
@@ -11,8 +11,6 @@ const SiteHeader = ({ siteTitle, children }) => {
     width: "100%",
     padding: "25px 25px 0px 25px"
   };
-
-  const siteTitleStyle = { margin: 0 };
 
   const tagStyle = {
     paddingLeft: 15,

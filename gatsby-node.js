@@ -56,11 +56,19 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
+
       allDestinationsYaml {
         edges {
           node {
             name
             slug
+          }
+        }
+      }
+      airtable: allAirtable {
+        edges {
+          node {
+            id
           }
         }
       }
@@ -88,6 +96,18 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
     });
   });
+
+  result.data.airtable.edges
+    .map(e => e.node)
+    .forEach(n => {
+      createPage({
+        path: `/event/${n.id}`,
+        component: path.resolve("./src/templates/event-page.js"),
+        context: {
+          id: n.id
+        }
+      });
+    });
 
   result.data.postgres.agencies.forEach(a => {
     createPage({

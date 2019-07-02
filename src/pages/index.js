@@ -4,15 +4,12 @@ import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import NewOrKnow from "../components/NewOrKnow";
-import bus from "../images/tourbus.jpg";
-import { Grid, Segment, Header, Image, Message, GridColumn } from "semantic-ui-react";
-import { Detour } from "../components/Detour";
+import { Grid, Header, Message } from "semantic-ui-react";
 
 const IndexPage = ({ data }) => {
   console.log(data);
 
   let explainers = data.allExplainersYaml.edges.map(e => e.node);
-  let agencies = data.postgres.agencies;
 
   return (
     <Layout title={"Detroit transit guide"} breadcrumb={false}>

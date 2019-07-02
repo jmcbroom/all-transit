@@ -15,61 +15,46 @@ const StopRoutes = ({ stop, list }) => {
     return t.trip.route.routeLongName;
   }).map(ur => ur.trip.route);
 
-  console.log(uniqRoutes)
+  console.log(uniqRoutes);
 
   let dropdownOptions = uniqRoutes.map(u => {
-    return({
-      key: u.routeShortName.toString(), text: u.routeLongName, value: u.routeShortName.toString(), content: <RouteDisplay key={u.routeShortName} route={u} size="big" />
-    })
-  })
+    return {
+      key: u.routeShortName.toString(),
+      text: u.routeLongName,
+      value: u.routeShortName.toString(),
+      content: <RouteDisplay key={u.routeShortName} route={u} size="big" />
+    };
+  });
 
-  console.log(dropdownOptions)
+  console.log(dropdownOptions);
 
-  let [route, setRoute] = useState(uniqRoutes[0])
+  // let [route, setRoute] = useState(uniqRoutes[0])
 
   return (
-    <div>      
+    <div>
       StopRoutes
-      <Dropdown
-        placeholder='select Friends'
-        fluid
-        selection
-        options={dropdownOptions}
-        / >
-
+      <Dropdown placeholder="select Friends" fluid selection options={dropdownOptions} />
       <StopTimeList list={list} />
     </div>
-  )
-}
+  );
+};
 
 export default class Stop extends React.Component {
   render() {
     const { data, pageContext } = this.props;
     const s = data.postgres.stop;
     const times = s.times.filter(t => {
-      return (
-        feeds[pageContext.feedIndex - 1].services[t.trip.serviceId] ===
-        "weekday"
-      );
+      return feeds[pageContext.feedIndex - 1].services[t.trip.serviceId] === "weekday";
     });
     // sort by arrivalTime
     let sorted = times.sort((a, b) => {
-      let times = [a, b].map(
-        x =>
-          x.arrivalTime.hours * 3600 +
-          x.arrivalTime.minutes * 60 +
-          x.arrivalTime.seconds
-      );
+      let times = [a, b].map(x => x.arrivalTime.hours * 3600 + x.arrivalTime.minutes * 60 + x.arrivalTime.seconds);
       return times[0] - times[1];
     });
     // dedupe on arrivalTime: transit-windsor has a service for every day of the week
     // TODO: this will need more tweaks for t-w
     let uniq = _.uniqBy(sorted, x => {
-      return (
-        x.arrivalTime.hours * 3600 +
-        x.arrivalTime.minutes * 60 +
-        x.arrivalTime.seconds
-      );
+      return x.arrivalTime.hours * 3600 + x.arrivalTime.minutes * 60 + x.arrivalTime.seconds;
     });
 
     return (
